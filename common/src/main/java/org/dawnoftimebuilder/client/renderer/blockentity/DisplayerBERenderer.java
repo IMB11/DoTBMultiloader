@@ -11,14 +11,10 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import org.dawnoftimebuilder.block.IBlockSpecialDisplay;
 import org.dawnoftimebuilder.block.templates.DisplayerBlock;
 import org.dawnoftimebuilder.blockentity.DisplayerBlockEntity;
 
-@OnlyIn(Dist.CLIENT)
 public class DisplayerBERenderer implements BlockEntityRenderer<DisplayerBlockEntity> {
 	public DisplayerBERenderer(BlockEntityRendererProvider.Context context) {
 
@@ -26,7 +22,6 @@ public class DisplayerBERenderer implements BlockEntityRenderer<DisplayerBlockEn
 
 	@Override
 	public void render(DisplayerBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
-		pBlockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(h -> {
 			BlockState state = pBlockEntity.getBlockState();
 			Level level = pBlockEntity.getLevel();
 			DisplayerBlock block = (DisplayerBlock) state.getBlock();
@@ -41,7 +36,7 @@ public class DisplayerBERenderer implements BlockEntityRenderer<DisplayerBlockEn
 
 			for(int i = 0; i < 9; i++) {
 				//After checking if the capability is there and set all the variables, we render each of the non-empty itemStack
-				itemStack = h.getStackInSlot(i);
+				itemStack = pBlockEntity.itemHandler.getItem(i);
 				ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
 
 				if (!itemStack.isEmpty()) {
@@ -73,6 +68,5 @@ public class DisplayerBERenderer implements BlockEntityRenderer<DisplayerBlockEn
 					pPoseStack.popPose();
 				}
 			}
-		});
 	}
 }

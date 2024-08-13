@@ -117,7 +117,7 @@ public class StickBundleBlock extends BlockAA implements IBlockChain {
 
             //The StickBundle has fully grown worms, it's time to harvest !
             if(state.getValue(AGE) == 3) {
-                List<ItemStack> drops = Utils.getLootList((ServerLevel) worldIn, state, player.getItemInHand(handIn), Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(this)).getPath() + "_harvest");
+                List<ItemStack> drops = Utils.getLootList((ServerLevel) worldIn, state, player.getItemInHand(handIn), Objects.requireNonNull(this.builtInRegistryHolder().key()).location().getPath() + "_harvest");
                 Utils.dropLootFromList(worldIn, pos, drops, 1.0F);
                 worldIn.setBlock(pos, state.setValue(AGE, 0), 10);
                 worldIn.playSound(null, pos, SoundEvents.GRASS_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -141,7 +141,7 @@ public class StickBundleBlock extends BlockAA implements IBlockChain {
     public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
         int growth = state.getValue(AGE);
         if(growth > 0 && growth < 3) {
-            if(random.nextInt(DoTBConfig.STICK_BUNDLE_GROWTH_CHANCE.get()) == 0) {
+            if(random.nextInt(DoTBConfig.get().stickBundleGrowthChance) == 0) {
                 worldIn.setBlock(pos, worldIn.getBlockState(pos).setValue(AGE, growth + 1), 10);
                 worldIn.setBlock(pos.below(), worldIn.getBlockState(pos.below()).setValue(AGE, growth + 1), 10);
             }

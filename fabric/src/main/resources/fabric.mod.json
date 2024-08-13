@@ -16,7 +16,7 @@
     "environment": "*",
     "entrypoints": {
         "main": [
-            "org.dawnoftimebuilder.ExampleMod"
+            "org.dawnoftimebuilder.DoTFabric"
         ]
     },
     "mixins": [

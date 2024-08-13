@@ -1,5 +1,6 @@
 package org.dawnoftimebuilder;
 
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod(Constants.MOD_ID)

@@ -21,8 +21,10 @@ import org.dawnoftimebuilder.block.persian.MoraqMosaicColumnBlock;
 import org.dawnoftimebuilder.block.precolumbian.*;
 import org.dawnoftimebuilder.block.roman.*;
 import org.dawnoftimebuilder.block.templates.*;
+import org.dawnoftimebuilder.item.IHasFlowerPot;
 import org.dawnoftimebuilder.item.templates.PotAndBlockItem;
 import org.dawnoftimebuilder.item.templates.SoilSeedsItem;
+import org.dawnoftimebuilder.util.Foods;
 
 import java.util.*;
 import java.util.function.Function;
@@ -35,7 +37,7 @@ import static org.dawnoftimebuilder.util.VoxelShapes.*;
 public abstract class DoTBBlocksRegistry {
     public static DoTBBlocksRegistry INSTANCE;
     public static Map<TagKey<Block>, Set<Supplier<Block>>> blockTagsMap = new HashMap<>();
-    public final HashMap<String, Block> POT_BLOCKS = new HashMap<>();
+    public static final HashMap<String, Block> POT_BLOCKS = new HashMap<>();
     public final Supplier<Block> ACACIA_PLANKS_EDGE = register("acacia_planks_edge", () -> new EdgeBlock(Block.Properties.copy(Blocks.ACACIA_PLANKS)).setBurnable(), BlockTags.MINEABLE_WITH_AXE);
     public final Supplier<Block> ACACIA_PLANKS_PLATE = register("acacia_planks_plate", () -> new PlateBlock(Block.Properties.copy(Blocks.ACACIA_PLANKS)).setBurnable(), BlockTags.MINEABLE_WITH_AXE);
     public final Supplier<Block> ACACIA_PERGOLA = register("acacia_pergola", () -> new PergolaBlock(Block.Properties.copy(Blocks.ACACIA_PLANKS)).setBurnable(), BlockTags.MINEABLE_WITH_AXE);
@@ -258,9 +260,8 @@ public abstract class DoTBBlocksRegistry {
     public final Supplier<Block> CAST_IRON_TEACUP_GREEN = register("cast_iron_teacup_green", () -> new SpecialDisplayBlock(Block.Properties.copy(Blocks.IRON_BLOCK).strength(1.0F).noOcclusion(), CAST_IRON_TEACUP_SHAPES));
     public final Supplier<Block> CAST_IRON_TEACUP_DECORATED = register("cast_iron_teacup_decorated", () -> new SpecialDisplayBlock(Block.Properties.copy(Blocks.IRON_BLOCK).strength(1.0F).noOcclusion(), CAST_IRON_TEACUP_SHAPES));
     public final Supplier<Block> BAMBOO_DRYING_TRAY = register("bamboo_drying_tray", () -> new DryerBlock(Block.Properties.copy(Blocks.OAK_PLANKS).noOcclusion(), DRYER_SHAPES), BlockTags.MINEABLE_WITH_AXE);
-//    public final Supplier<Block> CAMELLIA = registerWithFlowerPotItem("camellia", () -> new GrowingBushBlock(PlantType.PLAINS, 3), "camellia_seeds", (block) -> new SoilSeedsItem(block, null));
-//    public final Supplier<Block> MULBERRY = registerWithFlowerPotItem("mulberry", () -> new MulberryBlock(PlantType.PLAINS, 3, 2), (block) -> new SoilSeedsItem(block, Foods.MULBERRY));
-    // TODO: Camellia and Mulberry
+    public final Supplier<GrowingBushBlock> CAMELLIA = registerWithFlowerPotItem("camellia", () -> new GrowingBushBlock(SoilCropsBlock.PlantType.PLAINS, 3), "camellia_seeds", (block) -> new SoilSeedsItem(block, null));
+    public final Supplier<MulberryBlock> MULBERRY = registerWithFlowerPotItem("mulberry", () -> new MulberryBlock(SoilCropsBlock.PlantType.PLAINS, 3, 2), (block) -> new SoilSeedsItem(block, Foods.MULBERRY));
     public final Supplier<Block> IKEBANA_FLOWER_POT = register("ikebana_flower_pot", () -> new SidedFlowerPotBlock(null));
     public final Supplier<Block> SPRUCE_LOW_TABLE = register("spruce_low_table", () -> new SpruceLowTableBlock(Block.Properties.copy(Blocks.OAK_WOOD).mapColor(MapColor.COLOR_BLACK).strength(2.0F, 6.0F).noOcclusion().lightLevel(litBlockEmission(14))), BlockTags.MINEABLE_WITH_AXE);
     public final Supplier<Block> SPRUCE_LEGLESS_CHAIR = register("spruce_legless_chair", () -> new ChairBlock(Block.Properties.copy(Blocks.OAK_WOOD).mapColor(MapColor.COLOR_BLACK).strength(2.0F, 6.0F).noOcclusion(), 3.0F, SPRUCE_LEGLESS_CHAIR_SHAPES), BlockTags.MINEABLE_WITH_AXE);
@@ -314,8 +315,7 @@ public abstract class DoTBBlocksRegistry {
     public final Supplier<Block> SANDSTONE_SCULPTED_RELIEF = register("sandstone_sculpted_relief", () -> new ConnectedVerticalSidedPlanBlock(Block.Properties.copy(Blocks.CUT_SANDSTONE), RELIEF_SHAPES));
     public final Supplier<Block> SANDSTONE_CRENELATION = register("sandstone_crenelation", () -> new PlateBlock(Block.Properties.copy(Blocks.CUT_SANDSTONE), SANDSTONE_CRENELATION_SHAPES));
     // Pre_columbian
-    // TODO: Commelina
-//    public final Supplier<Block> COMMELINA = registerWithFlowerPotItem("commelina", () -> new SoilCropsBlock(PlantType.PLAINS), (block) -> new SoilSeedsItem(block, null));
+    public final Supplier<SoilCropsBlock> COMMELINA = registerWithFlowerPotItem("commelina", () -> new SoilCropsBlock(SoilCropsBlock.PlantType.PLAINS), (block) -> new SoilSeedsItem(block, null));
     public final Supplier<Block> PLASTERED_STONE = register("plastered_stone", () -> new BlockAA(Block.Properties.copy(Blocks.STONE_BRICKS)));
     public final Supplier<Block> PLASTERED_STONE_EDGE = register("plastered_stone_edge", () -> new EdgeBlock(Block.Properties.copy(Blocks.STONE_BRICKS)));
     public final Supplier<Block> PLASTERED_STONE_PLATE = register("plastered_stone_plate", () -> new PlateBlock(Block.Properties.copy(Blocks.STONE_BRICKS)));
@@ -343,8 +343,7 @@ public abstract class DoTBBlocksRegistry {
     public final Supplier<Block> GREEN_SCULPTED_PLASTERED_STONE_FRIEZE = register("green_sculpted_plastered_stone_frieze", () -> new PlateBlock(Block.Properties.copy(Blocks.STONE_BRICKS), GREEN_SCULPTED_PLASTERED_STONE_FRIEZE_SHAPES));
     public final Supplier<Block> GREEN_SMALL_PLASTERED_STONE_FRIEZE = register("green_small_plastered_stone_frieze", () -> new EdgeBlock(Block.Properties.copy(Blocks.STONE_BRICKS)));
     public final Supplier<Block> WILD_MAIZE = register("wild_maize", () -> new WildMaizeBlock(Block.Properties.copy(Blocks.DANDELION)), BlockTags.SWORD_EFFICIENT);
-//    public final Supplier<Block> MAIZE = registerWithFlowerPotItem("maize", () -> new DoubleCropsBlock(PlantType.CROP, 4), (block) -> new SoilSeedsItem(block, Foods.MAIZE));
-    // TODO: Maize
+    public final Supplier<DoubleCropsBlock> MAIZE = registerWithFlowerPotItem("maize", () -> new DoubleCropsBlock(SoilCropsBlock.PlantType.CROP, 4), (block) -> new SoilSeedsItem(block, Foods.MAIZE));
     public final Supplier<Block> RED_ORNAMENTED_PLASTERED_STONE = register("red_ornamented_plastered_stone", () -> new BlockAA(Block.Properties.copy(Blocks.STONE_BRICKS)));
     public final Supplier<Block> PLASTERED_STONE_COLUMN = register("plastered_stone_column", () -> new ConnectedVerticalBlock(Block.Properties.copy(Blocks.STONE_BRICKS), PLASTERED_STONE_COLUMN_SHAPES));
     public final Supplier<Block> PLASTERED_STONE_CRESSET = register("plastered_stone_cresset", () -> new PlasteredStoneCressetBlock(Block.Properties.copy(Blocks.STONE_BRICKS).noOcclusion().lightLevel(litBlockEmission(15))));
@@ -402,8 +401,11 @@ public abstract class DoTBBlocksRegistry {
     }
 
     public abstract <T extends Block, Y extends Item> Supplier<T> registerWithItem(String id, Supplier<T> block, Function<T, Y> item, TagKey<Block>... tags);
-    
-    public abstract <T extends Block, Y extends Item> Supplier<T> registerWithFlowerPotItem(String id, Supplier<T> block, Function<T, Y> item);
+    public abstract <T extends Block, Y extends Item & IHasFlowerPot> Supplier<T> registerWithFlowerPotItem(String blockID, Supplier<T> block, String itemID, Function<T, Y> item);
+
+    public <T extends Block, Y extends Item & IHasFlowerPot> Supplier<T> registerWithFlowerPotItem(String id, Supplier<T> block, Function<T, Y> item) {
+        return this.registerWithFlowerPotItem(id, block, id, item);
+    }
     
 //    @SafeVarargs
 //    @SuppressWarnings("unchecked")
@@ -440,8 +442,8 @@ public abstract class DoTBBlocksRegistry {
      * @param block Block that needs the tag.
      * @param tag BlockTags added.
      */
-    private static void addBlockTag(Supplier<Block> block, TagKey<Block> tag){
-        blockTagsMap.computeIfAbsent(tag, k -> new HashSet<>()).add(block);
+    public <T extends Block> void addBlockTag(Supplier<T> block, TagKey<Block> tag){
+        blockTagsMap.computeIfAbsent(tag, k -> new HashSet<>()).add((Supplier<Block>) block);
     }
 
     //Old Function

@@ -17,7 +17,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.common.ForgeHooks;
 import org.dawnoftimebuilder.DoTBConfig;
 import org.dawnoftimebuilder.util.BlockStatePropertiesAA;
 import org.dawnoftimebuilder.util.Utils;
@@ -42,25 +41,26 @@ public interface IBlockClimbingPlant {
         if(!worldIn.isClientSide()) {
             if(stateIn.getValue(CLIMBING_PLANT).hasNoPlant() || stateIn.getValue(PERSISTENT))
                 return;
-            if(!worldIn.isAreaLoaded(pos, 2))
+            if(!worldIn.isLoaded(pos))
                 return; // Forge: prevent loading unloaded chunks when checking neighbor's light
 
             if(worldIn.getRawBrightness(pos, 0) >= 8) {
                 int age = stateIn.getValue(AGE_0_6);
-				if (ForgeHooks.onCropsGrowPre(worldIn, pos, stateIn, random.nextInt(DoTBConfig.CLIMBING_PLANT_GROWTH_CHANCE.get()) == 0)) {//Probability "can grow"
-					if(age < 2){
-						this.placePlant(stateIn.setValue(AGE_0_6, age + 1), worldIn, pos, 2);
-						ForgeHooks.onCropsGrowPost(worldIn, pos, stateIn);
-						return;
-					}else{
-						if(stateIn.getValue(CLIMBING_PLANT).canGrow(worldIn, age)){
-							this.placePlant(stateIn.setValue(AGE_0_6, 2 + ((age - 1) % 5)), worldIn, pos, 2);
-							ForgeHooks.onCropsGrowPost(worldIn, pos, stateIn);
-							return;
-						}
-					}
-				}
-                if(age < 2 || random.nextInt(DoTBConfig.CLIMBING_PLANT_SPREAD_CHANCE.get()) != 0)
+                // TODO: Own Implementation
+//				if (ForgeHooks.onCropsGrowPre(worldIn, pos, stateIn, random.nextInt(DoTBConfig.get().climbingPlantGrowthChance) == 0)) {//Probability "can grow"
+//					if(age < 2){
+//						this.placePlant(stateIn.setValue(AGE_0_6, age + 1), worldIn, pos, 2);
+//						ForgeHooks.onCropsGrowPost(worldIn, pos, stateIn);
+//						return;
+//					}else{
+//						if(stateIn.getValue(CLIMBING_PLANT).canGrow(worldIn, age)){
+//							this.placePlant(stateIn.setValue(AGE_0_6, 2 + ((age - 1) % 5)), worldIn, pos, 2);
+//							ForgeHooks.onCropsGrowPost(worldIn, pos, stateIn);
+//							return;
+//						}
+//					}
+//				}
+                if(age < 2 || random.nextInt(DoTBConfig.get().climbingPlantSpreadChance) != 0)
                     return;//Probability "can spread"
                 BlockPos[] positions = new BlockPos[] {
                         pos.north(),
@@ -71,8 +71,7 @@ public interface IBlockClimbingPlant {
                 };
                 int index = random.nextInt(5);//Probability "chose the adjacent block to grow on"
                 BlockState newState = worldIn.getBlockState(positions[index]);
-                if(newState.getBlock() instanceof IBlockClimbingPlant) {
-                    IBlockClimbingPlant newBlock = (IBlockClimbingPlant) newState.getBlock();
+                if(newState.getBlock() instanceof IBlockClimbingPlant newBlock) {
                     if(newBlock.canHavePlant(newState) && newState.getValue(CLIMBING_PLANT).hasNoPlant()) {
                         this.placePlant(newState.setValue(CLIMBING_PLANT, stateIn.getValue(CLIMBING_PLANT)), worldIn, positions[index], 2);
                     }

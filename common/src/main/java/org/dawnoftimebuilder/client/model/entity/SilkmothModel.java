@@ -8,16 +8,13 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import org.dawnoftimebuilder.DawnOfTimeBuilder;
+import org.dawnoftimebuilder.Constants;
 import org.dawnoftimebuilder.entity.SilkmothEntity;
 import org.jetbrains.annotations.NotNull;
 
-@OnlyIn(Dist.CLIENT)
 @SuppressWarnings("FieldCanBeLocal")
 public class SilkmothModel<T extends SilkmothEntity> extends EntityModel<T> {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(DawnOfTimeBuilder.MOD_ID, "silkmoth"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "silkmoth"), "main");
     private final ModelPart root;
     private final ModelPart wingLeft;
     private final ModelPart wingRight;

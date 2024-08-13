@@ -21,13 +21,12 @@ import org.dawnoftimebuilder.block.templates.FlowerPotBlockAA;
 import org.dawnoftimebuilder.block.templates.SoilCropsBlock;
 import org.dawnoftimebuilder.item.IHasFlowerPot;
 import org.jetbrains.annotations.NotNull;
-
 import javax.annotation.Nullable;
 
 public class SoilSeedsItem extends BlockItem implements IHasFlowerPot {
     private FlowerPotBlockAA potBlock;
 
-    public SoilSeedsItem(SoilCropsBlock crops, @Nullable FoodProperties food) {
+    public <T extends SoilCropsBlock> SoilSeedsItem(T crops, @Nullable FoodProperties food) {
         super(crops, food != null ? new Properties().food(food) : new Properties());
     }
 

@@ -107,13 +107,13 @@ public class PoolBlock extends BlockAA {
             ItemStack newItemStack = null;
 
             if(itemStack.getItem() instanceof BucketItem) {
-                if(((BucketItem) itemStack.getItem()).getFluid() instanceof WaterFluid) {
+                if(((BucketItem) itemStack.getItem()).content instanceof WaterFluid) {
                     nextLevel = this.maxLevel;
 
                     if(!playerEntityIn.isCreative()) {
                         newItemStack = new ItemStack(Items.BUCKET);
                     }
-                } else if(((BucketItem) itemStack.getItem()).getFluid() instanceof EmptyFluid) {
+                } else if(((BucketItem) itemStack.getItem()).content instanceof EmptyFluid) {
                     nextLevel = 0;
 
                     if(!playerEntityIn.isCreative()) {
@@ -282,10 +282,11 @@ public class PoolBlock extends BlockAA {
         return 1;
     }
 
-    @Override
-    public int getLightEmission(final BlockState stateIn, final BlockGetter worldIn, final BlockPos posIn) {
-        return 1;
-    }
+    // TODO: Block.Properties
+//    @Override
+//    public int getLightEmission(final BlockState stateIn, final BlockGetter worldIn, final BlockPos posIn) {
+//        return 1;
+//    }
 
     @Override
     public boolean useShapeForLightOcclusion(final BlockState p_220074_1_In) {

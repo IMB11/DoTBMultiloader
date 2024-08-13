@@ -15,7 +15,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -35,11 +34,16 @@ import static org.dawnoftimebuilder.util.Utils.TOOLTIP_CROP;
 
 public class SoilCropsBlock extends CropBlock implements IBlockGeneration {
     private final PlantType plantType;
+
+    public enum PlantType {
+        DESERT, NETHER, CROP, CAVE, PLAINS, WATER, BEACH
+    }
+
     public static final BooleanProperty PERSISTENT = BlockStateProperties.PERSISTENT;
 
-    public SoilCropsBlock(PlantType plantType) {
+    public SoilCropsBlock(PlantType type) {
         super(Properties.copy(Blocks.SUNFLOWER).offsetType(OffsetType.NONE).randomTicks().sound(SoundType.CROP));
-        this.plantType = plantType;
+        this.plantType = type;
         this.registerDefaultState(this.stateDefinition.any().setValue(this.getAgeProperty(), 0).setValue(PERSISTENT, false));
     }
 
@@ -53,15 +57,14 @@ public class SoilCropsBlock extends CropBlock implements IBlockGeneration {
     public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
         if(state.getValue(PERSISTENT))
             return;
-        if(!worldIn.isAreaLoaded(pos, 1))
+        if(!worldIn.isLoaded(pos))
             return; // Forge: prevent loading unloaded chunks when checking neighbor's light
         if(worldIn.getRawBrightness(pos, 0) >= 9) {
             int age = this.getAge(state);
             if(age < this.getMaxAge()) {
                 float f = getGrowthSpeed(this, worldIn, pos);
-                if(ForgeHooks.onCropsGrowPre(worldIn, pos, state, random.nextInt((int) (25.0F / f) + 1) == 0)) {
+                if(random.nextInt((int) (25.0F / f) + 1) == 0) {
                     this.setPlantWithAge(state, worldIn, pos, age + 1);
-                    ForgeHooks.onCropsGrowPost(worldIn, pos, state);
                 }
             }
         }
@@ -69,12 +72,16 @@ public class SoilCropsBlock extends CropBlock implements IBlockGeneration {
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-        return this.mayGenerateOn(world, pos.below(), this.getPlantType(world, pos)) && super.canSurvive(state, world, pos);
+        return this.mayGenerateOn(world, pos.below(), this.getPlantType()) && super.canSurvive(state, world, pos);
+    }
+
+    private PlantType getPlantType() {
+        return this.plantType;
     }
 
     @Override
     protected boolean mayPlaceOn(BlockState state, BlockGetter world, BlockPos pos) {
-        return this.mayGenerateOn(world, pos, this.getPlantType(world, pos));
+        return this.mayGenerateOn(world, pos, this.getPlantType());
     }
 
     /**
@@ -163,11 +170,6 @@ public class SoilCropsBlock extends CropBlock implements IBlockGeneration {
 
     public void setPlantWithAge(BlockState currentState, LevelAccessor worldIn, BlockPos pos, int newAge) {
         worldIn.setBlock(pos, currentState.setValue(this.getAgeProperty(), newAge), 10);
-    }
-
-    @Override
-    public PlantType getPlantType(BlockGetter world, BlockPos pos) {
-        return this.plantType;
     }
 
 	@Override

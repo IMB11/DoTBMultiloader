@@ -11,12 +11,8 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import org.dawnoftimebuilder.blockentity.DryerBlockEntity;
 
-@OnlyIn(Dist.CLIENT)
 public class DryerBERenderer implements BlockEntityRenderer<DryerBlockEntity> {
     public DryerBERenderer(BlockEntityRendererProvider.Context context) {
 
@@ -24,11 +20,9 @@ public class DryerBERenderer implements BlockEntityRenderer<DryerBlockEntity> {
 
     @Override
     public void render(DryerBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
-        pBlockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(h -> {
-            this.renderItemModel(pBlockEntity, pPoseStack, h.getStackInSlot(0), pBuffer, pPackedLight, pPackedOverlay);
+            this.renderItemModel(pBlockEntity, pPoseStack, pBlockEntity.itemHandler.getItem(0), pBuffer, pPackedLight, pPackedOverlay);
             pPoseStack.translate(0, 0.5D, 0);
-            this.renderItemModel(pBlockEntity, pPoseStack, h.getStackInSlot(1), pBuffer, pPackedLight, pPackedOverlay);
-        });
+            this.renderItemModel(pBlockEntity, pPoseStack, pBlockEntity.itemHandler.getItem(1), pBuffer, pPackedLight, pPackedOverlay);
     }
 
 	public void renderItemModel(DryerBlockEntity dryerBlockEntity, PoseStack poseStack, ItemStack itemStack, MultiBufferSource buffer, int pPackedLight, int pPackedOverlay) {

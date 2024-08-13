@@ -52,10 +52,11 @@ public class LanternBlock extends SpecialDisplayBlock implements IBlockChain {
         };
     }
 
-    @Override
-    public int getLightEmission(BlockState state, BlockGetter world, BlockPos pos) {
-        return 15;
-    }
+    // TODO: Block.Properties
+//    @Override
+//    public int getLightEmission(BlockState state, BlockGetter world, BlockPos pos) {
+//        return 15;
+//    }
 
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {

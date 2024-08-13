@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.dawnoftimebuilder.registry.DoTBBlockEntitiesRegistry;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -75,7 +76,7 @@ public class ConnectedHorizontalPlanDoubleTableBlock extends DisplayerBlock {
 
     @Override
     public @org.jetbrains.annotations.Nullable BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return pState.getValue(HALF) == Half.TOP ? DoTBBlockEntitiesRegistry.DISPLAYER.get().create(pPos, pState) : null;
+        return pState.getValue(HALF) == Half.TOP ? DoTBBlockEntitiesRegistry.INSTANCE.DISPLAYER.get().create(pPos, pState) : null;
     }
 
     @Override

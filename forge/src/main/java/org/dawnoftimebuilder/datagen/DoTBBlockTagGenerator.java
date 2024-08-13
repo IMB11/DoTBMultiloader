@@ -16,7 +16,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class DoTBBlockTagGenerator extends BlockTagsProvider {
     public DoTBBlockTagGenerator(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, lookupProvider, DawnOfTimeBuilder.MOD_ID, existingFileHelper);
+        super(output, lookupProvider, Constants.MOD_ID, existingFileHelper);
     }
 
     @Override

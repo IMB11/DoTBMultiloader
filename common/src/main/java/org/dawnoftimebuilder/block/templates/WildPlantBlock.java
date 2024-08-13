@@ -51,8 +51,9 @@ public class WildPlantBlock extends BlockAA {
         return blockDown.getBlock() == Blocks.GRASS_BLOCK || blockDown.is(BlockTags.DIRT) || blockDown.getBlock() == Blocks.FARMLAND;
     }
 
-    @Override
-    public PushReaction getPistonPushReaction(BlockState state) {
-        return PushReaction.DESTROY;
-    }
+    // TODO: Block.Properties
+//    @Override
+//    public PushReaction getPistonPushReaction(BlockState state) {
+//        return PushReaction.DESTROY;
+//    }
 }

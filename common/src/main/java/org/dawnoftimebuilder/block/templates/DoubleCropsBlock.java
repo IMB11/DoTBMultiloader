@@ -18,9 +18,6 @@ import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.PlantType;
-
 import javax.annotation.Nullable;
 
 public class DoubleCropsBlock extends SoilCropsBlock {
@@ -156,7 +153,7 @@ public class DoubleCropsBlock extends SoilCropsBlock {
     @Override
     public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
         if(this.isBottomCrop(state)) {
-            if(!worldIn.isAreaLoaded(pos, 1) || state.getValue(PERSISTENT))
+            if(!worldIn.isLoaded(pos) || state.getValue(PERSISTENT))
                 return; // Forge: prevent loading unloaded chunks when checking neighbor's light
             if(worldIn.getRawBrightness(pos, 0) >= 9) {
                 int i = this.getAge(state);
@@ -164,12 +161,11 @@ public class DoubleCropsBlock extends SoilCropsBlock {
                     float f = getGrowthSpeed(this, worldIn, pos);
                     BlockPos topPos = pos.above();
                     if(worldIn.getBlockState(topPos).getBlock() == this || worldIn.isEmptyBlock(topPos)) {
-                        if(ForgeHooks.onCropsGrowPre(worldIn, pos, state, random.nextInt((int) (25.0F / f) + 1) == 0)) {
+                        if(random.nextInt((int) (25.0F / f) + 1) == 0) {
                             state = this.getStateForAge(i + 1);
                             worldIn.setBlock(pos, state, 2);
                             if(i + 1 >= this.getAgeReachingTopBlock())
                                 worldIn.setBlock(topPos, this.getTopState(state), 2);
-                            ForgeHooks.onCropsGrowPost(worldIn, pos, state);
                         }
                     }
                 }
@@ -193,10 +189,11 @@ public class DoubleCropsBlock extends SoilCropsBlock {
         return bottomState.setValue(HALF, Half.TOP);
     }
 
-    @Override
-    public PushReaction getPistonPushReaction(BlockState state) {
-        return PushReaction.DESTROY;
-    }
+    // TODO: Block.Properties
+//    @Override
+//    public PushReaction getPistonPushReaction(BlockState state) {
+//        return PushReaction.DESTROY;
+//    }
 
     public int getAgeReachingTopBlock() {
         return this.growingAge;

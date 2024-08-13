@@ -71,7 +71,7 @@ public class MixedSlabBlock extends SlabBlockAA {
                             if(player instanceof ServerPlayer) {
                                 CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayer) player, pos, itemStack);
                             }
-                            SoundType soundtype = recipe.getMixedBlock().getSoundType(state, worldIn, pos, player);
+                            SoundType soundtype = recipe.getMixedBlock().getSoundType(state);
                             worldIn.playSound(player, pos, soundtype.getPlaceSound(), SoundSource.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
                             if(!player.isCreative())
                                 itemStack.shrink(1);
@@ -116,7 +116,7 @@ public class MixedSlabBlock extends SlabBlockAA {
                                     if(player instanceof ServerPlayer) {
                                         CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayer) player, pos, itemStack);
                                     }
-                                    SoundType soundtype = recipe.getMixedBlock().getSoundType(state, worldIn, pos, player);
+                                    SoundType soundtype = recipe.getMixedBlock().getSoundType(state);
                                     worldIn.playSound(player, pos, soundtype.getPlaceSound(), SoundSource.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
                                     itemStack.shrink(1);
                                     return InteractionResult.SUCCESS;

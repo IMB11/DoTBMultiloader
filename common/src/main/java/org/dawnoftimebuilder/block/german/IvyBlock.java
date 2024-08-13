@@ -40,12 +40,8 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.ForgeHooks;
 
 public class IvyBlock extends BlockAA implements IBlockGeneration {
     public static final BooleanProperty NORTH = BlockStateProperties.NORTH;
@@ -137,7 +133,7 @@ public class IvyBlock extends BlockAA implements IBlockGeneration {
 //                    }
                     return;
                 }
-                if(random.nextInt(DoTBConfig.CLIMBING_PLANT_SPREAD_CHANCE.get()) == 0) {
+                if(random.nextInt(DoTBConfig.get().climbingPlantSpreadChance) == 0) {
                     // The Ivy will spread
                     ArrayList<Direction> list = getCurrentDirections(state);
                     int faceIndex = list.size();

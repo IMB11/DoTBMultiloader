@@ -21,6 +21,6 @@ public class DoTBWorldGenProvider extends DatapackBuiltinEntriesProvider {
             .add(ForgeRegistries.Keys.BIOME_MODIFIERS, DoTBBiomeModifiers::bootstrap);
 
     public DoTBWorldGenProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-        super(output, registries, BUILDER, Set.of(DawnOfTimeBuilder.MOD_ID));
+        super(output, registries, BUILDER, Set.of(Constants.MOD_ID));
     }
 }

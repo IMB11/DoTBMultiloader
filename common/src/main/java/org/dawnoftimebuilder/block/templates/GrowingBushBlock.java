@@ -9,6 +9,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -21,14 +22,10 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.PlantType;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.dawnoftimebuilder.util.BlockStatePropertiesAA;
 import org.dawnoftimebuilder.util.Utils;
 
 import java.util.List;
-
-import static net.minecraftforge.common.Tags.Items.SHEARS;
 
 public class GrowingBushBlock extends SoilCropsBlock {
     public final VoxelShape[] SHAPES;
@@ -100,15 +97,13 @@ public class GrowingBushBlock extends SoilCropsBlock {
         if(this.isMaxAge(state) && !playerIn.isCreative()) {
             if(!worldIn.isClientSide()) {
                 ItemStack itemStackHand = playerIn.getItemInHand(hand);
-                boolean holdShears = itemStackHand.is(SHEARS);
+                boolean holdShears = itemStackHand.is(Items.SHEARS);
                 if(holdShears)
                     itemStackHand.hurtAndBreak(1, playerIn, (p) -> p.broadcastBreakEvent(hand));
 
-                ResourceLocation resourceLocation = ForgeRegistries.BLOCKS.getKey(this);
-                if(resourceLocation != null) {
-                    this.harvestWithoutBreaking(state, worldIn, pos, itemStackHand, resourceLocation.getPath(), holdShears ? 1.5F : 1.0F);
-                    return InteractionResult.SUCCESS;
-                }
+                ResourceLocation resourceLocation = this.builtInRegistryHolder().key().location();
+                this.harvestWithoutBreaking(state, worldIn, pos, itemStackHand, resourceLocation.getPath(), holdShears ? 1.5F : 1.0F);
+                return InteractionResult.SUCCESS;
             }
         }
         return InteractionResult.PASS;

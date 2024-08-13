@@ -30,7 +30,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.dawnoftimebuilder.DawnOfTimeBuilder;
+import org.dawnoftimebuilder.Constants;
 import org.dawnoftimebuilder.block.templates.WaterloggedBlock;
 import org.dawnoftimebuilder.registry.DoTBTags;
 
@@ -42,8 +42,8 @@ public class Utils {
     public static final int HIGHEST_Y = 255;
     //Tooltip translation text
     public static final Component TOOLTIP_HOLD_SHIFT = Component.translatable("tooltip." +
-            DawnOfTimeBuilder.MOD_ID + ".hold_key").withStyle(ChatFormatting.GRAY).append(Component.translatable("tooltip." +
-            DawnOfTimeBuilder.MOD_ID + ".shift").withStyle(ChatFormatting.AQUA));
+            Constants.MOD_ID + ".hold_key").withStyle(ChatFormatting.GRAY).append(Component.translatable("tooltip." +
+            Constants.MOD_ID + ".shift").withStyle(ChatFormatting.AQUA));
     public static final String TOOLTIP_COLUMN = "column";
     public static final String TOOLTIP_CLIMBING_PLANT = "climbing_plant";
     public static final String TOOLTIP_BEAM = "beam";
@@ -99,7 +99,7 @@ public class Utils {
      * @return the List of ItemStack found in the corresponding LootTable.
      */
     public static List<ItemStack> getLootList(final ServerLevel serverWorld, final BlockState stateIn, final ItemStack itemStackHand, final String name) {
-        final LootTable table = serverWorld.getServer().getLootData().getLootTable(new ResourceLocation(DawnOfTimeBuilder.MOD_ID + ":blocks/" + name));
+        final LootTable table = serverWorld.getServer().getLootData().getLootTable(new ResourceLocation(Constants.MOD_ID + ":blocks/" + name));
         final LootParams.Builder builder = new LootParams.Builder(serverWorld).withParameter(LootContextParams.BLOCK_STATE, stateIn).withParameter(LootContextParams.TOOL, itemStackHand).withParameter(LootContextParams.ORIGIN, new Vec3(0, 0, 0));
         final LootParams lootParams = builder.create(LootContextParamSets.BLOCK);
         return table.getRandomItems(lootParams);
@@ -274,7 +274,7 @@ public class Utils {
     public static void addTooltip(final List<Component> tooltip, final String... tooltipNames) {
         if(Screen.hasShiftDown()) {
             for(final String tooltipName : tooltipNames) {
-                tooltip.add(Component.translatable("tooltip." + DawnOfTimeBuilder.MOD_ID + "." + tooltipName).withStyle(ChatFormatting.GRAY));
+                tooltip.add(Component.translatable("tooltip." + Constants.MOD_ID + "." + tooltipName).withStyle(ChatFormatting.GRAY));
             }
         } else {
             tooltip.add(Utils.TOOLTIP_HOLD_SHIFT);

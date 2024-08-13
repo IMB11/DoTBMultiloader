@@ -79,7 +79,7 @@ public class MixedRoofSupportBlock extends SlabBlockAA {
                     if(player instanceof ServerPlayer) {
                         CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayer) player, pos, itemStack);
                     }
-                    final SoundType soundtype = this.getSoundType(state, worldIn, pos, player);
+                    final SoundType soundtype = this.getSoundType(state);
                     worldIn.playSound(player, pos, soundtype.getPlaceSound(), SoundSource.BLOCKS,
                             (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
                     if(!player.isCreative()) {
@@ -127,7 +127,7 @@ public class MixedRoofSupportBlock extends SlabBlockAA {
                             if(player instanceof ServerPlayer) {
                                 CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayer) player, pos, itemStack);
                             }
-                            final SoundType soundtype = block.getSoundType(state, worldIn, pos, player);
+                            final SoundType soundtype = block.getSoundType(state);
                             worldIn.playSound(player, pos, soundtype.getPlaceSound(), SoundSource.BLOCKS,
                                     (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
                             itemStack.shrink(1);

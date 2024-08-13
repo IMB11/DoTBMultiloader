@@ -25,7 +25,7 @@ import javax.annotation.Nullable;
 import java.util.Random;
 
 public class DryerBlockEntity extends BlockEntity {
-    private final SimpleContainer itemHandler = new SimpleContainer(2);
+    public final SimpleContainer itemHandler = new SimpleContainer(2);
     private final int[] remainingTicks = new int[2];
     private boolean isInOperation;
 
@@ -152,7 +152,7 @@ public class DryerBlockEntity extends BlockEntity {
                     itemStack.shrink(recipe.getIngredients().get(0).getItems()[0].getCount());
                 }
                 final float timeVariation = new Random().nextFloat() * 2.0F - 1.0F;
-                final int range = timeVariation >= 0 ? DoTBConfig.DRYING_TIME_VARIATION.get() : 10000 / (100 + DoTBConfig.DRYING_TIME_VARIATION.get());
+                final int range = timeVariation >= 0 ? DoTBConfig.get().dryingTimeVariation : 10000 / (100 + DoTBConfig.get().dryingTimeVariation);
                 this.remainingTicks[index] = (int) (recipe.getDryingTime() * (100 + timeVariation * range) / 100);
                 this.getLevel().sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
 

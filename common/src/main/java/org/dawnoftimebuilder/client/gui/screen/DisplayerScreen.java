@@ -9,7 +9,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.dawnoftimebuilder.container.DisplayerMenu;
 
-import static org.dawnoftimebuilder.DawnOfTimeBuilder.MOD_ID;
+import static org.dawnoftimebuilder.Constants.MOD_ID;
 
 @OnlyIn(Dist.CLIENT)
 public class DisplayerScreen extends AbstractContainerScreen<DisplayerMenu> {

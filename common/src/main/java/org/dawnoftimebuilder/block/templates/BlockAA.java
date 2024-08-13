@@ -9,10 +9,10 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.dawnoftimebuilder.DawnOfTimeBuilder;
+import org.dawnoftimebuilder.Constants;
 import org.jetbrains.annotations.NotNull;
 
-import static org.dawnoftimebuilder.DawnOfTimeBuilder.MOD_ID;
+import static org.dawnoftimebuilder.Constants.MOD_ID;
 import static org.dawnoftimebuilder.util.VoxelShapes.FULL_SHAPE;
 
 public class BlockAA extends Block {
@@ -42,7 +42,7 @@ public class BlockAA extends Block {
         try {
             return this.getShape(this.getShapeIndex(state, level, pos, context));
         } catch (ArrayIndexOutOfBoundsException e) {
-            DawnOfTimeBuilder.LOG.error(MOD_ID + " : Error in the VoxelShape of the block : " + state.getBlock().getName().getString());
+            Constants.LOG.error(MOD_ID + " : Error in the VoxelShape of the block : {}", state.getBlock().getName().getString());
             throw e;
         }
     }

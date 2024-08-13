@@ -29,7 +29,6 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 
 import static net.minecraft.world.Containers.dropItemStack;
-import static net.minecraftforge.common.capabilities.ForgeCapabilities.ITEM_HANDLER;
 
 public class DryerBlock extends WaterloggedBlock implements EntityBlock {
     //TODO Add redstone compatibility : ie emit redstone when dried
@@ -81,10 +80,10 @@ public class DryerBlock extends WaterloggedBlock implements EntityBlock {
     public void onRemove(final BlockState oldState, final Level worldIn, final BlockPos pos, final BlockState newState, final boolean isMoving) {
         if(oldState.getBlock() != newState.getBlock()) {
             final BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-            if(tileEntity instanceof DryerBlockEntity) {
-                tileEntity.getCapability(ITEM_HANDLER).ifPresent(h -> {
-                    dropItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), h.getStackInSlot(0));
-                    dropItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), h.getStackInSlot(1));
+            if(tileEntity instanceof DryerBlockEntity dryerBlockEntity) {
+                dryerBlockEntity.itemHandler.removeAllItems().forEach(h -> {
+                    dropItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), h);
+                    dropItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), h);
                 });
             }
         }
@@ -116,7 +115,7 @@ public class DryerBlock extends WaterloggedBlock implements EntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return DoTBBlockEntitiesRegistry.DRYER.get().create(pPos, pState);
+        return DoTBBlockEntitiesRegistry.INSTANCE.DRYER.get().create(pPos, pState);
     }
 
     @Override

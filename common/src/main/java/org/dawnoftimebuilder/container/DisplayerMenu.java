@@ -1,6 +1,7 @@
 package org.dawnoftimebuilder.container;
 
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -11,8 +12,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.items.SlotItemHandler;
 import org.dawnoftimebuilder.block.IBlockSpecialDisplay;
 import org.dawnoftimebuilder.blockentity.DisplayerBlockEntity;
 import org.dawnoftimebuilder.registry.DoTBMenuTypesRegistry;
@@ -20,7 +19,7 @@ import org.dawnoftimebuilder.registry.DoTBMenuTypesRegistry;
 import static org.dawnoftimebuilder.block.templates.DisplayerBlock.LIT;
 
 public class DisplayerMenu extends AbstractContainerMenu {
-	private final DisplayerBlockEntity blockEntity;
+	private DisplayerBlockEntity blockEntity;
 	private final ContainerLevelAccess levelAccess;
 
 	//Client constructor
@@ -30,7 +29,7 @@ public class DisplayerMenu extends AbstractContainerMenu {
 
 	//Server constructor
 	public DisplayerMenu(int windowId, Inventory playerInventory, BlockEntity blockEntity) {
-		super(DoTBMenuTypesRegistry.DISPLAYER.get(), windowId);
+		super(DoTBMenuTypesRegistry.INSTANCE.DISPLAYER.get(), windowId);
 
 		if(blockEntity instanceof DisplayerBlockEntity displayerBlockEntity) {
 			this.blockEntity = displayerBlockEntity;
@@ -41,13 +40,11 @@ public class DisplayerMenu extends AbstractContainerMenu {
 
 		this.levelAccess = ContainerLevelAccess.create(blockEntity.getLevel(), blockEntity.getBlockPos());
 
-        this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(h -> {
-            for(int i = 0; i < 3; i++) {
-                for(int j = 0; j < 3; j++) {
-                    this.addSlot(new SlotItemHandler(h, j + i * 3, 19 + j * 18, 168 + i * 18));
-                }
-            }
-        });
+		for(int i = 0; i < 3; i++) {
+			for(int j = 0; j < 3; j++) {
+				this.addSlot(new Slot(this.blockEntity.itemHandler, j + i * 3, 19 + j * 18, 168 + i * 18));
+			}
+		}
 
         for(int y = 0; y < 3; y++){
             for (int x = 0; x < 9; x++){
@@ -71,10 +68,9 @@ public class DisplayerMenu extends AbstractContainerMenu {
 		super.broadcastChanges();
 		//Update light level
 		if(this.blockEntity.getLevel() != null && !this.blockEntity.getLevel().isClientSide()){
-			this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(h -> {
 				boolean lit = false;
-				for(int index = 0; index < h.getSlots(); index++) {
-					ItemStack itemstack = h.getStackInSlot(index);
+				for(int index = 0; index < this.blockEntity.itemHandler.getContainerSize(); index++) {
+					ItemStack itemstack = this.blockEntity.itemHandler.getItem(index);
 					if (!itemstack.isEmpty()) {
 						Item item = itemstack.getItem();
 						if (item instanceof BlockItem) {
@@ -82,7 +78,7 @@ public class DisplayerMenu extends AbstractContainerMenu {
 							if (block instanceof IBlockSpecialDisplay) {
 								lit = ((IBlockSpecialDisplay) block).emitsLight();
 							} else {
-								lit = block.getLightEmission(block.defaultBlockState(), this.blockEntity.getLevel(), this.blockEntity.getBlockPos()) > 0;
+								lit = block.getLightBlock(block.defaultBlockState(), this.blockEntity.getLevel(), this.blockEntity.getBlockPos()) > 0;
 							}
 						}
 					}
@@ -92,7 +88,6 @@ public class DisplayerMenu extends AbstractContainerMenu {
 				if(this.blockEntity.getBlockState().getValue(LIT) != lit){
 					this.blockEntity.getLevel().setBlock(this.blockEntity.getBlockPos(), this.blockEntity.getBlockState().setValue(LIT, lit), 10);
 				}
-			});
 		}
 	}
 

@@ -59,10 +59,11 @@ public class SmallShutterBlock extends WaterloggedBlock {
         };
     }
 
-    @Override
-    public PushReaction getPistonPushReaction(final BlockState state) {
-        return PushReaction.DESTROY;
-    }
+    // TODO: Move to Block.Properties
+//    @Override
+//    public PushReaction getPistonPushReaction(final BlockState state) {
+//        return PushReaction.DESTROY;
+//    }
 
     @Nullable
     @Override
@@ -172,10 +173,11 @@ public class SmallShutterBlock extends WaterloggedBlock {
         return false;
     }
 
-    @Override
-    public int getLightEmission(final BlockState stateIn, final BlockGetter worldIn, final BlockPos posIn) {
-        return 1;
-    }
+    // TODO: Block.Properties
+//    @Override
+//    public int getLightEmission(final BlockState stateIn, final BlockGetter worldIn, final BlockPos posIn) {
+//        return 1;
+//    }
 
     @Override
     public VoxelShape getOcclusionShape(final BlockState p_196247_1_In, final BlockGetter p_196247_2_In, final BlockPos p_196247_3_In) {

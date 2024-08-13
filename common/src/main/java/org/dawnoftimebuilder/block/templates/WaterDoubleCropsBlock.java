@@ -15,13 +15,12 @@ import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.PlantType;
 
 public class WaterDoubleCropsBlock extends DoubleCropsBlock implements SimpleWaterloggedBlock {
     private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     public WaterDoubleCropsBlock(int growingAge) {
-        super(PlantType.WATER, growingAge);
+        super(SoilCropsBlock.PlantType.WATER, growingAge);
         this.registerDefaultState(this.defaultBlockState().setValue(WATERLOGGED, true));
     }
 

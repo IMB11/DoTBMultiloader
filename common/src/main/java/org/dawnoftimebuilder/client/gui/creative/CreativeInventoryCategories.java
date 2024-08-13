@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.dawnoftimebuilder.DawnOfTimeBuilder.MOD_ID;
+import static org.dawnoftimebuilder.Constants.MOD_ID;
 
 public enum CreativeInventoryCategories {
     GENERAL("general",
@@ -378,7 +378,8 @@ public enum CreativeInventoryCategories {
             DoTBItemsRegistry.INSTANCE.SILK_WORMS.get(),
             DoTBItemsRegistry.INSTANCE.SILK_COCOONS.get(),
             DoTBItemsRegistry.INSTANCE.SILK.get(),
-            DoTBBlocksRegistry.INSTANCE.RICE.get().asItem(),
+            // TODO: Rice
+//            DoTBBlocksRegistry.INSTANCE.RICE.get().asItem(),
             Items.FLINT_AND_STEEL
     ),
     PERSIAN("persian",

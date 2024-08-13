@@ -8,7 +8,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import org.dawnoftimebuilder.client.model.entity.JapaneseDragonModel;
 import org.dawnoftimebuilder.entity.JapaneseDragonEntity;
 
-import static org.dawnoftimebuilder.DawnOfTimeBuilder.MOD_ID;
+import static org.dawnoftimebuilder.Constants.MOD_ID;
 
 @OnlyIn(Dist.CLIENT)
 public class JapaneseDragonRenderer extends MobRenderer<JapaneseDragonEntity, JapaneseDragonModel> {
