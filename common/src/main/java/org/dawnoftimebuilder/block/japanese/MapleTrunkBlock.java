@@ -19,8 +19,8 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+
+
 import org.dawnoftimebuilder.block.templates.BlockAA;
 import org.dawnoftimebuilder.registry.DoTBBlocksRegistry;
 import org.jetbrains.annotations.NotNull;
@@ -116,7 +116,7 @@ public class MapleTrunkBlock extends BlockAA {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    
     public float getShadeBrightness(final BlockState p_220080_1_, final BlockGetter p_220080_2_, final BlockPos p_220080_3_) {
         return 1.0F;
     }

@@ -6,6 +6,7 @@ public class DoTFabric implements ModInitializer {
     
     @Override
     public void onInitialize() {
+        RegistryImpls.init();
         CommonClass.init();
     }
 }

@@ -27,8 +27,8 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+
+
 import org.dawnoftimebuilder.block.general.FireplaceBlock;
 import org.dawnoftimebuilder.util.BlockStatePropertiesAA;
 import org.dawnoftimebuilder.util.BlockStatePropertiesAA.HorizontalConnection;
@@ -222,7 +222,7 @@ public class ConnectedVerticalSidedPlanFireplaceBlock extends ConnectedVerticalS
         return true;
     }
 
-    @OnlyIn(Dist.CLIENT)
+    
     @Override
     public void animateTick(final BlockState stateIn, final Level worldIn, final BlockPos pos, final RandomSource rand) {
         if(stateIn.getValue(ConnectedVerticalBlock.VERTICAL_CONNECTION) != BlockStatePropertiesAA.VerticalConnection.BOTH && stateIn.getValue(ConnectedVerticalBlock.VERTICAL_CONNECTION) != BlockStatePropertiesAA.VerticalConnection.UNDER && stateIn.getValue(ConnectedVerticalSidedPlanFireplaceBlock.LIT)) {

@@ -32,9 +32,14 @@ public abstract class DoTBItemsRegistry {
     public final Supplier<Item> GRAY_CLAY_ROOF_TILE = register("gray_clay_roof_tile", ItemDoTB::new);
     public final Supplier<Item> MULBERRY_LEAVES = register("mulberry_leaves", ItemDoTB::new);
     public final Supplier<Item> GRAPE = register("grape", () -> new ItemDoTB(new Item.Properties().food(Foods.GRAPE)));
-    public final Supplier<Item> GRAPE_SEEDS = registerWithFlowerPot("grape_seeds", PotItem::new);
-    // TODO: Silkmoth spawn egg
+    public Supplier<Item> GRAPE_SEEDS;
+
+    // TODO: This.
 //    public final Supplier<Item> SILKMOTH_SPAWN_EGG = register("silkmoth_spawn_egg", () -> new SpawnEggItem(DoTBEntitiesRegistry.SILKMOTH_ENTITY, 0xDBD8BD, 0xFEFEFC, new Item.Properties()));
+
+    public void postRegister() {
+        GRAPE_SEEDS = registerWithFlowerPot("grape_seeds", PotItem::new);
+    }
 
     public abstract <T extends Item> Supplier<Item> register(final String name, final Supplier<T> itemSupplier);
     public abstract <T extends Item & IHasFlowerPot> Supplier<Item> registerWithFlowerPot(final String name, final Supplier<T> itemSupplier);

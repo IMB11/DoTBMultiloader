@@ -9,8 +9,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+
+
 import org.dawnoftimebuilder.block.templates.CandleLampBlock;
 
 import static org.dawnoftimebuilder.util.VoxelShapes.FULL_SHAPE;
@@ -20,7 +20,7 @@ public class IroriFireplaceBlock extends CandleLampBlock {
         super(properties, FULL_SHAPE);
     }
 
-    @OnlyIn(Dist.CLIENT)
+    
     @Override
     public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, RandomSource rand) {
         if(stateIn.getValue(LIT)) {

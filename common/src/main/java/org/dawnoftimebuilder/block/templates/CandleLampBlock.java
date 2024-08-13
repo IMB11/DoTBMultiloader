@@ -20,8 +20,6 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import org.dawnoftimebuilder.block.IBlockSpecialDisplay;
 import org.dawnoftimebuilder.util.Utils;
 
@@ -48,7 +46,6 @@ public abstract class CandleLampBlock extends WaterloggedBlock implements IBlock
      * @param y coordinate offset (between 0 and 1).
      * @param z coordinate offset (between 0 and 1).
      */
-    @OnlyIn(Dist.CLIENT)
     public void animateLitCandle(final BlockState stateIn, final Level worldIn, final BlockPos pos, final double x, final double y, final double z) {
         if(stateIn.getValue(CandleLampBlock.LIT)) {
             final double d0 = pos.getX() + x;

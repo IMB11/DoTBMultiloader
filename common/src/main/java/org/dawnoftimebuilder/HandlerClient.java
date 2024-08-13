@@ -3,8 +3,8 @@
 //import net.minecraft.client.gui.screens.MenuScreens;
 //import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 //import net.minecraft.world.item.CreativeModeTab;
-//import net.minecraftforge.api.distmarker.Dist;
-//import net.minecraftforge.api.distmarker.OnlyIn;
+//
+//
 //import net.minecraftforge.client.event.EntityRenderersEvent;
 //import net.minecraftforge.common.MinecraftForge;
 //import net.minecraftforge.eventbus.api.IEventBus;
@@ -51,7 +51,7 @@
 //        event.registerLayerDefinition(SilkmothModel.LAYER_LOCATION, SilkmothModel::createBodyLayer);
 //    }
 //
-//    @OnlyIn(Dist.CLIENT)
+//    
 //    public static void onCreativeTabChange(CreativeModeInventoryScreen screen, CreativeModeTab tab) {
 //        DOT_SELECTED = tab == DoTBCreativeModeTabsRegistry.DOT_TAB.get();
 //    }

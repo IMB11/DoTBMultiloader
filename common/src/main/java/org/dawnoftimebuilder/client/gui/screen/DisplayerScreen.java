@@ -5,13 +5,13 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+
+
 import org.dawnoftimebuilder.container.DisplayerMenu;
 
 import static org.dawnoftimebuilder.Constants.MOD_ID;
 
-@OnlyIn(Dist.CLIENT)
+
 public class DisplayerScreen extends AbstractContainerScreen<DisplayerMenu> {
     private static final ResourceLocation GUI_TEXTURE = new ResourceLocation(MOD_ID + ":textures/gui/displayer_gui.png");
 

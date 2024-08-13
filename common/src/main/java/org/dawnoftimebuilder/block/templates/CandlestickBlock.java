@@ -16,8 +16,8 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+
+
 import org.apache.commons.lang3.ArrayUtils;
 import org.dawnoftimebuilder.block.IBlockSpecialDisplay;
 import org.dawnoftimebuilder.util.Utils;
@@ -48,7 +48,7 @@ public class CandlestickBlock extends CandleLampBlock implements IBlockSpecialDi
         builder.add(FACING);
     }
 
-    @OnlyIn(Dist.CLIENT)
+    
     @Override
     public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, RandomSource rand) {
         this.animateLitCandle(stateIn, worldIn, pos, 0.5D, 1.0D, 0.5D);

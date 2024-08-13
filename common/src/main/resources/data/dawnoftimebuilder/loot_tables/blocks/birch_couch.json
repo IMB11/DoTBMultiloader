@@ -1,0 +1,28 @@
+{
+    "type": "minecraft:block",
+    "pools": [
+        {
+            "rolls": 1,
+            "conditions": [
+                {
+                    "condition": "minecraft:survives_explosion"
+                }
+            ],
+            "entries": [
+                {
+                    "type": "minecraft:item",
+                    "conditions": [
+                        {
+                            "block": "dawnoftimebuilder:birch_couch",
+                            "condition": "minecraft:block_state_property",
+                            "properties": {
+                                "persistent": "true"
+                            }
+                        }
+                    ],
+                    "name": "dawnoftimebuilder:birch_couch"
+                }
+            ]
+        }
+    ]
+}

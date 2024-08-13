@@ -22,8 +22,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+
+
 import org.dawnoftimebuilder.block.IBlockGeneration;
 import org.dawnoftimebuilder.block.templates.BlockAA;
 import org.dawnoftimebuilder.util.BlockStatePropertiesAA;
@@ -136,7 +136,7 @@ public class CypressBlock extends BlockAA implements IBlockGeneration {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    
     public void animateTick(final BlockState stateIn, final Level worldIn, final BlockPos pos, final RandomSource rand) {
         if(worldIn.isRainingAt(pos.above()) && rand.nextInt(15) == 1) {
             final BlockPos posDown = pos.below();

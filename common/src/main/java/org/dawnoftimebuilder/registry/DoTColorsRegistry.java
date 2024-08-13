@@ -73,7 +73,7 @@ public abstract class DoTColorsRegistry {
 
     // TODO: Register Dynamic Item Colors
 //    @SubscribeEvent
-//    @OnlyIn(Dist.CLIENT)
+//    
 //    public static void registerItemsColors(final RegisterColorHandlersEvent.Item eventIn) {
 //        for(final Entry<ItemColor, List<Supplier<Item>>> entry : DoTColorsRegistry.ITEMS_COLOR_REGISTRY.entrySet()) {
 //            final Item[] items = new Item[entry.getValue().size()];
@@ -110,7 +110,7 @@ public abstract class DoTColorsRegistry {
 
     // TODO: Register Dynamic Block Colors
 //    @SubscribeEvent
-//    @OnlyIn(Dist.CLIENT)
+//    
 //    public static void registerBlockColors(final RegisterColorHandlersEvent.Block eventIn) {
 //        for(final Entry<BlockColor, List<Supplier<Block>>> entry : DoTColorsRegistry.BLOCKS_COLOR_REGISTRY.entrySet()) {
 //            final Block[] blocks = new Block[entry.getValue().size()];
