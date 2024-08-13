@@ -8,6 +8,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import org.dawnoftimebuilder.block.roman.MarbleStatueBlock;
 import org.dawnoftimebuilder.block.templates.HorizontalBlockAA;
@@ -24,6 +25,12 @@ public class WaxedOakCanopyBedWoodBlock extends HorizontalBlockAA {
 
     public static BlockState getMultiblockState(BlockState defaultState, int x, int y, int z){
         return defaultState.setValue(MULTIBLOCK_X, x).setValue(MULTIBLOCK_Y, y).setValue(MULTIBLOCK_Z, z);
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
+        builder.add(MULTIBLOCK_X, MULTIBLOCK_Y, MULTIBLOCK_Z);
     }
 
     @Override
