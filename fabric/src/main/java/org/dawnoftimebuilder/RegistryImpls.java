@@ -88,7 +88,7 @@ public class RegistryImpls {
         public <T extends Block, Y extends Item & IHasFlowerPot> Supplier<T> registerWithFlowerPotItem(String blockID, Supplier<T> block, String itemID, Function<T, Y> item) {
             T toReturn = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Constants.MOD_ID, blockID), block.get());
             if(item != null) {
-                final String potName = itemID + "_flower_pot";
+                final String potName = blockID + "_flower_pot";
 
                 Supplier<FlowerPotBlockAA> potBlockObject = this.register(potName, () -> {
                     final FlowerPotBlockAA potBlock = new FlowerPotBlockAA(null);
