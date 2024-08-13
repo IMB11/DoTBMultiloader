@@ -250,7 +250,6 @@ public class Utils {
     }
 
     public static void addTooltip(final List<Component> tooltip, @Nonnull final Item item, final String... tooltipNames) {
-        // TODO: Registry call
         final ResourceLocation itemName = item.builtInRegistryHolder().key().location();
         if(itemName != null) {
             String[] tts = new String[tooltipNames.length + 1];
@@ -261,7 +260,6 @@ public class Utils {
     }
 
     public static void addTooltip(final List<Component> tooltip, @Nonnull final Block block, final String... tooltipNames) {
-        // TODO: Registry call
         final ResourceLocation itemName = block.builtInRegistryHolder().key().location();
         if(itemName != null) {
             String[] tts = new String[tooltipNames.length + 1];

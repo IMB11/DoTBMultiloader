@@ -5,6 +5,8 @@ bin
 .metadata
 .classpath
 .project
+node_modules
+package-lock.json
 
 # idea
 out

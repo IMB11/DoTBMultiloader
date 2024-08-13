@@ -1,8 +1,17 @@
 package org.dawnoftimebuilder;
 
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
+import net.fabricmc.fabric.impl.client.rendering.BlockEntityRendererRegistryImpl;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -13,6 +22,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
@@ -27,8 +37,16 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.scores.criteria.ObjectiveCriteria;
 import org.dawnoftimebuilder.block.templates.FlowerPotBlockAA;
+import org.dawnoftimebuilder.client.model.entity.SilkmothModel;
+import org.dawnoftimebuilder.client.renderer.blockentity.DisplayerBERenderer;
+import org.dawnoftimebuilder.client.renderer.blockentity.DryerBERenderer;
+import org.dawnoftimebuilder.client.renderer.entity.ChairRenderer;
+import org.dawnoftimebuilder.client.renderer.entity.SilkmothRenderer;
+import org.dawnoftimebuilder.entity.SilkmothEntity;
 import org.dawnoftimebuilder.item.IHasFlowerPot;
+import org.dawnoftimebuilder.item.IconItem;
 import org.dawnoftimebuilder.registry.*;
 
 import java.util.function.BiFunction;
@@ -39,7 +57,8 @@ public class RegistryImpls {
     public static class FabricBlockEntitiesRegistry extends DoTBBlockEntitiesRegistry {
         @Override
         public <T extends BlockEntity> Supplier<BlockEntityType<T>> register(String name, BiFunction<BlockPos, BlockState, T> factoryIn, Supplier<Block[]> validBlocksSupplier) {
-            return () -> Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, new ResourceLocation(Constants.MOD_ID, name), FabricBlockEntityTypeBuilder.create((FabricBlockEntityTypeBuilder.Factory<T>) factoryIn, validBlocksSupplier.get()).build());
+            BlockEntityType<T> blockEntity = (BlockEntityType<T>) Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, new ResourceLocation(Constants.MOD_ID, name), FabricBlockEntityTypeBuilder.create((FabricBlockEntityTypeBuilder.Factory<BlockEntity>) factoryIn::apply, validBlocksSupplier.get()).build());
+            return () -> blockEntity;
         }
     }
 
@@ -94,14 +113,16 @@ public class RegistryImpls {
     public static class FabricEntitiesRegistry extends DoTBEntitiesRegistry {
         @Override
         public <T extends Entity> Supplier<EntityType<T>> register(String name, Supplier<EntityType.Builder<T>> builder) {
-            return () -> Registry.register(BuiltInRegistries.ENTITY_TYPE, new ResourceLocation(Constants.MOD_ID, name), builder.get().build(name));
+            var entity = Registry.register(BuiltInRegistries.ENTITY_TYPE, new ResourceLocation(Constants.MOD_ID, name), builder.get().build(name));
+            return () -> entity;
         }
     }
 
     public static class FabricFeaturesRegistry extends DoTBFeaturesRegistry {
         @Override
         public <Y extends FeatureConfiguration, T extends Feature<Y>> Supplier<T> register(String name, Supplier<T> featureSupplier) {
-            return () -> Registry.register(BuiltInRegistries.FEATURE, new ResourceLocation(Constants.MOD_ID, name), featureSupplier.get());
+            var feature = Registry.register(BuiltInRegistries.FEATURE, new ResourceLocation(Constants.MOD_ID, name), featureSupplier.get());
+            return () -> feature;
         }
     }
 
@@ -146,21 +167,24 @@ public class RegistryImpls {
     public static class FabricMenuTypesRegistry extends DoTBMenuTypesRegistry {
         @Override
         public <T extends AbstractContainerMenu> Supplier<MenuType<T>> register(String name, MenuTypeFactory<T> factory) {
-            return () -> (MenuType<T>) Registry.register(BuiltInRegistries.MENU, new ResourceLocation(Constants.MOD_ID, name), new ExtendedScreenHandlerType<>(factory::create));
+            ExtendedScreenHandlerType<AbstractContainerMenu> type = Registry.register(BuiltInRegistries.MENU, new ResourceLocation(Constants.MOD_ID, name), new ExtendedScreenHandlerType<>(factory::create));
+            return () -> (MenuType<T>) type;
         }
     }
 
     public static class FabricRecipeSerializersRegistry extends DoTBRecipeSerializersRegistry {
         @Override
         public <T extends RecipeSerializer<? extends Recipe<?>>> Supplier<T> register(String name, Supplier<T> recipeSerializer) {
-            return () -> Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, new ResourceLocation(Constants.MOD_ID, name), recipeSerializer.get());
+            var recipe = Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, new ResourceLocation(Constants.MOD_ID, name), recipeSerializer.get());
+            return () -> recipe;
         }
     }
 
     public static class FabricRecipeTypesRegistry extends DoTBRecipeTypesRegistry {
         @Override
         public <T extends Recipe<?>> Supplier<RecipeType<T>> register(String name) {
-            return () -> RecipeType.register(name);
+            RecipeType<T> type = RecipeType.register(name);
+            return () -> type;
         }
     }
 
@@ -170,6 +194,7 @@ public class RegistryImpls {
             var group = Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, new ResourceLocation(Constants.MOD_ID, name), FabricItemGroup.builder().icon(iconSupplier).title(title).displayItems((itemDisplayParameters, output) -> {
                 BuiltInRegistries.ITEM.entrySet().forEach(entry -> {
                     var loc = entry.getKey().location();
+                    if(entry.getValue() instanceof IconItem) return;
                     if (loc.getNamespace().equals(Constants.MOD_ID)) {
                         output.accept(entry.getValue());
                     }
@@ -191,6 +216,16 @@ public class RegistryImpls {
         }
     }
 
+    public static void initClient() {
+        EntityRendererRegistry.register(DoTBEntitiesRegistry.INSTANCE.SILKMOTH_ENTITY.get(), SilkmothRenderer::new);
+        EntityRendererRegistry.register(DoTBEntitiesRegistry.INSTANCE.CHAIR_ENTITY.get(), ChairRenderer::new);
+
+        BlockEntityRenderers.register(DoTBBlockEntitiesRegistry.INSTANCE.DISPLAYER.get(), DisplayerBERenderer::new);
+        BlockEntityRenderers.register(DoTBBlockEntitiesRegistry.INSTANCE.DRYER.get(), DryerBERenderer::new);
+
+        EntityModelLayerRegistry.registerModelLayer(SilkmothModel.LAYER_LOCATION, SilkmothModel::createBodyLayer);
+    }
+
     public static void init() {
         DoTBBlocksRegistry.INSTANCE = new FabricBlocksRegistry();
         DoTBItemsRegistry.INSTANCE = new FabricItemsRegistry();
@@ -202,5 +237,7 @@ public class RegistryImpls {
         DoTBRecipeTypesRegistry.INSTANCE = new FabricRecipeTypesRegistry();
         DoTBTags.INSTANCE = new FabricTagsRegistry();
         DoTBCreativeModeTabsRegistry.INSTANCE = new FabricCreativeModeTabsRegistry();
+
+        FabricDefaultAttributeRegistry.register(DoTBEntitiesRegistry.INSTANCE.SILKMOTH_ENTITY.get(), SilkmothEntity.createAttributes());
     }
 }
