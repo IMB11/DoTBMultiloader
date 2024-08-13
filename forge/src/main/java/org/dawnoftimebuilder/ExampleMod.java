@@ -1,5 +1,7 @@
 package org.dawnoftimebuilder;
 
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fml.common.Mod;
 

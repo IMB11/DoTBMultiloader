@@ -1,11 +1,13 @@
 package org.dawnoftimebuilder;
 
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
@@ -13,7 +15,9 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -160,6 +164,21 @@ public class RegistryImpls {
         }
     }
 
+    public static class FabricCreativeModeTabsRegistry extends DoTBCreativeModeTabsRegistry {
+        @Override
+        public <T extends CreativeModeTab> Supplier<CreativeModeTab> register(String name, Supplier<ItemStack> iconSupplier, Component title) {
+            var group = Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, new ResourceLocation(Constants.MOD_ID, name), FabricItemGroup.builder().icon(iconSupplier).title(title).displayItems((itemDisplayParameters, output) -> {
+                BuiltInRegistries.ITEM.entrySet().forEach(entry -> {
+                    var loc = entry.getKey().location();
+                    if (loc.getNamespace().equals(Constants.MOD_ID)) {
+                        output.accept(entry.getValue());
+                    }
+                });
+            }).build());
+            return () -> group;
+        }
+    }
+
     public static class FabricTagsRegistry extends DoTBTags {
         @Override
         public TagKey<Block> registerBlock(ResourceLocation id) {
@@ -182,5 +201,6 @@ public class RegistryImpls {
         DoTBRecipeSerializersRegistry.INSTANCE = new FabricRecipeSerializersRegistry();
         DoTBRecipeTypesRegistry.INSTANCE = new FabricRecipeTypesRegistry();
         DoTBTags.INSTANCE = new FabricTagsRegistry();
+        DoTBCreativeModeTabsRegistry.INSTANCE = new FabricCreativeModeTabsRegistry();
     }
 }
