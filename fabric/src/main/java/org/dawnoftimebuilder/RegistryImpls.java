@@ -4,11 +4,13 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.fabricmc.fabric.impl.client.rendering.BlockEntityRendererRegistryImpl;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
@@ -39,6 +41,7 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.scores.criteria.ObjectiveCriteria;
 import org.dawnoftimebuilder.block.templates.FlowerPotBlockAA;
+import org.dawnoftimebuilder.client.gui.screen.DisplayerScreen;
 import org.dawnoftimebuilder.client.model.entity.SilkmothModel;
 import org.dawnoftimebuilder.client.renderer.blockentity.DisplayerBERenderer;
 import org.dawnoftimebuilder.client.renderer.blockentity.DryerBERenderer;
@@ -219,11 +222,10 @@ public class RegistryImpls {
     public static void initClient() {
         EntityRendererRegistry.register(DoTBEntitiesRegistry.INSTANCE.SILKMOTH_ENTITY.get(), SilkmothRenderer::new);
         EntityRendererRegistry.register(DoTBEntitiesRegistry.INSTANCE.CHAIR_ENTITY.get(), ChairRenderer::new);
-
         BlockEntityRenderers.register(DoTBBlockEntitiesRegistry.INSTANCE.DISPLAYER.get(), DisplayerBERenderer::new);
         BlockEntityRenderers.register(DoTBBlockEntitiesRegistry.INSTANCE.DRYER.get(), DryerBERenderer::new);
-
         EntityModelLayerRegistry.registerModelLayer(SilkmothModel.LAYER_LOCATION, SilkmothModel::createBodyLayer);
+        MenuScreens.register(DoTBMenuTypesRegistry.INSTANCE.DISPLAYER.get(), DisplayerScreen::new);
     }
 
     public static void init() {

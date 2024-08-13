@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.dawnoftimebuilder.blockentity.DisplayerBlockEntity;
+import org.dawnoftimebuilder.platform.Services;
 import org.dawnoftimebuilder.registry.DoTBBlockEntitiesRegistry;
 
 import static net.minecraft.world.Containers.dropItemStack;
@@ -45,7 +46,7 @@ public abstract class DisplayerBlock extends WaterloggedBlock implements EntityB
         if(!world.isClientSide()) {
             BlockEntity tileEntity = world.getBlockEntity(pos);
             if(tileEntity instanceof MenuProvider provider) {
-                playerEntity.openMenu(provider);
+                Services.PLATFORM.openScreenHandler(playerEntity, provider, (player, buf) -> buf.writeBlockPos(pos));
             }
         }
         return InteractionResult.SUCCESS;

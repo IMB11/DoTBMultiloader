@@ -1,5 +1,12 @@
 package org.dawnoftimebuilder.platform.services;
 
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Player;
+
+import java.util.function.BiConsumer;
+
 public interface IPlatformHelper {
 
     /**
@@ -32,4 +39,6 @@ public interface IPlatformHelper {
     default String getEnvironmentName() {
         return isDevelopmentEnvironment() ? "development" : "production";
     }
+
+    void openScreenHandler(Player playerEntity, MenuProvider provider, BiConsumer<ServerPlayer, FriendlyByteBuf> dataWriter);
 }
