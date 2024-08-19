@@ -1,3 +1,2 @@
 accessWidener   v2  named
-accessible field net/minecraft/world/item/BucketItem content Lnet/minecraft/world/level/material/Fluid;
 accessible method net/minecraft/client/gui/screens/Screen addWidget (Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;

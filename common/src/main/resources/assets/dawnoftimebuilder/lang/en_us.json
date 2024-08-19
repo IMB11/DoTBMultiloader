@@ -1,4 +1,17 @@
 {
+    "yacl3.config.dawnoftimebuilder:config.category.entities": "Entites",
+    "yacl3.config.dawnoftimebuilder:config.silkmothSpawnChance": "Silk Moth Spawn Chance",
+    "yacl3.config.dawnoftimebuilder:config.silkmothRotationMaxRange": "Silk Moth Rotation Max Range",
+    "yacl3.config.dawnoftimebuilder:config.silkmothMustDie": "Silk Moth Must Die?",
+    "yacl3.config.dawnoftimebuilder:config.silkmothRotationChange": "Silk Moth Rotation Change",
+    "yacl3.config.dawnoftimebuilder:config.silkmothMute": "Mute Silk Moth",
+
+    "yacl3.config.dawnoftimebuilder:config.category.blocks": "Blocks",
+    "yacl3.config.dawnoftimebuilder:config.dryingTimeVariation": "Drying Time Variation",
+    "yacl3.config.dawnoftimebuilder:config.climbingPlantGrowthChance": "Climbing Plant Growth Chance",
+    "yacl3.config.dawnoftimebuilder:config.climbingPlantSpreadChance": "Climbing Plant Spread Chance",
+    "yacl3.config.dawnoftimebuilder:config.stickBundleGrowthChance": "Stick Bundle Growth Chance",
+
     "itemGroup.dawnoftimebuilder.dottab": "Dawn of Time : Builder Edition",
     "gui.dawnoftimebuilder.general": "General",
     "gui.dawnoftimebuilder.egyptian": "Egyptian",

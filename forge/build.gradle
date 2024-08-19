@@ -76,7 +76,7 @@ sourceSets.main.resources.srcDir 'src/generated/resources'
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     compileOnly project(":common")
-    compileOnly fg.deobf("dev.isxander:yet-another-config-lib:${project.yacl_version}-forge")
+    implementation fg.deobf("dev.isxander:yet-another-config-lib:${project.yacl_version}-forge")
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
 }
 

@@ -1,6 +1,6 @@
 {
     "schemaVersion": 1,
-    "id": "mod_id",
+    "id": "${mod_id}",
     "version": "${version}",
     "name": "${mod_name}",
     "description": "${description}",
@@ -12,8 +12,9 @@
         "sources": "https://github.com/FabricMC/fabric-example-mod"
     },
     "license": "${license}",
-    "icon": "assets/modid/${mod_id}.png",
+    "icon": "icon.png",
     "environment": "*",
+    "accessWidener": "${mod_id}.accesswidener",
     "entrypoints": {
         "main": [
             "org.dawnoftimebuilder.DoTBFabric"

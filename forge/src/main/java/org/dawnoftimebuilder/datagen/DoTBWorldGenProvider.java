@@ -6,7 +6,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.dawnoftimebuilder.DawnOfTimeBuilder;
+import org.dawnoftimebuilder.DoTBCommon;
 import org.dawnoftimebuilder.datagen.worldgen.DoTBBiomeModifiers;
 import org.dawnoftimebuilder.datagen.worldgen.DoTBConfiguredFeatures;
 import org.dawnoftimebuilder.datagen.worldgen.DoTBPlacedFeatures;
@@ -21,6 +21,6 @@ public class DoTBWorldGenProvider extends DatapackBuiltinEntriesProvider {
             .add(ForgeRegistries.Keys.BIOME_MODIFIERS, DoTBBiomeModifiers::bootstrap);
 
     public DoTBWorldGenProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-        super(output, registries, BUILDER, Set.of(Constants.MOD_ID));
+        super(output, registries, BUILDER, Set.of(DoTBCommon.MOD_ID));
     }
 }

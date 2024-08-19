@@ -7,6 +7,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 
 
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.block.state.properties.WallSide;
 import org.dawnoftimebuilder.registry.DoTBBlocksRegistry;
 import org.dawnoftimebuilder.registry.DoTBItemsRegistry;
 import org.jetbrains.annotations.NotNull;

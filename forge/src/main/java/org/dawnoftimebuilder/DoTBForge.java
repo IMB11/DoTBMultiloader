@@ -3,11 +3,14 @@ package org.dawnoftimebuilder;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 import dev.isxander.yacl3.platform.YACLPlatform;
-import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.api.ModInitializer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.dawnoftimebuilder.datagen.DataGenerators;
 
-public class DoTBFabric implements ModInitializer, ClientModInitializer {
+@Mod(DoTBCommon.MOD_ID)
+public class DoTBForge {
     public static final ConfigClassHandler<DoTBConfig> HANDLER = ConfigClassHandler.createBuilder(DoTBConfig.class)
             .id(new ResourceLocation(DoTBCommon.MOD_ID, "config"))
             .serializer(config -> GsonConfigSerializerBuilder.create(config)
@@ -16,18 +19,15 @@ public class DoTBFabric implements ModInitializer, ClientModInitializer {
                     .build())
             .build();
 
-    @Override
-    public void onInitialize() {
+    public DoTBForge() {
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         HANDLER.load();
-
         DoTBCommon.init();
-        RegistryImpls.init();
-        BiomeModifiers.init();
+
+        RegistryImpls.init(modEventBus);
+
+        modEventBus.register(DoTBForgeClient.class);
+        modEventBus.register(DataGenerators.class);
     }
 
-    @Override
-    public void onInitializeClient() {
-        RegistryImpls.initClient();
-        RenderLayers.init();
-    }
 }

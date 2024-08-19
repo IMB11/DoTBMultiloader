@@ -17,6 +17,7 @@ import org.dawnoftimebuilder.client.gui.elements.buttons.GroupButton;
 import org.dawnoftimebuilder.client.gui.elements.buttons.SocialsButton;
 import org.dawnoftimebuilder.mixin.api.CreativeMixinScreen;
 import org.dawnoftimebuilder.registry.DoTBCreativeModeTabsRegistry;
+import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -31,6 +32,7 @@ import java.util.List;
 import static org.dawnoftimebuilder.DoTBCommon.CREATIVE_ICONS;
 
 @SuppressWarnings("unused")
+@Debug(print = true)
 @Mixin(CreativeModeInventoryScreen.class)
 public abstract class CreativeInventoryMixin extends AbstractContainerScreen<CreativeModeInventoryScreen.ItemPickerMenu> implements CreativeMixinScreen {
     @Shadow public abstract boolean mouseScrolled(double p_98527_, double p_98528_, double p_98529_);
@@ -119,14 +121,11 @@ public abstract class CreativeInventoryMixin extends AbstractContainerScreen<Cre
 
     @Inject(method = "render", at = @At(value = "HEAD"))
     public void dawnoftimebuilder$render(GuiGraphics $$0, int $$1, int $$2, float $$3, CallbackInfo ci) {
-        if(this.dOTBuilder$tabDoTBSelected) {
-//            dOTBuilder$updateItems((CreativeModeInventoryScreen) (Object) this);
-            toggleButtons(true);
-        } else {
-            toggleButtons(false);
-        }
+        //            dOTBuilder$updateItems((CreativeModeInventoryScreen) (Object) this);
+        toggleButtons(this.dOTBuilder$tabDoTBSelected);
     }
 
+    @Unique
     private void toggleButtons(boolean val) {
         this.dOTBuilder$btnScrollUp.visible = val;
         this.dOTBuilder$btnScrollDown.visible =  val;

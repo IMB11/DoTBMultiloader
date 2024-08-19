@@ -26,6 +26,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.dawnoftimebuilder.block.general.WaterTrickleBlock;
+import org.dawnoftimebuilder.mixin.impl.BucketItemAccessor;
 import org.dawnoftimebuilder.util.BlockStatePropertiesAA;
 import org.dawnoftimebuilder.util.Utils;
 import org.jetbrains.annotations.NotNull;
@@ -107,13 +108,13 @@ public class PoolBlock extends BlockAA {
             ItemStack newItemStack = null;
 
             if(itemStack.getItem() instanceof BucketItem) {
-                if(((BucketItem) itemStack.getItem()).content instanceof WaterFluid) {
+                if(((BucketItemAccessor) itemStack.getItem()).getContent() instanceof WaterFluid) {
                     nextLevel = this.maxLevel;
 
                     if(!playerEntityIn.isCreative()) {
                         newItemStack = new ItemStack(Items.BUCKET);
                     }
-                } else if(((BucketItem) itemStack.getItem()).content instanceof EmptyFluid) {
+                } else if(((BucketItemAccessor) itemStack.getItem()).getContent() instanceof EmptyFluid) {
                     nextLevel = 0;
 
                     if(!playerEntityIn.isCreative()) {

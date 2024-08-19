@@ -26,6 +26,7 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -134,6 +135,8 @@ public class RegistryImpls {
     }
 
     public static class FabricItemsRegistry extends DoTBItemsRegistry {
+        public final Supplier<Item> SILKMOTH_SPAWN_EGG = register("silkmoth_spawn_egg", () -> new SpawnEggItem(DoTBEntitiesRegistry.INSTANCE.SILKMOTH_ENTITY.get(), 0xDBD8BD, 0xFEFEFC, new Item.Properties()));
+
         public FabricItemsRegistry() {
             postRegister();
         }
@@ -231,11 +234,11 @@ public class RegistryImpls {
         EntityModelLayerRegistry.registerModelLayer(SilkmothModel.LAYER_LOCATION, SilkmothModel::createBodyLayer);
         MenuScreens.register(DoTBMenuTypesRegistry.INSTANCE.DISPLAYER.get(), DisplayerScreen::new);
 
-        DoTColorsRegistry.initialize();
-        DoTColorsRegistry.getBlocksColorRegistry().forEach((blockColor, blocks) -> {
+        DoTBColorsRegistry.initialize();
+        DoTBColorsRegistry.getBlocksColorRegistry().forEach((blockColor, blocks) -> {
             ColorProviderRegistry.BLOCK.register(blockColor, blocks.stream().map(Supplier::get).toArray(Block[]::new));
         });
-        DoTColorsRegistry.getItemsColorRegistry().forEach((itemColor, items) -> {
+        DoTBColorsRegistry.getItemsColorRegistry().forEach((itemColor, items) -> {
             ColorProviderRegistry.ITEM.register(itemColor, items.stream().map(Supplier::get).toArray(Item[]::new));
         });
     }

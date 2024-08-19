@@ -4,6 +4,8 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
+import org.dawnoftimebuilder.DoTBConfig;
+import org.dawnoftimebuilder.DoTBForge;
 import org.dawnoftimebuilder.platform.services.IPlatformHelper;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLLoader;
@@ -25,6 +27,11 @@ public class ForgePlatformHelper implements IPlatformHelper {
     @Override
     public boolean isDevelopmentEnvironment() {
         return !FMLLoader.isProduction();
+    }
+
+    @Override
+    public DoTBConfig getConfig() {
+        return DoTBForge.HANDLER.instance();
     }
 
     @Override

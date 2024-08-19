@@ -1,14 +1,9 @@
 package org.dawnoftimebuilder;
 
-import dev.isxander.yacl3.api.YetAnotherConfigLib;
-import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.autogen.AutoGen;
 import dev.isxander.yacl3.config.v2.api.autogen.Boolean;
 import dev.isxander.yacl3.config.v2.api.autogen.IntField;
-import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
-import dev.isxander.yacl3.platform.YACLPlatform;
-import net.minecraft.resources.ResourceLocation;
 
 public class DoTBConfig {
     @AutoGen(category = "entities")
@@ -31,18 +26,20 @@ public class DoTBConfig {
     @AutoGen(category = "entities")
     @Boolean(colored = true, formatter = Boolean.Formatter.YES_NO)
     public boolean silkmothMute = false;
-    @SerialEntry
-    @AutoGen(category = "entities")
-    @IntField(min = 1, max = 10000)
-    public int japaneseDragonHealth = 60;
-    @SerialEntry
-    @AutoGen(category = "entities")
-    @IntField(min = 1, max = 100)
-    public int japaneseDragonAttack = 4;
-    @SerialEntry
-    @AutoGen(category = "entities")
-    @Boolean(colored = true, formatter = Boolean.Formatter.YES_NO)
-    public boolean japaneseDragonMute = false;
+
+    // Disabled until JD is implemented.
+//    @SerialEntry
+//    @AutoGen(category = "entities")
+//    @IntField(min = 1, max = 10000)
+//    public int japaneseDragonHealth = 60;
+//    @SerialEntry
+//    @AutoGen(category = "entities")
+//    @IntField(min = 1, max = 100)
+//    public int japaneseDragonAttack = 4;
+//    @SerialEntry
+//    @AutoGen(category = "entities")
+//    @Boolean(colored = true, formatter = Boolean.Formatter.YES_NO)
+//    public boolean japaneseDragonMute = false;
 
     // Block settings
     @SerialEntry(comment = "The drying time of an item is randomly set in an interval around the default time from the recipe. The following value defines the high bound of the interval in percents. IE, if you choose '20', the interval will be [ 83.3% , 120%]. If you chose '200', the interval will be [33.3% , 300%]")

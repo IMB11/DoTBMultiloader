@@ -10,7 +10,8 @@ import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.common.world.ForgeBiomeModifiers;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.dawnoftimebuilder.DawnOfTimeBuilder;
+import org.dawnoftimebuilder.DoTBCommon;
+import org.dawnoftimebuilder.registry.DoTBFeaturesRegistry;
 
 public class DoTBBiomeModifiers {
     public static final ResourceKey<BiomeModifier> ADD_CAMELLIA = registerKey("add_camellia");
@@ -35,7 +36,7 @@ public class DoTBBiomeModifiers {
                         biomes.get(Biomes.FLOWER_FOREST).get(),
                         biomes.get(Biomes.JUNGLE).get(),
                         biomes.get(Biomes.SPARSE_JUNGLE).get()),
-                HolderSet.direct(placedFeatures.getOrThrow(DoTBPlacedFeatures.CAMELLIA_PLACED_KEY)),
+                HolderSet.direct(placedFeatures.getOrThrow(DoTBFeaturesRegistry.CAMELLIA_PLACED_KEY)),
                 GenerationStep.Decoration.VEGETAL_DECORATION
             )
         );
@@ -45,7 +46,7 @@ public class DoTBBiomeModifiers {
                 HolderSet.direct(
                         biomes.get(Biomes.SWAMP).get(),
                         biomes.get(Biomes.MANGROVE_SWAMP).get()),
-                HolderSet.direct(placedFeatures.getOrThrow(DoTBPlacedFeatures.COMMELINA_PLACED_KEY)),
+                HolderSet.direct(placedFeatures.getOrThrow(DoTBFeaturesRegistry.COMMELINA_PLACED_KEY)),
                 GenerationStep.Decoration.VEGETAL_DECORATION
             )
         );
@@ -58,7 +59,7 @@ public class DoTBBiomeModifiers {
                         biomes.get(Biomes.SNOWY_TAIGA).get(),
                         biomes.get(Biomes.OLD_GROWTH_PINE_TAIGA).get(),
                         biomes.get(Biomes.OLD_GROWTH_SPRUCE_TAIGA).get()),
-                HolderSet.direct(placedFeatures.getOrThrow(DoTBPlacedFeatures.CYPRESS_PLACED_KEY)),
+                HolderSet.direct(placedFeatures.getOrThrow(DoTBFeaturesRegistry.CYPRESS_PLACED_KEY)),
                 GenerationStep.Decoration.VEGETAL_DECORATION
             )
         );
@@ -71,7 +72,7 @@ public class DoTBBiomeModifiers {
                             biomes.get(Biomes.SNOWY_TAIGA).get(),
                             biomes.get(Biomes.OLD_GROWTH_PINE_TAIGA).get(),
                             biomes.get(Biomes.OLD_GROWTH_SPRUCE_TAIGA).get()),
-                HolderSet.direct(placedFeatures.getOrThrow(DoTBPlacedFeatures.RED_MAPLE_PLACED_KEY)),
+                HolderSet.direct(placedFeatures.getOrThrow(DoTBFeaturesRegistry.RED_MAPLE_PLACED_KEY)),
                 GenerationStep.Decoration.VEGETAL_DECORATION
             )
         );
@@ -82,7 +83,7 @@ public class DoTBBiomeModifiers {
                         biomes.get(Biomes.FLOWER_FOREST).get(),
                         biomes.get(Biomes.FOREST).get(),
                         biomes.get(Biomes.WINDSWEPT_FOREST).get()),
-                HolderSet.direct(placedFeatures.getOrThrow(DoTBPlacedFeatures.BOXWOOD_BUSH_PLACED_KEY)),
+                HolderSet.direct(placedFeatures.getOrThrow(DoTBFeaturesRegistry.BOXWOOD_BUSH_PLACED_KEY)),
                 GenerationStep.Decoration.VEGETAL_DECORATION
             )
         );
@@ -95,7 +96,7 @@ public class DoTBBiomeModifiers {
                             biomes.get(Biomes.SNOWY_TAIGA).get(),
                             biomes.get(Biomes.OLD_GROWTH_PINE_TAIGA).get(),
                             biomes.get(Biomes.OLD_GROWTH_SPRUCE_TAIGA).get()),
-                HolderSet.direct(placedFeatures.getOrThrow(DoTBPlacedFeatures.MULBERRY_PLACED_KEY)),
+                HolderSet.direct(placedFeatures.getOrThrow(DoTBFeaturesRegistry.MULBERRY_PLACED_KEY)),
                 GenerationStep.Decoration.VEGETAL_DECORATION
             )
         );
@@ -105,7 +106,7 @@ public class DoTBBiomeModifiers {
                 HolderSet.direct(
                         biomes.get(Biomes.SWAMP).get(),
                         biomes.get(Biomes.MANGROVE_SWAMP).get()),
-                HolderSet.direct(placedFeatures.getOrThrow(DoTBPlacedFeatures.RICE_PLACED_KEY)),
+                HolderSet.direct(placedFeatures.getOrThrow(DoTBFeaturesRegistry.RICE_PLACED_KEY)),
                 GenerationStep.Decoration.VEGETAL_DECORATION
             )
         );
@@ -116,7 +117,7 @@ public class DoTBBiomeModifiers {
                         biomes.get(Biomes.FLOWER_FOREST).get(),
                         biomes.get(Biomes.BIRCH_FOREST).get(),
                         biomes.get(Biomes.OLD_GROWTH_BIRCH_FOREST).get()),
-                HolderSet.direct(placedFeatures.getOrThrow(DoTBPlacedFeatures.WILD_GRAPE_PLACED_KEY)),
+                HolderSet.direct(placedFeatures.getOrThrow(DoTBFeaturesRegistry.WILD_GRAPE_PLACED_KEY)),
                 GenerationStep.Decoration.VEGETAL_DECORATION
             )
         );
@@ -128,7 +129,7 @@ public class DoTBBiomeModifiers {
                         biomes.get(Biomes.SAVANNA_PLATEAU).get(),
                         biomes.get(Biomes.WINDSWEPT_SAVANNA).get(),
                         biomes.get(Biomes.FLOWER_FOREST).get()),
-                HolderSet.direct(placedFeatures.getOrThrow(DoTBPlacedFeatures.WILD_MAIZE_PLACED_KEY)),
+                HolderSet.direct(placedFeatures.getOrThrow(DoTBFeaturesRegistry.WILD_MAIZE_PLACED_KEY)),
                 GenerationStep.Decoration.VEGETAL_DECORATION
             )
         );
@@ -139,7 +140,7 @@ public class DoTBBiomeModifiers {
                         biomes.get(Biomes.FLOWER_FOREST).get(),
                         biomes.get(Biomes.BIRCH_FOREST).get(),
                         biomes.get(Biomes.OLD_GROWTH_BIRCH_FOREST).get()),
-            HolderSet.direct(placedFeatures.getOrThrow(DoTBPlacedFeatures.GERANIUM_PINK_PLACED_KEY)),
+            HolderSet.direct(placedFeatures.getOrThrow(DoTBFeaturesRegistry.GERANIUM_PINK_PLACED_KEY)),
                 GenerationStep.Decoration.VEGETAL_DECORATION
             )
         );
@@ -150,13 +151,13 @@ public class DoTBBiomeModifiers {
                         biomes.get(Biomes.FLOWER_FOREST).get(),
                         biomes.get(Biomes.BIRCH_FOREST).get(),
                         biomes.get(Biomes.OLD_GROWTH_BIRCH_FOREST).get()),
-                HolderSet.direct(placedFeatures.getOrThrow(DoTBPlacedFeatures.IVY_PLACED_KEY)),
+                HolderSet.direct(placedFeatures.getOrThrow(DoTBFeaturesRegistry.IVY_PLACED_KEY)),
                 GenerationStep.Decoration.VEGETAL_DECORATION
             )
         );
     }
 
     private static ResourceKey<BiomeModifier> registerKey(String name) {
-        return ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, new ResourceLocation(Constants.MOD_ID, name));
+        return ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, new ResourceLocation(DoTBCommon.MOD_ID, name));
     }
 }

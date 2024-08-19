@@ -7,7 +7,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import org.dawnoftimebuilder.DawnOfTimeBuilder;
+import org.dawnoftimebuilder.DoTBCommon;
 import org.dawnoftimebuilder.registry.DoTBBlocksRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -16,7 +16,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class DoTBBlockTagGenerator extends BlockTagsProvider {
     public DoTBBlockTagGenerator(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, lookupProvider, Constants.MOD_ID, existingFileHelper);
+        super(output, lookupProvider, DoTBCommon.MOD_ID, existingFileHelper);
     }
 
     @Override
