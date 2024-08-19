@@ -107,7 +107,9 @@ public abstract class CreativeInventoryMixin extends EffectRenderingInventoryScr
             }, this));
         }
 
-        this.dOTBuilder$buttons.forEach(this::addRenderableWidget);
+        for (CategoryButton dOTBuilder$button : this.dOTBuilder$buttons) {
+            addRenderableWidget(dOTBuilder$button);
+        }
         this.dOTBuilder$updateCategoryButtons();
 
         if(this.dOTBuilder$tabDoTBSelected) {

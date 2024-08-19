@@ -14,7 +14,6 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -28,6 +27,7 @@ import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.common.extensions.IForgeMenuType;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -41,8 +41,10 @@ import org.dawnoftimebuilder.client.renderer.entity.ChairRenderer;
 import org.dawnoftimebuilder.client.renderer.entity.SilkmothRenderer;
 import org.dawnoftimebuilder.entity.SilkmothEntity;
 import org.dawnoftimebuilder.item.IHasFlowerPot;
+import org.dawnoftimebuilder.item.IconItem;
 import org.dawnoftimebuilder.registry.*;
 
+import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -277,5 +279,14 @@ public class RegistryImpls {
         ForgeCreativeModeTabsRegistry.CREATIVE_MODE_TABS_REGISTRY.register(bus);
 
         bus.addListener((EntityAttributeCreationEvent event) -> event.put(DoTBEntitiesRegistry.INSTANCE.SILKMOTH_ENTITY.get(), SilkmothEntity.createAttributes().build()));
+        bus.addListener((BuildCreativeModeTabContentsEvent event) -> {
+            if(event.getTab() == DoTBCreativeModeTabsRegistry.INSTANCE.DOT_TAB.get()) {
+                ForgeRegistries.ITEMS.getEntries().stream().filter(entry ->
+                                entry.getKey().location().getNamespace().equalsIgnoreCase(DoTBCommon.MOD_ID) &&
+                                        !(entry.getValue() instanceof IconItem))
+                        .map(Map.Entry::getValue)
+                        .forEachOrdered(event::accept);
+            }
+        });
     }
 }
