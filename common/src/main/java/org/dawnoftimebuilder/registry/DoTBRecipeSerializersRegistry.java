@@ -6,8 +6,6 @@ import org.dawnoftimebuilder.recipe.DryerRecipeSerializer;
 
 import java.util.function.Supplier;
 
-import static org.dawnoftimebuilder.Constants.MOD_ID;
-
 public abstract class DoTBRecipeSerializersRegistry {
     public static DoTBRecipeSerializersRegistry INSTANCE;
 

@@ -22,17 +22,13 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-
-
 import org.dawnoftimebuilder.block.IBlockGeneration;
 import org.dawnoftimebuilder.block.templates.BlockAA;
 import org.dawnoftimebuilder.util.BlockStatePropertiesAA;
 import org.dawnoftimebuilder.util.Utils;
 import org.jetbrains.annotations.NotNull;
-
 import javax.annotation.Nullable;
 import java.util.List;
-
 import static org.dawnoftimebuilder.util.VoxelShapes.CYPRESS_SHAPES;
 
 public class CypressBlock extends BlockAA implements IBlockGeneration {
@@ -61,25 +57,25 @@ public class CypressBlock extends BlockAA implements IBlockGeneration {
     @Override
     public InteractionResult use(final BlockState state, final Level worldIn, final BlockPos pos, final Player player, final InteractionHand handIn, final BlockHitResult hit) {
         final ItemStack heldItemStack = player.getItemInHand(handIn);
-        if(player.isCrouching()) {
+        if (player.isCrouching()) {
             //We remove the highest CypressBlock
             final BlockPos topPos = this.getHighestCypressPos(worldIn, pos);
-            if(topPos != pos) {
-                if(!worldIn.isClientSide()) {
+            if (topPos != pos) {
+                if (!worldIn.isClientSide()) {
                     worldIn.setBlock(topPos, Blocks.AIR.defaultBlockState(), 35);
-                    if(!player.isCreative()) {
+                    if (!player.isCreative()) {
                         Block.dropResources(state, worldIn, pos, null, player, heldItemStack);
                     }
                 }
                 return InteractionResult.SUCCESS;
             }
-        } else if(!heldItemStack.isEmpty() && heldItemStack.getItem() == this.asItem()) {
+        } else if (!heldItemStack.isEmpty() && heldItemStack.getItem() == this.asItem()) {
             //We put a CypressBlock on top of the cypress
             final BlockPos topPos = this.getHighestCypressPos(worldIn, pos).above();
-            if(topPos.getY() <= Utils.HIGHEST_Y) {
-                if(!worldIn.isClientSide() && worldIn.getBlockState(topPos).isAir()) {
+            if (topPos.getY() <= Utils.HIGHEST_Y) {
+                if (!worldIn.isClientSide() && worldIn.getBlockState(topPos).isAir()) {
                     worldIn.setBlock(topPos, this.defaultBlockState(), 11);
-                    if(!player.isCreative()) {
+                    if (!player.isCreative()) {
                         heldItemStack.shrink(1);
                     }
                 }
@@ -91,8 +87,8 @@ public class CypressBlock extends BlockAA implements IBlockGeneration {
 
     private BlockPos getHighestCypressPos(final Level worldIn, final BlockPos pos) {
         int yOffset;
-        for(yOffset = 0; yOffset + pos.getY() <= Utils.HIGHEST_Y; yOffset++) {
-            if(worldIn.getBlockState(pos.above(yOffset)).getBlock() != this) {
+        for (yOffset = 0; yOffset + pos.getY() <= Utils.HIGHEST_Y; yOffset++) {
+            if (worldIn.getBlockState(pos.above(yOffset)).getBlock() != this) {
                 break;
             }
         }
@@ -109,7 +105,7 @@ public class CypressBlock extends BlockAA implements IBlockGeneration {
     public BlockState getStateForPlacement(final BlockPlaceContext context) {
         BlockState adjacentState = context.getLevel().getBlockState(context.getClickedPos().above());
         final int size = adjacentState.getBlock() == this ? Math.min(adjacentState.getValue(CypressBlock.SIZE) + 1, 5) : 1;
-        if(size < 3) {
+        if (size < 3) {
             return this.defaultBlockState().setValue(CypressBlock.SIZE, size);
         }
         adjacentState = context.getLevel().getBlockState(context.getClickedPos().below());
@@ -118,17 +114,17 @@ public class CypressBlock extends BlockAA implements IBlockGeneration {
 
     @Override
     public BlockState updateShape(final BlockState stateIn, final Direction facing, final BlockState facingState, final LevelAccessor worldIn, final BlockPos currentPos, final BlockPos facingPos) {
-        if(!facing.getAxis().isVertical()) {
+        if (!facing.getAxis().isVertical()) {
             return stateIn;
         }
-        if(!this.canSurvive(stateIn, worldIn, currentPos)) {
+        if (!this.canSurvive(stateIn, worldIn, currentPos)) {
             return Blocks.AIR.defaultBlockState();
         }
         BlockState adjacentState = worldIn.getBlockState(currentPos.above());
         final int size = adjacentState.getBlock() == this
                 ? Math.min(adjacentState.getValue(CypressBlock.SIZE) + 1, 5)
                 : 1;
-        if(size < 3) {
+        if (size < 3) {
             return this.defaultBlockState().setValue(CypressBlock.SIZE, size);
         }
         adjacentState = worldIn.getBlockState(currentPos.below());
@@ -136,12 +132,12 @@ public class CypressBlock extends BlockAA implements IBlockGeneration {
     }
 
     @Override
-    
+
     public void animateTick(final BlockState stateIn, final Level worldIn, final BlockPos pos, final RandomSource rand) {
-        if(worldIn.isRainingAt(pos.above()) && rand.nextInt(15) == 1) {
+        if (worldIn.isRainingAt(pos.above()) && rand.nextInt(15) == 1) {
             final BlockPos posDown = pos.below();
             final BlockState stateDown = worldIn.getBlockState(posDown);
-            if(!stateDown.canOcclude() || !stateDown.isFaceSturdy(worldIn, posDown, Direction.UP)) {
+            if (!stateDown.canOcclude() || !stateDown.isFaceSturdy(worldIn, posDown, Direction.UP)) {
                 final double x = pos.getX() + rand.nextFloat();
                 final double y = pos.getY() - 0.05D;
                 final double z = pos.getZ() + rand.nextFloat();

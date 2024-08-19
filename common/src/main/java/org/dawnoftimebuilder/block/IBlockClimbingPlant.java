@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.dawnoftimebuilder.DoTBConfig;
+import org.dawnoftimebuilder.platform.Services;
 import org.dawnoftimebuilder.util.BlockStatePropertiesAA;
 import org.dawnoftimebuilder.util.Utils;
 
@@ -46,7 +47,7 @@ public interface IBlockClimbingPlant {
 
             if(worldIn.getRawBrightness(pos, 0) >= 8) {
                 int age = stateIn.getValue(AGE_0_6);
-				if (random.nextInt(DoTBConfig.get().climbingPlantGrowthChance) == 0) {//Probability "can grow"
+				if (random.nextInt(Services.PLATFORM.getConfig().climbingPlantGrowthChance) == 0) {//Probability "can grow"
 					if(age < 2){
 						this.placePlant(stateIn.setValue(AGE_0_6, age + 1), worldIn, pos, 2);
 						return;
@@ -57,7 +58,7 @@ public interface IBlockClimbingPlant {
 						}
 					}
 				}
-                if(age < 2 || random.nextInt(DoTBConfig.get().climbingPlantSpreadChance) != 0)
+                if(age < 2 || random.nextInt(Services.PLATFORM.getConfig().climbingPlantSpreadChance) != 0)
                     return;//Probability "can spread"
                 BlockPos[] positions = new BlockPos[] {
                         pos.north(),

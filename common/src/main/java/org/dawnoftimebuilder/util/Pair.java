@@ -32,10 +32,10 @@ public class Pair<S1, S2> {
 
     @Override
     public boolean equals(final Object obj) {
-        if(this == obj) {
+        if (this == obj) {
             return true;
         }
-        if(obj == null || this.getClass() != obj.getClass()) {
+        if (obj == null || this.getClass() != obj.getClass()) {
             return false;
         }
         @SuppressWarnings("unchecked") final Pair<S1, S2> other = (Pair<S1, S2>) obj;

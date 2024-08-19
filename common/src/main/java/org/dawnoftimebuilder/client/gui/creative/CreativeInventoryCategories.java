@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.dawnoftimebuilder.Constants.MOD_ID;
+import static org.dawnoftimebuilder.DoTBCommon.MOD_ID;
 
 public enum CreativeInventoryCategories {
     GENERAL("general",

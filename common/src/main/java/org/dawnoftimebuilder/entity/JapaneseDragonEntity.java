@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.phys.shapes.Shapes;
 import org.dawnoftimebuilder.DoTBConfig;
+import org.dawnoftimebuilder.platform.Services;
 import org.dawnoftimebuilder.registry.DoTBEntitiesRegistry;
 import org.dawnoftimebuilder.util.Utils;
 
@@ -43,8 +44,8 @@ public class JapaneseDragonEntity extends AmbientCreature {
 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, DoTBConfig.get().japaneseDragonHealth)
-                .add(Attributes.ATTACK_DAMAGE, DoTBConfig.get().japaneseDragonAttack);
+                .add(Attributes.MAX_HEALTH, Services.PLATFORM.getConfig().japaneseDragonHealth)
+                .add(Attributes.ATTACK_DAMAGE, Services.PLATFORM.getConfig().japaneseDragonAttack);
     }
 
     @Nullable
@@ -112,7 +113,7 @@ public class JapaneseDragonEntity extends AmbientCreature {
     @Nullable
     @Override
     public SoundEvent getAmbientSound() {
-        return !DoTBConfig.get().japaneseDragonMute && this.random.nextInt(4) == 0 ? SoundEvents.ENDER_DRAGON_AMBIENT : null;
+        return !Services.PLATFORM.getConfig().japaneseDragonMute && this.random.nextInt(4) == 0 ? SoundEvents.ENDER_DRAGON_AMBIENT : null;
     }
 
     @Override

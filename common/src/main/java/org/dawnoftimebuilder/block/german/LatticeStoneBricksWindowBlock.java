@@ -24,12 +24,12 @@ public class LatticeStoneBricksWindowBlock extends SidedWindowBlock {
     @Override
     public @NotNull VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter world, @NotNull BlockPos pos, @NotNull CollisionContext context) {
         return switch (state.getValue(SIDED_WINDOW)) {
-            default -> NORTH_VS;
             case EAST -> EAST_VS;
             case SOUTH -> SOUTH_VS;
             case WEST -> WEST_VS;
             case AXIS_X -> X_VS;
             case AXIS_Z -> Z_VS;
+            default -> NORTH_VS;
         };
     }
 }

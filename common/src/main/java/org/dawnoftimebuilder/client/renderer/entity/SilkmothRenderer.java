@@ -7,7 +7,7 @@ import org.dawnoftimebuilder.client.model.entity.SilkmothModel;
 import org.dawnoftimebuilder.entity.SilkmothEntity;
 import org.jetbrains.annotations.NotNull;
 
-import static org.dawnoftimebuilder.Constants.MOD_ID;
+import static org.dawnoftimebuilder.DoTBCommon.MOD_ID;
 
 public class SilkmothRenderer extends MobRenderer<SilkmothEntity, SilkmothModel<SilkmothEntity>> {
 	private static final ResourceLocation SILKMOTH_TEXTURE = new ResourceLocation(MOD_ID, "textures/entity/silkmoth.png");

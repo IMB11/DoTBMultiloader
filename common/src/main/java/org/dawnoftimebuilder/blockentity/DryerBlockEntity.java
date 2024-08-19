@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.dawnoftimebuilder.DoTBConfig;
+import org.dawnoftimebuilder.platform.Services;
 import org.dawnoftimebuilder.recipe.DryerRecipe;
 import org.dawnoftimebuilder.registry.DoTBBlockEntitiesRegistry;
 import org.dawnoftimebuilder.registry.DoTBRecipeTypesRegistry;
@@ -152,7 +153,7 @@ public class DryerBlockEntity extends BlockEntity {
                     itemStack.shrink(recipe.getIngredients().get(0).getItems()[0].getCount());
                 }
                 final float timeVariation = new Random().nextFloat() * 2.0F - 1.0F;
-                final int range = timeVariation >= 0 ? DoTBConfig.get().dryingTimeVariation : 10000 / (100 + DoTBConfig.get().dryingTimeVariation);
+                final int range = timeVariation >= 0 ? Services.PLATFORM.getConfig().dryingTimeVariation : 10000 / (100 + Services.PLATFORM.getConfig().dryingTimeVariation);
                 this.remainingTicks[index] = (int) (recipe.getDryingTime() * (100 + timeVariation * range) / 100);
                 this.getLevel().sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
 

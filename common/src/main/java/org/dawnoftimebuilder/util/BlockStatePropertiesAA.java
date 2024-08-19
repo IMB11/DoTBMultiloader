@@ -5,7 +5,8 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.properties.*;
+
+
 import org.dawnoftimebuilder.registry.DoTBBlocksRegistry;
 import org.dawnoftimebuilder.registry.DoTBItemsRegistry;
 import org.jetbrains.annotations.NotNull;
@@ -220,7 +221,6 @@ public class BlockStatePropertiesAA {
 
         /**
          * @param referenceCorner Corner used as reference
-         *
          * @return the offset to apply to the BlockPos horizontally to get the pos of the studied corner.
          */
         public int getHorizontalOffset(final SquareCorners referenceCorner) {
@@ -229,7 +229,6 @@ public class BlockStatePropertiesAA {
 
         /**
          * @param referenceCorner Corner used as reference
-         *
          * @return the offset to apply to the BlockPos vertically to get the pos of the studied corner.
          */
         public int getVerticalOffset(final SquareCorners referenceCorner) {
@@ -242,7 +241,6 @@ public class BlockStatePropertiesAA {
 
         /**
          * @param vertically must be true if the adjacent corner must be above or under.
-         *
          * @return the adjacent SquareCorner vertically or horizontally.
          */
         public SquareCorners getAdjacentCorner(final boolean vertically) {
@@ -295,6 +293,18 @@ public class BlockStatePropertiesAA {
             this.direction = offset;
         }
 
+        public static SidedWindow getSide(final Direction facing, final boolean isSneaking) {
+            if (isSneaking) {
+                return facing.getAxis() == Direction.Axis.X ? AXIS_X : AXIS_Z;
+            }
+            return switch (facing) {
+                case EAST -> EAST;
+                case SOUTH -> SOUTH;
+                case WEST -> WEST;
+                default -> NORTH;
+            };
+        }
+
         @Override
         public String toString() {
             return this.name;
@@ -313,20 +323,8 @@ public class BlockStatePropertiesAA {
             return this.direction.getCounterClockWise();
         }
 
-        public static SidedWindow getSide(final Direction facing, final boolean isSneaking) {
-            if(isSneaking) {
-                return facing.getAxis() == Direction.Axis.X ? AXIS_X : AXIS_Z;
-            }
-            return switch (facing) {
-                case EAST -> EAST;
-                case SOUTH -> SOUTH;
-                case WEST -> WEST;
-                default -> NORTH;
-            };
-        }
-
-        public SidedWindow rotate(boolean clockWise){
-            return switch(this){
+        public SidedWindow rotate(boolean clockWise) {
+            return switch (this) {
                 case NORTH -> clockWise ? EAST : WEST;
                 case EAST -> clockWise ? SOUTH : NORTH;
                 case SOUTH -> clockWise ? WEST : EAST;
@@ -386,13 +384,27 @@ public class BlockStatePropertiesAA {
         ClimbingPlant(final String name, final boolean cycle, final int age2, final int age3, final int age4, final int age5, final int age6) {
             this.name = name;
             this.cycle = cycle;
-            this.moonPhasePerAge = new int[] {
+            this.moonPhasePerAge = new int[]{
                     age2, age3, age4, age5, age6
             };
         }
 
         ClimbingPlant(final String name) {
             this(name, false, 0, 0, 0, 0, 0);
+        }
+
+        public static ClimbingPlant getFromItem(final Item item) {
+            if (item == DoTBItemsRegistry.INSTANCE.GRAPE_SEEDS.get()) {
+                return GRAPE;
+            }
+            //if(item == CLEMATIS_SEEDS.get()) return CLEMATIS;
+            if (item == Blocks.VINE.asItem()) {
+                return VINE;
+            }
+            if (item == DoTBBlocksRegistry.INSTANCE.IVY.get().asItem()) {
+                return IVY;
+            }
+            return NONE;
         }
 
         @Override
@@ -410,7 +422,7 @@ public class BlockStatePropertiesAA {
         }
 
         public boolean canGrow(final Level worldIn, int currentAge) {
-            if(!this.cycle || currentAge < 2 || currentAge > 6) {
+            if (!this.cycle || currentAge < 2 || currentAge > 6) {
                 return false;
             }
             currentAge -= 2;
@@ -420,20 +432,6 @@ public class BlockStatePropertiesAA {
 
         public boolean hasNoPlant() {
             return this == NONE;
-        }
-
-        public static ClimbingPlant getFromItem(final Item item) {
-            if(item == DoTBItemsRegistry.INSTANCE.GRAPE_SEEDS.get()) {
-                return GRAPE;
-            }
-            //if(item == CLEMATIS_SEEDS.get()) return CLEMATIS;
-            if(item == Blocks.VINE.asItem()) {
-                return VINE;
-            }
-            if(item == DoTBBlocksRegistry.INSTANCE.IVY.get().asItem()) {
-                return IVY;
-            }
-            return NONE;
         }
     }
 }

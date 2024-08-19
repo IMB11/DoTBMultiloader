@@ -21,15 +21,11 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.StairsShape;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import org.dawnoftimebuilder.block.templates.PlateBlock;
 import org.dawnoftimebuilder.util.Utils;
 import org.jetbrains.annotations.NotNull;
-
 import javax.annotation.Nullable;
 import java.util.List;
-
 import static org.dawnoftimebuilder.util.VoxelShapes.IRON_FENCE_SHAPES;
 
 public class IronFenceBlock extends PlateBlock {
@@ -49,11 +45,12 @@ public class IronFenceBlock extends PlateBlock {
         int index = (state.getValue(FACING).get2DDataValue() + 2) % 4;
         index *= 3;
         switch (state.getValue(SHAPE)) {
-            default -> {}
             case OUTER_RIGHT -> index += 3;
             case STRAIGHT -> index += 1;
             case INNER_LEFT -> index += 2;
             case INNER_RIGHT -> index += 5;
+            default -> {
+            }
         }
         index %= 12;
         return state.getValue(UP) ? index + 12 : index;
@@ -73,7 +70,7 @@ public class IronFenceBlock extends PlateBlock {
 
     @Override
     public @NotNull BlockState updateShape(BlockState stateIn, @NotNull Direction facing, @NotNull BlockState facingState, @NotNull LevelAccessor worldIn, @NotNull BlockPos currentPos, @NotNull BlockPos facingPos) {
-        if(facing == Direction.UP) {
+        if (facing == Direction.UP) {
             stateIn = stateIn.setValue(UP, !facingState.is(this));
         }
         return super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
@@ -82,28 +79,28 @@ public class IronFenceBlock extends PlateBlock {
     @Override
     public InteractionResult use(final BlockState state, final Level worldIn, final BlockPos pos, final Player player, final InteractionHand handIn, final BlockHitResult hit) {
         final ItemStack heldItemStack = player.getItemInHand(handIn);
-        if(player.isCrouching()) {
+        if (player.isCrouching()) {
             //We remove the highest Block
-            if(state.getValue(UP)) {
+            if (state.getValue(UP)) {
                 return super.use(state, worldIn, pos, player, handIn, hit);
             }
             final BlockPos topPos = this.getHighestColumnPos(worldIn, pos);
-            if(topPos != pos) {
-                if(!worldIn.isClientSide()) {
+            if (topPos != pos) {
+                if (!worldIn.isClientSide()) {
                     worldIn.setBlock(topPos, Blocks.AIR.defaultBlockState(), 35);
-                    if(!player.isCreative()) {
+                    if (!player.isCreative()) {
                         Block.dropResources(state, worldIn, pos, null, player, heldItemStack);
                     }
                 }
                 return InteractionResult.SUCCESS;
             }
-        } else if(!heldItemStack.isEmpty() && heldItemStack.getItem() == this.asItem()) {
+        } else if (!heldItemStack.isEmpty() && heldItemStack.getItem() == this.asItem()) {
             //We put a ColumnBlock on top of the column
             final BlockPos topPos = this.getHighestColumnPos(worldIn, pos).above();
-            if(topPos.getY() <= Utils.HIGHEST_Y) {
-                if(!worldIn.isClientSide() && worldIn.getBlockState(topPos).isAir()) {
+            if (topPos.getY() <= Utils.HIGHEST_Y) {
+                if (!worldIn.isClientSide() && worldIn.getBlockState(topPos).isAir()) {
                     worldIn.setBlock(topPos, state, 11);
-                    if(!player.isCreative()) {
+                    if (!player.isCreative()) {
                         heldItemStack.shrink(1);
                     }
                 }
@@ -115,8 +112,8 @@ public class IronFenceBlock extends PlateBlock {
 
     private BlockPos getHighestColumnPos(final Level worldIn, final BlockPos pos) {
         int yOffset;
-        for(yOffset = 0; yOffset + pos.getY() <= Utils.HIGHEST_Y; yOffset++) {
-            if(worldIn.getBlockState(pos.above(yOffset)).getBlock() != this) {
+        for (yOffset = 0; yOffset + pos.getY() <= Utils.HIGHEST_Y; yOffset++) {
+            if (worldIn.getBlockState(pos.above(yOffset)).getBlock() != this) {
                 break;
             }
         }

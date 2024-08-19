@@ -28,7 +28,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.dawnoftimebuilder.Constants.CREATIVE_ICONS;
+import static org.dawnoftimebuilder.DoTBCommon.CREATIVE_ICONS;
 
 @SuppressWarnings("unused")
 @Mixin(CreativeModeInventoryScreen.class)

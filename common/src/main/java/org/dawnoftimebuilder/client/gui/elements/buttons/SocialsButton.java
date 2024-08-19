@@ -7,7 +7,7 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
-import static org.dawnoftimebuilder.Constants.MOD_ID;
+import static org.dawnoftimebuilder.DoTBCommon.MOD_ID;
 
 public class SocialsButton extends Button {
     private final ResourceLocation buttonIcons, socialIcons;

@@ -24,6 +24,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import org.dawnoftimebuilder.DoTBConfig;
 import org.dawnoftimebuilder.block.IBlockChain;
 import org.dawnoftimebuilder.block.templates.BlockAA;
+import org.dawnoftimebuilder.platform.Services;
 import org.dawnoftimebuilder.registry.DoTBItemsRegistry;
 import org.dawnoftimebuilder.util.Utils;
 import org.jetbrains.annotations.NotNull;
@@ -142,7 +143,7 @@ public class StickBundleBlock extends BlockAA implements IBlockChain {
     public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
         int growth = state.getValue(AGE);
         if(growth > 0 && growth < 3) {
-            if(random.nextInt(DoTBConfig.get().stickBundleGrowthChance) == 0) {
+            if(random.nextInt(Services.PLATFORM.getConfig().stickBundleGrowthChance) == 0) {
                 worldIn.setBlock(pos, worldIn.getBlockState(pos).setValue(AGE, growth + 1), 10);
                 worldIn.setBlock(pos.below(), worldIn.getBlockState(pos.below()).setValue(AGE, growth + 1), 10);
             }

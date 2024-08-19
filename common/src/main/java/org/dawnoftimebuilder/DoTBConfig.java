@@ -8,27 +8,9 @@ import dev.isxander.yacl3.config.v2.api.autogen.Boolean;
 import dev.isxander.yacl3.config.v2.api.autogen.IntField;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 import dev.isxander.yacl3.platform.YACLPlatform;
+import net.minecraft.resources.ResourceLocation;
 
 public class DoTBConfig {
-    public static final ConfigClassHandler<DoTBConfig> HANDLER = ConfigClassHandler.createBuilder(DoTBConfig.class)
-            .serializer(config -> GsonConfigSerializerBuilder.create(config)
-                    .setPath(YACLPlatform.getConfigDir().resolve("dawnoftimebuilder-config.json5"))
-                    .setJson5(true)
-                    .build())
-            .build();
-
-    public static void load() {
-        HANDLER.load();
-    }
-
-    public static DoTBConfig get() {
-        return HANDLER.instance();
-    }
-
-    public static YetAnotherConfigLib getInstance() {
-        return HANDLER.generateGui();
-    }
-
     @AutoGen(category = "entities")
     @SerialEntry(comment = "The probability to spawn a Silkmoth on a Mulberry each random tick is equal to 1/x, where x is the config value.")
     @IntField(min = 10, max = 10000)

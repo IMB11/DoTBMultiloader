@@ -16,10 +16,10 @@
     "environment": "*",
     "entrypoints": {
         "main": [
-            "org.dawnoftimebuilder.DoTFabric"
+            "org.dawnoftimebuilder.DoTBFabric"
         ],
         "client": [
-            "org.dawnoftimebuilder.DoTFabric"
+            "org.dawnoftimebuilder.DoTBFabric"
         ],
         "modmenu": [
             "org.dawnoftimebuilder.compat.ModMenuEntrypoint"
@@ -31,6 +31,7 @@
     "depends": {
         "fabricloader": ">=0.14",
         "fabric": "*",
+        "yet_another_config_lib_v3": "*",
         "minecraft": "${minecraft_version}",
         "java": ">=17"
     },

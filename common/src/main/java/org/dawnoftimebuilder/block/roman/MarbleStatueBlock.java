@@ -19,13 +19,10 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import org.dawnoftimebuilder.block.templates.WaterloggedBlock;
 import org.dawnoftimebuilder.util.BlockStatePropertiesAA;
 import org.jetbrains.annotations.NotNull;
-
 import javax.annotation.Nullable;
-
 import static org.dawnoftimebuilder.util.VoxelShapes.MARBLE_STATUE_SHAPES;
 
 public class MarbleStatueBlock extends WaterloggedBlock {
@@ -46,10 +43,10 @@ public class MarbleStatueBlock extends WaterloggedBlock {
     @Override
     public void playerWillDestroy(final Level worldIn, final BlockPos blockPosIn, final BlockState blockStateIn, final Player playerEntityIn) {
         // Prevents item from dropping in creative by removing the part that gives the item with a setBlock.
-        if(!worldIn.isClientSide() && playerEntityIn.isCreative()) {
+        if (!worldIn.isClientSide() && playerEntityIn.isCreative()) {
             BlockPos blockPos;
             int multiblockValue = blockStateIn.getValue(MarbleStatueBlock.MULTIBLOCK);
-            if(multiblockValue > 0) {
+            if (multiblockValue > 0) {
                 blockPos = blockPosIn.below(multiblockValue);
                 final BlockState blockState = worldIn.getBlockState(blockPos);
                 worldIn.setBlock(blockPos, Blocks.AIR.defaultBlockState(), 35);
@@ -70,7 +67,7 @@ public class MarbleStatueBlock extends WaterloggedBlock {
     public BlockState getStateForPlacement(final BlockPlaceContext context) {
         final BlockPos pos = context.getClickedPos();
         final Level level = context.getLevel();
-        if(!level.getBlockState(pos.above()).canBeReplaced(context) || !level.getBlockState(pos.above(2)).canBeReplaced(context)) {
+        if (!level.getBlockState(pos.above()).canBeReplaced(context) || !level.getBlockState(pos.above(2)).canBeReplaced(context)) {
             return null;
         }
         return super.getStateForPlacement(context).setValue(MarbleStatueBlock.FACING, context.getHorizontalDirection().getOpposite());
@@ -86,19 +83,19 @@ public class MarbleStatueBlock extends WaterloggedBlock {
 
     @Override
     public @NotNull BlockState updateShape(final BlockState stateIn, final @NotNull Direction facing, final @NotNull BlockState facingState, final @NotNull LevelAccessor worldIn, final @NotNull BlockPos currentPos, final @NotNull BlockPos facingPos) {
-        if(facing.getAxis().isHorizontal()) {
+        if (facing.getAxis().isHorizontal()) {
             return stateIn;
         }
         final int multipart = stateIn.getValue(MarbleStatueBlock.MULTIBLOCK);
 
-        if(facing == Direction.UP && multipart < 2 && facingState.getBlock() == this) {
-            if(facingState.getValue(MarbleStatueBlock.FACING) == stateIn.getValue(MarbleStatueBlock.FACING) && facingState.getValue(MarbleStatueBlock.MULTIBLOCK) == multipart + 1) {
+        if (facing == Direction.UP && multipart < 2 && facingState.getBlock() == this) {
+            if (facingState.getValue(MarbleStatueBlock.FACING) == stateIn.getValue(MarbleStatueBlock.FACING) && facingState.getValue(MarbleStatueBlock.MULTIBLOCK) == multipart + 1) {
                 return stateIn;
             }
         }
 
-        if(facing == Direction.DOWN && multipart > 0 && facingState.getBlock() == this) {
-            if(facingState.getValue(MarbleStatueBlock.FACING) == stateIn.getValue(MarbleStatueBlock.FACING) && facingState.getValue(MarbleStatueBlock.MULTIBLOCK) == multipart - 1) {
+        if (facing == Direction.DOWN && multipart > 0 && facingState.getBlock() == this) {
+            if (facingState.getValue(MarbleStatueBlock.FACING) == stateIn.getValue(MarbleStatueBlock.FACING) && facingState.getValue(MarbleStatueBlock.MULTIBLOCK) == multipart - 1) {
                 return stateIn;
             }
         }

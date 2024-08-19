@@ -19,7 +19,7 @@ public class VoxelShapesBuilder {
         final VoxelShape vsNorthEastCorner = Block.box(8.0D, 0.0D, 0.0D, 16.0D, 16.0D, 8.0D);
         final VoxelShape vsSouthEastCorner = Block.box(8.0D, 0.0D, 8.0D, 16.0D, 16.0D, 16.0D);
         final VoxelShape vsSouthWestCorner = Block.box(0.0D, 0.0D, 8.0D, 8.0D, 16.0D, 16.0D);
-        return new VoxelShape[] { vsNorthWestCorner, vsNorthFlat, Shapes.or(vsNorthFlat, vsSouthWestCorner), vsNorthEastCorner, vsEastFlat, Shapes.or(vsEastFlat, vsNorthWestCorner), vsSouthEastCorner, vsSouthFlat, Shapes.or(vsSouthFlat, vsNorthEastCorner), vsSouthWestCorner, vsWestFlat, Shapes.or(vsWestFlat, vsSouthEastCorner), };
+        return new VoxelShape[]{vsNorthWestCorner, vsNorthFlat, Shapes.or(vsNorthFlat, vsSouthWestCorner), vsNorthEastCorner, vsEastFlat, Shapes.or(vsEastFlat, vsNorthWestCorner), vsSouthEastCorner, vsSouthFlat, Shapes.or(vsSouthFlat, vsNorthEastCorner), vsSouthWestCorner, vsWestFlat, Shapes.or(vsWestFlat, vsSouthEastCorner),};
     }
 
     /**
@@ -36,7 +36,7 @@ public class VoxelShapesBuilder {
         VoxelShape vsNorthEastCorner = Block.box(12.0D, 0.0D, 0.0D, 16.0D, 16.0D, 4.0D);
         VoxelShape vsSouthEastCorner = Block.box(12.0D, 0.0D, 12.0D, 16.0D, 16.0D, 16.0D);
         VoxelShape vsSouthWestCorner = Block.box(0.0D, 0.0D, 12.0D, 4.0D, 16.0D, 16.0D);
-        return new VoxelShape[] {
+        return new VoxelShape[]{
                 vsNorthWestCorner,
                 vsNorthFlat,
                 Shapes.or(vsNorthFlat, vsWestFlat),
@@ -60,21 +60,21 @@ public class VoxelShapesBuilder {
         final VoxelShape vsWest = Block.box(0.0D, 2.0D, 0.0D, 2.0D, 16.0D, 16.0D);
         final VoxelShape vsPillar = Block.box(4.0D, 2.0D, 4.0D, 12.0D, 16.0D, 12.0D);
         final VoxelShape[] shapes = new VoxelShape[32];
-        for(int i = 0; i < 32; i++) {
+        for (int i = 0; i < 32; i++) {
             VoxelShape temp = vsFloor;
-            if((i & 1) == 0) { // Check first bit : 0 -> North true
+            if ((i & 1) == 0) { // Check first bit : 0 -> North true
                 temp = Shapes.or(temp, vsNorth);
             }
-            if((i >> 1 & 1) == 0) { // Check second bit : 0 -> East true
+            if ((i >> 1 & 1) == 0) { // Check second bit : 0 -> East true
                 temp = Shapes.or(temp, vsEast);
             }
-            if((i >> 2 & 1) == 0) { // Check third bit : 0 -> South true
+            if ((i >> 2 & 1) == 0) { // Check third bit : 0 -> South true
                 temp = Shapes.or(temp, vsSouth);
             }
-            if((i >> 3 & 1) == 0) { // Check fourth bit : 0 -> West true
+            if ((i >> 3 & 1) == 0) { // Check fourth bit : 0 -> West true
                 temp = Shapes.or(temp, vsWest);
             }
-            if((i >> 4 & 1) == 1) { // Check fifth bit : 1 -> Pillar true
+            if ((i >> 4 & 1) == 1) { // Check fifth bit : 1 -> Pillar true
                 temp = Shapes.or(temp, vsPillar);
             }
             shapes[i] = temp;
@@ -91,24 +91,24 @@ public class VoxelShapesBuilder {
         final VoxelShape vsPillar = Block.box(4.0D, 10.0D, 4.0D, 12.0D, 16.0D, 12.0D);
         final VoxelShape vsBottom = Block.box(4.0D, 0.0D, 4.0D, 12.0D, 8.0D, 12.0D);
         final VoxelShape[] shapes = new VoxelShape[64];
-        for(int i = 0; i < 64; i++) {
+        for (int i = 0; i < 64; i++) {
             VoxelShape temp = vsFloor;
-            if((i & 1) == 0) { // Check first bit : 0 -> North true
+            if ((i & 1) == 0) { // Check first bit : 0 -> North true
                 temp = Shapes.or(temp, vsNorth);
             }
-            if((i >> 1 & 1) == 0) { // Check second bit : 0 -> East true
+            if ((i >> 1 & 1) == 0) { // Check second bit : 0 -> East true
                 temp = Shapes.or(temp, vsEast);
             }
-            if((i >> 2 & 1) == 0) { // Check third bit : 0 -> South true
+            if ((i >> 2 & 1) == 0) { // Check third bit : 0 -> South true
                 temp = Shapes.or(temp, vsSouth);
             }
-            if((i >> 3 & 1) == 0) { // Check fourth bit : 0 -> West true
+            if ((i >> 3 & 1) == 0) { // Check fourth bit : 0 -> West true
                 temp = Shapes.or(temp, vsWest);
             }
-            if((i >> 4 & 1) == 1) { // Check fifth bit : 1 -> Pillar true
+            if ((i >> 4 & 1) == 1) { // Check fifth bit : 1 -> Pillar true
                 temp = Shapes.or(temp, vsPillar);
             }
-            if((i >> 5 & 1) == 1) { // Check fifth bit : 1 -> Bottom true
+            if ((i >> 5 & 1) == 1) { // Check fifth bit : 1 -> Bottom true
                 temp = Shapes.or(temp, vsBottom);
             }
             shapes[i] = temp;
@@ -124,21 +124,21 @@ public class VoxelShapesBuilder {
         final VoxelShape vsWest = Block.box(0.0D, 10.0D, 0.0D, 2.0D, 16.0D, 16.0D);
         final VoxelShape vsPillar = Block.box(4.0D, 10.0D, 4.0D, 12.0D, 16.0D, 12.0D);
         final VoxelShape[] shapes = new VoxelShape[32];
-        for(int i = 0; i < 32; i++) {
+        for (int i = 0; i < 32; i++) {
             VoxelShape temp = vsFloor;
-            if((i & 1) == 0) { // Check first bit : 0 -> North true
+            if ((i & 1) == 0) { // Check first bit : 0 -> North true
                 temp = Shapes.or(temp, vsNorth);
             }
-            if((i >> 1 & 1) == 0) { // Check second bit : 0 -> East true
+            if ((i >> 1 & 1) == 0) { // Check second bit : 0 -> East true
                 temp = Shapes.or(temp, vsEast);
             }
-            if((i >> 2 & 1) == 0) { // Check third bit : 0 -> South true
+            if ((i >> 2 & 1) == 0) { // Check third bit : 0 -> South true
                 temp = Shapes.or(temp, vsSouth);
             }
-            if((i >> 3 & 1) == 0) { // Check fourth bit : 0 -> West true
+            if ((i >> 3 & 1) == 0) { // Check fourth bit : 0 -> West true
                 temp = Shapes.or(temp, vsWest);
             }
-            if((i >> 4 & 1) == 1) { // Check fifth bit : 1 -> Pillar true
+            if ((i >> 4 & 1) == 1) { // Check fifth bit : 1 -> Pillar true
                 temp = Shapes.or(temp, vsPillar);
             }
             shapes[i] = temp;
@@ -157,7 +157,7 @@ public class VoxelShapesBuilder {
         VoxelShape vsAxisXZ = Shapes.or(vsAxisX, vsAxisZ);
         VoxelShape vsAxisY = Block.box(3.0D, 0.0D, 3.0D, 13.0D, 16.0D, 13.0D);
         VoxelShape vsAxisY_bottom = Shapes.or(vsAxisY, Block.box(2.0D, 0.0D, 2.0D, 14.0D, 4.0D, 14.0D));
-        return new VoxelShape[] {
+        return new VoxelShape[]{
                 vsAxisX,
                 vsAxisZ,
                 vsAxisXZ,
@@ -183,7 +183,7 @@ public class VoxelShapesBuilder {
         VoxelShape vsAxisXZ = Shapes.or(vsAxisX, vsAxisZ);
         VoxelShape vsAxisY = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 16.0D, 11.0D);
         VoxelShape vsAxisY_bottom = Shapes.or(vsAxisY, Block.box(2.0D, 0.0D, 2.0D, 14.0D, 2.0D, 14.0D));
-        return new VoxelShape[] {
+        return new VoxelShape[]{
                 vsAxisX,
                 vsAxisZ,
                 vsAxisXZ,
@@ -249,7 +249,7 @@ public class VoxelShapesBuilder {
         VoxelShape vsNorthWest = Shapes.or(vsWest, vsNorth);
         VoxelShape vsNorthEast = Shapes.or(vsNorth, vsEast);
         VoxelShape vsSouthEast = Shapes.or(vsEast, vsSouth);
-        return new VoxelShape[] {
+        return new VoxelShape[]{
                 Shapes.or(vsSouthWest, vsNorthEast),
                 vsSouth,
                 vsWest,
@@ -276,14 +276,14 @@ public class VoxelShapesBuilder {
      */
     protected static VoxelShape[] makeWaxedOakTableShapes() {
         // South - West - North - East:
-        VoxelShape[] vsSide = Utils.generateHorizontalShapes(new VoxelShape[] { Shapes.or(Block.box(1.0D, 1.0D, 13.5D, 15.0D, 3.0D, 14.5D), Block.box(1.0D, 12.0D, 13.5D, 15.0D, 16.0D, 14.5D)) });
+        VoxelShape[] vsSide = Utils.generateHorizontalShapes(new VoxelShape[]{Shapes.or(Block.box(1.0D, 1.0D, 13.5D, 15.0D, 3.0D, 14.5D), Block.box(1.0D, 12.0D, 13.5D, 15.0D, 16.0D, 14.5D))});
         // SW - NW - NE - SE:
-        VoxelShape[] vsPillar = Utils.generateHorizontalShapes(new VoxelShape[] { Block.box(0.5D, 0.0D, 12.5D, 3.5D, 16.0D, 15.5D) });
+        VoxelShape[] vsPillar = Utils.generateHorizontalShapes(new VoxelShape[]{Block.box(0.5D, 0.0D, 12.5D, 3.5D, 16.0D, 15.5D)});
         // W - N - E - S
-        VoxelShape[] vsPillarLeft = Utils.generateHorizontalShapes(new VoxelShape[] { Block.box(0.0D, 0.0D, 13.0D, 1.0D, 16.0D, 15.0D) });
+        VoxelShape[] vsPillarLeft = Utils.generateHorizontalShapes(new VoxelShape[]{Block.box(0.0D, 0.0D, 13.0D, 1.0D, 16.0D, 15.0D)});
         // S - W - N - E
-        VoxelShape[] vsPillarRight = Utils.generateHorizontalShapes(new VoxelShape[] { Block.box(1.0D, 0.0D, 15.0D, 3.0D, 16.0D, 16.0D) });
-        return new VoxelShape[] {
+        VoxelShape[] vsPillarRight = Utils.generateHorizontalShapes(new VoxelShape[]{Block.box(1.0D, 0.0D, 15.0D, 3.0D, 16.0D, 16.0D)});
+        return new VoxelShape[]{
                 Shapes.empty(),
                 Shapes.or(vsSide[0], vsPillarLeft[0], vsPillarRight[3]),
                 Shapes.or(vsSide[1], vsPillarLeft[1], vsPillarRight[0]),
@@ -304,20 +304,20 @@ public class VoxelShapesBuilder {
         };
     }
 
-    protected static VoxelShape[] makeSupportSlabShapes(){
+    protected static VoxelShape[] makeSupportSlabShapes() {
         VoxelShape vs = Block.box(0.0D, 12.0D, 0.0D, 16.0D, 16.0D, 16.0D);
         VoxelShape vsFourPx = Shapes.or(vs, Block.box(6.0D, 0.0D, 6.0D, 10.0D, 16.0D, 10.0D));
         VoxelShape vsEightPx = Shapes.or(vs, Block.box(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D));
         VoxelShape vsTenPx = Shapes.or(vs, Block.box(3.0D, 0.0D, 3.0D, 13.0D, 16.0D, 13.0D));
-        return new VoxelShape[] {vs, vsFourPx, vsEightPx, vsTenPx};
+        return new VoxelShape[]{vs, vsFourPx, vsEightPx, vsTenPx};
     }
 
     /**
      * @return Stores VoxelShape for "South" with index : <p/>
      * {0 : S Small fireplace, 1 : S Big fireplace}
      */
-    protected static VoxelShape[] makeMultiblockFireplaceShapes(){
-        return Utils.generateHorizontalShapes(new VoxelShape[] {
+    protected static VoxelShape[] makeMultiblockFireplaceShapes() {
+        return Utils.generateHorizontalShapes(new VoxelShape[]{
                 Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 8.0D),
                 Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 12.0D)
         });
@@ -338,7 +338,7 @@ public class VoxelShapesBuilder {
         VoxelShape vsRight = Block.box(12.0D, 4.0D, 0.0D, 16.0D, 12.0D, 4.0D);
         VoxelShape vsVertical = Shapes.or(vsCenter, vsUnder, vsAbove);
         VoxelShape vsHorizontal = Shapes.or(vsCenter, vsLeft, vsRight);
-        return Utils.generateHorizontalShapes(new VoxelShape[] {
+        return Utils.generateHorizontalShapes(new VoxelShape[]{
                 vsCenter,
                 vsHorizontal,
                 vsHorizontal,
@@ -363,7 +363,7 @@ public class VoxelShapesBuilder {
      * {0 : S Closed, 1 : S Fully opened to the right, 2 : S Fully opened to the left}
      */
     protected static VoxelShape[] makeSmallShutterShapes() {
-        return Utils.generateHorizontalShapes(new VoxelShape[] { Block.box(0.0D, 0.0D, 13.0D, 16.0D, 16.0D, 16.0D),
+        return Utils.generateHorizontalShapes(new VoxelShape[]{Block.box(0.0D, 0.0D, 13.0D, 16.0D, 16.0D, 16.0D),
                 Block.box(-13.0D, 0.0D, 13.0D, 3.0D, 16.0D, 16.0D),
                 Block.box(13.0D, 0.0D, 13.0D, 29.0D, 16.0D, 16.0D)});
     }
@@ -382,7 +382,7 @@ public class VoxelShapesBuilder {
         VoxelShape vsAxis4px = Block.box(6.0D, 0.0D, 6.0D, 10.0D, 16.0D, 10.0D);
         VoxelShape vsAxis8px = Block.box(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D);
         VoxelShape vsAxis10px = Block.box(3.0D, 0.0D, 3.0D, 13.0D, 16.0D, 13.0D);
-        return new VoxelShape[] {
+        return new VoxelShape[]{
                 vsAxisX,
                 vsAxisZ,
                 vsAxisXZ,
@@ -406,7 +406,7 @@ public class VoxelShapesBuilder {
         VoxelShape vsColumn = Shapes.or(
                 Block.box(1.5D, 0.0D, 0.0D, 14.5D, 16.0D, 3.0D),
                 Block.box(5.5D, 0.0D, 3.0D, 10.5D, 16.0D, 6.0D));
-        return Utils.generateHorizontalShapes(new VoxelShape[] {
+        return Utils.generateHorizontalShapes(new VoxelShape[]{
                 vsColumn,
                 Shapes.or(
                         Block.box(1.5D, 0.0D, 0.0D, 14.5D, 9.0D, 3.0D),
@@ -447,7 +447,7 @@ public class VoxelShapesBuilder {
         VoxelShape vsNorthEastCornerTop = Block.box(6.0D, 0.0D, 0.0D, 16.0D, 16.0D, 10.0D);
         VoxelShape vsSouthEastCornerTop = Block.box(6.0D, 0.0D, 6.0D, 16.0D, 16.0D, 16.0D);
         VoxelShape vsSouthWestCornerTop = Block.box(0.0D, 0.0D, 6.0D, 10.0D, 16.0D, 16.0D);
-        return new VoxelShape[] {
+        return new VoxelShape[]{
                 vsNorthWestCorner,
                 vsNorthFlat,
                 Shapes.or(vsNorthFlat, vsWestFlat, vsNorthWestCorner),
@@ -471,7 +471,7 @@ public class VoxelShapesBuilder {
                 Shapes.or(vsSouthFlatTop, vsEastFlatTop, vsSouthEastCornerTop),
                 vsSouthWestCornerTop,
                 vsWestFlatTop,
-                Shapes.or(vsWestFlatTop, vsSouthFlatTop, vsSouthWestCornerTop) };
+                Shapes.or(vsWestFlatTop, vsSouthFlatTop, vsSouthWestCornerTop)};
     }
 
     /**
@@ -496,7 +496,7 @@ public class VoxelShapesBuilder {
         VoxelShape vsNorthEastCornerUp = Block.box(13.0D, 0.0D, 0.0D, 16.0D, 10, 3.0D);
         VoxelShape vsSouthEastCornerUp = Block.box(13.0D, 0.0D, 13.0D, 16.0D, 10, 16.0D);
         VoxelShape vsSouthWestCornerUp = Block.box(0.0D, 0.0D, 13.0D, 3.0D, 10, 16.0D);
-        return new VoxelShape[] {
+        return new VoxelShape[]{
                 vsNorthWestCorner,
                 vsNorthFlat,
                 Shapes.or(vsNorthFlat, vsWestFlat, vsNorthWestCorner),
@@ -525,7 +525,6 @@ public class VoxelShapesBuilder {
     }
 
 
-
     /**
      * @return Stores VoxelShape with index following binary system : <p/>
      * 8+4+2+1 with 1 = SOUTH, 2 = WEST, 4 = NORTH, 8 = EAST
@@ -541,7 +540,7 @@ public class VoxelShapesBuilder {
         VoxelShape vsNorthWest = Shapes.or(vsWest, vsNorth);
         VoxelShape vsNorthEst = Shapes.or(vsNorth, vsEast);
         VoxelShape vsSouthEst = Shapes.or(vsEast, vsSouth);
-        return new VoxelShape[] {
+        return new VoxelShape[]{
                 Shapes.or(vsSouthWest, vsNorthEst),
                 vsSouth,
                 vsWest,
@@ -560,15 +559,15 @@ public class VoxelShapesBuilder {
         };
     }
 
-    protected static VoxelShape[] makeStoneBricksArrowslitShapes(){
-        return Utils.generateHorizontalShapes(new VoxelShape[] {Shapes.or(
-                        Block.box(0.0D, 0.0D, 14.0D, 7.0D, 16.0D, 16.0D),
-                        Block.box(9.0D, 0.0D, 14.0D, 16.0D, 16.0D, 16.0D),
-                        Block.box(0.0D, 0.0D, 8.0D, 2.0D, 16.0D, 14.0D),
-                        Block.box(14.0D, 0.0D, 8.0D, 16.0D, 16.0D, 14.0D),
-                        Block.box(2.0D, 0.0D, 13.0D, 4.5D, 16.0D, 14.0D),
-                        Block.box(11.5D, 0.0D, 13.0D, 14.0D, 16.0D, 14.0D)
-                )
+    protected static VoxelShape[] makeStoneBricksArrowslitShapes() {
+        return Utils.generateHorizontalShapes(new VoxelShape[]{Shapes.or(
+                Block.box(0.0D, 0.0D, 14.0D, 7.0D, 16.0D, 16.0D),
+                Block.box(9.0D, 0.0D, 14.0D, 16.0D, 16.0D, 16.0D),
+                Block.box(0.0D, 0.0D, 8.0D, 2.0D, 16.0D, 14.0D),
+                Block.box(14.0D, 0.0D, 8.0D, 16.0D, 16.0D, 14.0D),
+                Block.box(2.0D, 0.0D, 13.0D, 4.5D, 16.0D, 14.0D),
+                Block.box(11.5D, 0.0D, 13.0D, 14.0D, 16.0D, 14.0D)
+        )
         });
     }
 
@@ -577,7 +576,7 @@ public class VoxelShapesBuilder {
      * {0 : Lone, 1 : Under, 2 : Above, 3 : Both}
      */
     protected static VoxelShape[] makeLimestoneChimneyShapes() {
-        return new VoxelShape[] {
+        return new VoxelShape[]{
                 Shapes.or(
                         Block.box(2.0D, 0.0D, 2.0D, 14.0D, 8.0D, 14.0D),
                         Block.box(4.0D, 8.0D, 4.0D, 12.0D, 16.0D, 12.0D)),
@@ -596,7 +595,7 @@ public class VoxelShapesBuilder {
      * {0 : None, 1 : Under, 2 : Above, 3 : Both}
      */
     protected static VoxelShape[] makeStoneBricksChimneyShapes() {
-        return new VoxelShape[] {
+        return new VoxelShape[]{
                 Shapes.or(
                         Block.box(2.0D, 0.0D, 2.0D, 14.0D, 8.0D, 14.0D),
                         Block.box(1.0D, 8.0D, 1.0D, 15.0D, 11.0D, 15.0D)),
@@ -611,14 +610,13 @@ public class VoxelShapesBuilder {
     }
 
 
-
     /**
      * @return Stores VoxelShape for "South" with index : <p/>
      * {0 : S None, 1 : S Left, 2 : S Right, 3 : S Both}
      */
     protected static VoxelShape[] makeStoneBricksMachicolationShapes() {
         VoxelShape floorVS = Block.box(0.0D, 12.0D, 0.0D, 16.0D, 16.0D, 8.0D);
-        return Utils.generateHorizontalShapes(new VoxelShape[] {
+        return Utils.generateHorizontalShapes(new VoxelShape[]{
                 Shapes.or(
                         floorVS,
                         Block.box(0.0D, 8.0D, 0.0D, 6.0D, 16.0D, 16.0D),
@@ -672,7 +670,7 @@ public class VoxelShapesBuilder {
         VoxelShape vsNorthEastCorner = Block.box(12.0D, 0.0D, 0.0D, 16.0D, 16.0D, 4.0D);
         VoxelShape vsSouthEastCorner = Block.box(12.0D, 0.0D, 12.0D, 16.0D, 16.0D, 16.0D);
         VoxelShape vsSouthWestCorner = Block.box(0.0D, 0.0D, 12.0D, 4.0D, 16.0D, 16.0D);
-        return Utils.generateHorizontalShapes(new VoxelShape[] {
+        return Utils.generateHorizontalShapes(new VoxelShape[]{
                 vsNorthWestCorner,
                 vsNorthFlat,
                 Shapes.or(vsNorthFlat, vsWestFlat),
@@ -688,12 +686,12 @@ public class VoxelShapesBuilder {
         });
     }
 
-    protected static VoxelShape[] makeWaxedOakChairShapes(){
-        return Utils.generateHorizontalShapes(new VoxelShape[] {
+    protected static VoxelShape[] makeWaxedOakChairShapes() {
+        return Utils.generateHorizontalShapes(new VoxelShape[]{
                 Shapes.or(
                         Block.box(2.0D, 0.0D, 2.0D, 14.0D, 11.0D, 14.0D),
                         Block.box(2.5D, 11.0D, 3.0D, 13.5D, 16.0D, 5.0D)),
-                Block.box(2.5D, 0.0D, 3.0D, 13.5D, 10.0D, 5.0D) });
+                Block.box(2.5D, 0.0D, 3.0D, 13.5D, 10.0D, 5.0D)});
     }
 
     protected static VoxelShape[] makeCharredSpruceFancyRailingShapes() {
@@ -704,25 +702,25 @@ public class VoxelShapesBuilder {
         VoxelShape voxelShape4 = Block.box(7.0D, 6.0D, 7.0D, 16.0D, 16.0D, 9.0D);
         VoxelShape voxelShape5 = Shapes.or(voxelShape1, voxelShape4);
         VoxelShape voxelShape6 = Shapes.or(voxelShape2, voxelShape3);
-        VoxelShape[] allVoxelShape = new VoxelShape[] {Shapes.empty(), voxelShape2, voxelShape3, voxelShape6, voxelShape1, Shapes.or(voxelShape2, voxelShape1), Shapes.or(voxelShape3, voxelShape1), Shapes.or(voxelShape6, voxelShape1), voxelShape4, Shapes.or(voxelShape2, voxelShape4), Shapes.or(voxelShape3, voxelShape4), Shapes.or(voxelShape6, voxelShape4), voxelShape5, Shapes.or(voxelShape2, voxelShape5), Shapes.or(voxelShape3, voxelShape5), Shapes.or(voxelShape6, voxelShape5) };
-        for(int i = 0; i < 16; ++i) {
+        VoxelShape[] allVoxelShape = new VoxelShape[]{Shapes.empty(), voxelShape2, voxelShape3, voxelShape6, voxelShape1, Shapes.or(voxelShape2, voxelShape1), Shapes.or(voxelShape3, voxelShape1), Shapes.or(voxelShape6, voxelShape1), voxelShape4, Shapes.or(voxelShape2, voxelShape4), Shapes.or(voxelShape3, voxelShape4), Shapes.or(voxelShape6, voxelShape4), voxelShape5, Shapes.or(voxelShape2, voxelShape5), Shapes.or(voxelShape3, voxelShape5), Shapes.or(voxelShape6, voxelShape5)};
+        for (int i = 0; i < 16; ++i) {
             allVoxelShape[i] = Shapes.or(voxelShape, allVoxelShape[i]);
         }
         return allVoxelShape;
     }
 
     protected static VoxelShape[] makeCharredSpruceShuttersShapes() {
-        return Utils.generateHorizontalShapes(new VoxelShape[] {
-            Block.box(0.0D, 0.0D, 14.0D, 16.0D, 16.0D, 16.0D),
-            Shapes.or(
-                    Block.box(0.0D, 12.0D, 12.0D, 16.0D, 16.0D, 16.0D),
-                    Block.box(0.0D, 9.0D, 9.0D, 16.0D, 13.0D, 13.0D),
-                    Block.box(0.0D, 6.0D, 6.0D, 16.0D, 10.0D, 10.0D),
-                    Block.box(0.0D, 3.0D, 3.0D, 16.0D, 7.0D, 7.0D)) });
+        return Utils.generateHorizontalShapes(new VoxelShape[]{
+                Block.box(0.0D, 0.0D, 14.0D, 16.0D, 16.0D, 16.0D),
+                Shapes.or(
+                        Block.box(0.0D, 12.0D, 12.0D, 16.0D, 16.0D, 16.0D),
+                        Block.box(0.0D, 9.0D, 9.0D, 16.0D, 13.0D, 13.0D),
+                        Block.box(0.0D, 6.0D, 6.0D, 16.0D, 10.0D, 10.0D),
+                        Block.box(0.0D, 3.0D, 3.0D, 16.0D, 7.0D, 7.0D))});
     }
 
     protected static VoxelShape[] makeCharredSpruceTallShuttersShapes() {
-        return Utils.generateHorizontalShapes(new VoxelShape[] {
+        return Utils.generateHorizontalShapes(new VoxelShape[]{
                 Block.box(0.0D, 0.0D, 14.0D, 16.0D, 16.0D, 16.0D),
                 Shapes.or(
                         Block.box(0.0D, 10.0D, 11.0D, 16.0D, 16.0D, 16.0D),
@@ -731,26 +729,26 @@ public class VoxelShapesBuilder {
                 Shapes.or(
                         Block.box(0.0D, 11.0D, 5.0D, 16.0D, 16.0D, 10.0D),
                         Block.box(0.0D, 6.0D, 3.0D, 16.0D, 11.0D, 8.0D),
-                        Block.box(0.0D, 1.0D, 1.0D, 16.0D, 6.0D, 6.0D)) });
+                        Block.box(0.0D, 1.0D, 1.0D, 16.0D, 6.0D, 6.0D))});
     }
 
-    protected static VoxelShape[] makeSmallTatamiMatShapes(){
-        return new VoxelShape[] {
-            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D),
-            Block.box(5.5D, 0.0D, 0.0D, 10.5D, 5.0D, 16.0D),
-            Block.box(1.5D, 0.0D, 0.0D, 14.5D, 5.0D, 16.0D),
-            Block.box(1.5D, 0.0D, 0.0D, 14.5D, 10.0D, 16.0D),
-            Block.box(0.0D, 0.0D, 5.5D, 16.0D, 5.0D, 10.5D),
-            Block.box(0.0D, 0.0D, 1.5D, 16.0D, 5.0D, 14.5D),
-            Block.box(0.0D, 0.0D, 1.5D, 16.0D, 10.0D, 14.5D),
-            Block.box(5.5D, 0.0D, 5.5D, 10.5D, 16.0D, 10.5D)};
+    protected static VoxelShape[] makeSmallTatamiMatShapes() {
+        return new VoxelShape[]{
+                Block.box(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D),
+                Block.box(5.5D, 0.0D, 0.0D, 10.5D, 5.0D, 16.0D),
+                Block.box(1.5D, 0.0D, 0.0D, 14.5D, 5.0D, 16.0D),
+                Block.box(1.5D, 0.0D, 0.0D, 14.5D, 10.0D, 16.0D),
+                Block.box(0.0D, 0.0D, 5.5D, 16.0D, 5.0D, 10.5D),
+                Block.box(0.0D, 0.0D, 1.5D, 16.0D, 5.0D, 14.5D),
+                Block.box(0.0D, 0.0D, 1.5D, 16.0D, 10.0D, 14.5D),
+                Block.box(5.5D, 0.0D, 5.5D, 10.5D, 16.0D, 10.5D)};
     }
 
     /**
      * @return In the order none, under, above, both.
      */
-    protected static VoxelShape[] makeMoraqMosaicColumnShapes(){
-        return new VoxelShape[] {
+    protected static VoxelShape[] makeMoraqMosaicColumnShapes() {
+        return new VoxelShape[]{
                 Block.box(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D),
                 Shapes.or(
                         Block.box(2.0D, 0.0D, 2.0D, 14.0D, 6.0D, 14.0D),
@@ -770,7 +768,7 @@ public class VoxelShapesBuilder {
                 Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 8.0D),
                 Block.box(4.0D, 2.0D, 0.0D, 12.0D, 13.0D, 8.0D),
                 Block.box(6.0D, 13.0D, 0.0D, 10.0D, 16.0D, 8.0D));
-        return Utils.generateHorizontalShapes(new VoxelShape[] {
+        return Utils.generateHorizontalShapes(new VoxelShape[]{
                 Block.box(0.0D, 0.0D, 0.0D, 8.0D, 2.0D, 8.0D),
                 vsCrenelation,
                 Shapes.or(
@@ -788,7 +786,7 @@ public class VoxelShapesBuilder {
     protected static VoxelShape[] makeGreenSculptedPlasteredStoneFriezeShapes() {
         VoxelShape vsQtrN = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 8.0D);
         VoxelShape vsSpikeN = Block.box(4.5D, 4.0D, 2.0D, 11.5D, 16.0D, 4.0D);
-        return Utils.generateHorizontalShapes(new VoxelShape[] {
+        return Utils.generateHorizontalShapes(new VoxelShape[]{
                 Shapes.or(
                         Block.box(0.0D, 0.0D, 0.0D, 8.0D, 4.0D, 8.0D),
                         Block.box(0.0D, 4.0D, 0.0D, 6.0D, 16.0D, 6.0D)),
@@ -805,8 +803,8 @@ public class VoxelShapesBuilder {
     /**
      * @return In the order none, under, above, both.
      */
-    protected static VoxelShape[] makePlasteredStoneColumnShapes(){
-        return new VoxelShape[] {
+    protected static VoxelShape[] makePlasteredStoneColumnShapes() {
+        return new VoxelShape[]{
                 Block.box(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D),
                 Shapes.or(
                         Block.box(1.0D, 8.0D, 1.0D, 15.0D, 16.0D, 15.0D),
@@ -824,7 +822,7 @@ public class VoxelShapesBuilder {
     protected static VoxelShape[] makeRedSculptedPlasteredStoneFriezeShapes() {
         VoxelShape vsQtrN = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 8.0D);
         VoxelShape vsSpikeN = Block.box(4.0D, 4.0D, 4.0D, 12.0D, 13.0D, 7.0D);
-        return Utils.generateHorizontalShapes(new VoxelShape[] {
+        return Utils.generateHorizontalShapes(new VoxelShape[]{
                 Shapes.or(
                         Block.box(0.0D, 0.0D, 0.0D, 8.0D, 4.0D, 8.0D),
                         Block.box(4.0D, 2.0D, 4.0D, 12.0D, 13.0D, 12.0D)),
@@ -845,7 +843,7 @@ public class VoxelShapesBuilder {
     protected static VoxelShape[] makeSerpentSculptedColumnShapes() {
         VoxelShape vsHead = Block.box(4.0D, 0.0D, 6.0D, 12.0D, 9.0D, 16.0D);
         VoxelShape vsTail = Block.box(5.0D, 0.0D, 0.0D, 11.0D, 16.0D, 6.0D);
-        return Utils.generateHorizontalShapes(new VoxelShape[] {
+        return Utils.generateHorizontalShapes(new VoxelShape[]{
                 Shapes.or(vsHead, Block.box(5.0D, 0.0D, 0.0D, 11.0D, 6.0D, 6.0D)),
                 Shapes.or(vsTail, Block.box(5.0D, 10.0D, 6.0D, 11.0D, 16.0D, 15.0D)),
                 Shapes.or(vsHead, vsTail),
@@ -853,7 +851,7 @@ public class VoxelShapesBuilder {
         });
     }
 
-    protected static VoxelShape[] makeMarbleColumnShapes(){
+    protected static VoxelShape[] makeMarbleColumnShapes() {
         return new VoxelShape[]{
                 Block.box(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D),
                 Shapes.or(
@@ -876,7 +874,7 @@ public class VoxelShapesBuilder {
      */
     protected static VoxelShape[] makeMarbleSidedColumnShapes() {
         VoxelShape vsColumn = Block.box(4.0D, 0.0D, 0.0D, 12.0D, 16.0D, 4.0D);
-        return Utils.generateHorizontalShapes(new VoxelShape[] {
+        return Utils.generateHorizontalShapes(new VoxelShape[]{
                 vsColumn,
                 Shapes.or(
                         Block.box(4.0D, 0.0D, 0.0D, 12.0D, 10.0D, 4.0D),
@@ -896,7 +894,7 @@ public class VoxelShapesBuilder {
      */
     protected static VoxelShape[] makeSandstoneSidedColumnShapes() {
         VoxelShape vsColumn = Block.box(4.0D, 0.0D, 0.0D, 12.0D, 16.0D, 4.0D);
-        return Utils.generateHorizontalShapes(new VoxelShape[] {
+        return Utils.generateHorizontalShapes(new VoxelShape[]{
                 vsColumn,
                 Shapes.or(
                         Block.box(4.0D, 0.0D, 0.0D, 12.0D, 8.0D, 4.0D),
@@ -934,16 +932,16 @@ public class VoxelShapesBuilder {
                 Block.box(6.0D, 0.0D, 6.0D, 10.0D, 8.0D, 10.0D),
                 Block.box(6.0D, 10.0D, 6.0D, 10.0D, 12.0D, 10.0D));
         VoxelShape both = Shapes.or(axisY, Block.box(6.5D, 15.0D, 6.5D, 9.5D, 16.0D, 9.5D));
-        return new VoxelShape[] {axisX, axisZ, Shapes.or(axisX, axisZ),
+        return new VoxelShape[]{axisX, axisZ, Shapes.or(axisX, axisZ),
                 smallNone, largeNone, smallUnder, largeUnder, above, both,
                 Shapes.or(axisX, smallNone), Shapes.or(axisX, largeNone), Shapes.or(axisX, smallUnder), Shapes.or(axisX, largeUnder), Shapes.or(axisX, above), Shapes.or(axisX, both),
                 Shapes.or(axisZ, smallNone), Shapes.or(axisZ, largeNone), Shapes.or(axisZ, smallUnder), Shapes.or(axisZ, largeUnder), Shapes.or(axisZ, above), Shapes.or(axisZ, both),
                 Shapes.or(axisXZ, smallNone), Shapes.or(axisXZ, largeNone), Shapes.or(axisXZ, smallUnder), Shapes.or(axisXZ, largeUnder), Shapes.or(axisXZ, above), Shapes.or(axisXZ, both)};
     }
 
-    protected static VoxelShape[] makeStoneLanternShapes(){
+    protected static VoxelShape[] makeStoneLanternShapes() {
         return Utils.generateHorizontalShapes(
-                new VoxelShape[] {Shapes.or(
+                new VoxelShape[]{Shapes.or(
                         Block.box(4.0D, 1.0D, 4.0D, 12.0D, 2.0D, 12.0D),
                         Block.box(5.0D, 2.0D, 5.0D, 11.0D, 10.5D, 11.0D),
                         Block.box(7.0D, 6.0D, 0.0D, 9.0D, 16.0D, 9.0D),
@@ -961,9 +959,9 @@ public class VoxelShapesBuilder {
                         Block.box(2.0D, 8.5D, 2.0D, 14.0D, 10.0D, 14.0D)));
     }
 
-    protected static VoxelShape[] makeIronFancyLanternShapes(){
+    protected static VoxelShape[] makeIronFancyLanternShapes() {
         return Utils.generateHorizontalShapes(
-                new VoxelShape[] {Shapes.or(
+                new VoxelShape[]{Shapes.or(
                         Block.box(7.0D, 18.0D, 7.0D, 9.0D, 20.0D, 9.0D),
                         Block.box(6.0D, 17.0D, 6.0D, 10.0D, 18.0D, 10.0D),
                         Block.box(5.0D, 8.0D, 5.0D, 11.0D, 17.0D, 11.0D),

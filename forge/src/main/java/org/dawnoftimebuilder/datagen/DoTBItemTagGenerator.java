@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-import static org.dawnoftimebuilder.Constants.MOD_ID;
+import static org.dawnoftimebuilder.DoTBCommon.MOD_ID;
 
 public class DoTBItemTagGenerator extends ItemTagsProvider {
     public DoTBItemTagGenerator(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> lookupBlock, @Nullable ExistingFileHelper existingFileHelper) {

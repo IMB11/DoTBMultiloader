@@ -34,7 +34,7 @@ public class ItemDoTB extends Item {
     @Override
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level world, @NotNull List<Component> tooltips, @NotNull TooltipFlag flagIn) {
         super.appendHoverText(stack, world, tooltips, flagIn);
-        if(this.hasTooltip) {
+        if (this.hasTooltip) {
             Utils.addTooltip(tooltips, this);
         }
     }

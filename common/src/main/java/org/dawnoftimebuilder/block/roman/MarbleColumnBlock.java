@@ -37,9 +37,9 @@ public class MarbleColumnBlock extends ConnectedVerticalBlock implements IBlockP
     @Override
     public int getShapeIndex(@NotNull BlockState state, @NotNull BlockGetter worldIn, @NotNull BlockPos pos, @NotNull CollisionContext context) {
         return switch (state.getValue(VERTICAL_CONNECTION)) {
-            default -> 0;
             case ABOVE -> 1;
             case UNDER -> state.getValue(AXIS_X) ? 2 : 3;
+            default -> 0;
         };
     }
 
@@ -58,10 +58,10 @@ public class MarbleColumnBlock extends ConnectedVerticalBlock implements IBlockP
     @Override
     public boolean isConnectible(BlockState stateIn, LevelAccessor worldIn, BlockPos pos, Direction faceToConnect) {
         BlockState testedState = worldIn.getBlockState(pos);
-        if(faceToConnect == Direction.DOWN && IBlockPillar.getPillarConnectionUnder(worldIn, pos) == BlockStatePropertiesAA.PillarConnection.EIGHT_PX) {
+        if (faceToConnect == Direction.DOWN && IBlockPillar.getPillarConnectionUnder(worldIn, pos) == BlockStatePropertiesAA.PillarConnection.EIGHT_PX) {
             return true;
         }
-        if(faceToConnect == Direction.UP && IBlockPillar.getPillarConnectionAbove(worldIn, pos) == BlockStatePropertiesAA.PillarConnection.EIGHT_PX) {
+        if (faceToConnect == Direction.UP && IBlockPillar.getPillarConnectionAbove(worldIn, pos) == BlockStatePropertiesAA.PillarConnection.EIGHT_PX) {
             return true;
         }
         return testedState.getBlock() == this;

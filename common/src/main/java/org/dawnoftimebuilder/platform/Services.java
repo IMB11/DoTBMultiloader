@@ -1,6 +1,6 @@
 package org.dawnoftimebuilder.platform;
 
-import org.dawnoftimebuilder.Constants;
+import org.dawnoftimebuilder.DoTBCommon;
 import org.dawnoftimebuilder.platform.services.IPlatformHelper;
 
 import java.util.ServiceLoader;
@@ -24,7 +24,7 @@ public class Services {
         final T loadedService = ServiceLoader.load(clazz)
                 .findFirst()
                 .orElseThrow(() -> new NullPointerException("Failed to load service for " + clazz.getName()));
-        Constants.LOG.debug("Loaded {} for service {}", loadedService, clazz);
+        DoTBCommon.LOG.debug("Loaded {} for service {}", loadedService, clazz);
         return loadedService;
     }
 }

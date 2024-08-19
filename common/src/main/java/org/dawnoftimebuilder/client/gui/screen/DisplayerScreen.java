@@ -9,7 +9,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 import org.dawnoftimebuilder.container.DisplayerMenu;
 
-import static org.dawnoftimebuilder.Constants.MOD_ID;
+import static org.dawnoftimebuilder.DoTBCommon.MOD_ID;
 
 
 public class DisplayerScreen extends AbstractContainerScreen<DisplayerMenu> {

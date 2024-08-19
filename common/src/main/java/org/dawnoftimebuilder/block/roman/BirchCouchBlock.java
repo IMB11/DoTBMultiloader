@@ -42,10 +42,10 @@ public class BirchCouchBlock extends ChairBlock {
         float x = 8.0F;
         float z = 8.0F;
         switch (state.getValue(FACING)) {
-            default -> z = 2.0F;
             case SOUTH -> z = 14.0F;
             case WEST -> x = 2.0F;
             case EAST -> x = 14.0F;
+            default -> z = 2.0F;
         }
 
         return ChairEntity.createEntity(worldIn, pos, player, player.getDirection().getOpposite(), x, this.pixelsYOffset, z);
@@ -55,7 +55,7 @@ public class BirchCouchBlock extends ChairBlock {
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         Direction direction = context.getHorizontalDirection();
-        if(context.getLevel().getBlockState(context.getClickedPos().relative(direction)).canBeReplaced(context))
+        if (context.getLevel().getBlockState(context.getClickedPos().relative(direction)).canBeReplaced(context))
             return super.getStateForPlacement(context).setValue(FACING, direction);
         return null;
     }
@@ -69,9 +69,9 @@ public class BirchCouchBlock extends ChairBlock {
     @Override
     public @NotNull BlockState updateShape(BlockState stateIn, @NotNull Direction facing, @NotNull BlockState facingState, @NotNull LevelAccessor worldIn, @NotNull BlockPos currentPos, @NotNull BlockPos facingPos) {
         Direction blockFacing = stateIn.getValue(FACING);
-        if(facing == blockFacing) {
-            if(facingState.getBlock() == this) {
-                if(facingState.getValue(FACING).getOpposite() == blockFacing)
+        if (facing == blockFacing) {
+            if (facingState.getBlock() == this) {
+                if (facingState.getValue(FACING).getOpposite() == blockFacing)
                     return super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
             }
             return Blocks.AIR.defaultBlockState();

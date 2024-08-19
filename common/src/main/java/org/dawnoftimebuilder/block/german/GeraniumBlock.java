@@ -3,19 +3,12 @@ package org.dawnoftimebuilder.block.german;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.PushReaction;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import org.dawnoftimebuilder.block.templates.BlockAA;
-import org.jetbrains.annotations.NotNull;
-
 import javax.annotation.Nullable;
-
 import static org.dawnoftimebuilder.util.VoxelShapes.GERANIUM_SHAPE;
 
 public class GeraniumBlock extends BlockAA {

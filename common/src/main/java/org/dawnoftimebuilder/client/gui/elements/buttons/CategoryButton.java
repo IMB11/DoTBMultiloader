@@ -9,8 +9,8 @@ import net.minecraft.resources.ResourceLocation;
 import org.dawnoftimebuilder.client.gui.creative.CreativeInventoryCategories;
 import org.dawnoftimebuilder.mixin.api.CreativeMixinScreen;
 
-import static org.dawnoftimebuilder.Constants.CREATIVE_ICONS;
-import static org.dawnoftimebuilder.Constants.MOD_ID;
+import static org.dawnoftimebuilder.DoTBCommon.CREATIVE_ICONS;
+import static org.dawnoftimebuilder.DoTBCommon.MOD_ID;
 
 public class CategoryButton extends Button {
     private final CreativeMixinScreen parent;
