@@ -2,14 +2,17 @@ package org.dawnoftimebuilder;
 
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.fabricmc.fabric.impl.client.rendering.BlockEntityRendererRegistryImpl;
+import net.fabricmc.fabric.impl.content.registry.FlammableBlockRegistryImpl;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
@@ -19,6 +22,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
@@ -40,6 +44,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.scores.criteria.ObjectiveCriteria;
+import org.dawnoftimebuilder.block.IFlammable;
 import org.dawnoftimebuilder.block.templates.FlowerPotBlockAA;
 import org.dawnoftimebuilder.client.gui.screen.DisplayerScreen;
 import org.dawnoftimebuilder.client.model.entity.SilkmothModel;
@@ -52,6 +57,7 @@ import org.dawnoftimebuilder.item.IHasFlowerPot;
 import org.dawnoftimebuilder.item.IconItem;
 import org.dawnoftimebuilder.registry.*;
 
+import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -68,6 +74,13 @@ public class RegistryImpls {
     public static class FabricBlocksRegistry extends DoTBBlocksRegistry {
         public FabricBlocksRegistry() {
             postRegister();
+
+            for (Map.Entry<ResourceKey<Block>, Block> resourceKeyBlockEntry : BuiltInRegistries.BLOCK.entrySet()) {
+                Block block = resourceKeyBlockEntry.getValue();
+                if (block instanceof IFlammable) {
+                    FlammableBlockRegistry.getDefaultInstance().add(block, ((IFlammable) block).getFireSpreadSpeed(block.defaultBlockState(), null, null, null), ((IFlammable) block).getFlammability(block.defaultBlockState(), null, null, null));
+                }
+            }
         }
 
         @SafeVarargs
@@ -226,6 +239,14 @@ public class RegistryImpls {
         BlockEntityRenderers.register(DoTBBlockEntitiesRegistry.INSTANCE.DRYER.get(), DryerBERenderer::new);
         EntityModelLayerRegistry.registerModelLayer(SilkmothModel.LAYER_LOCATION, SilkmothModel::createBodyLayer);
         MenuScreens.register(DoTBMenuTypesRegistry.INSTANCE.DISPLAYER.get(), DisplayerScreen::new);
+
+        DoTColorsRegistry.initialize();
+        DoTColorsRegistry.getBlocksColorRegistry().forEach((blockColor, blocks) -> {
+            ColorProviderRegistry.BLOCK.register(blockColor, blocks.stream().map(Supplier::get).toArray(Block[]::new));
+        });
+        DoTColorsRegistry.getItemsColorRegistry().forEach((itemColor, items) -> {
+            ColorProviderRegistry.ITEM.register(itemColor, items.stream().map(Supplier::get).toArray(Item[]::new));
+        });
     }
 
     public static void init() {
@@ -239,7 +260,8 @@ public class RegistryImpls {
         DoTBRecipeTypesRegistry.INSTANCE = new FabricRecipeTypesRegistry();
         DoTBTags.INSTANCE = new FabricTagsRegistry();
         DoTBCreativeModeTabsRegistry.INSTANCE = new FabricCreativeModeTabsRegistry();
-
         FabricDefaultAttributeRegistry.register(DoTBEntitiesRegistry.INSTANCE.SILKMOTH_ENTITY.get(), SilkmothEntity.createAttributes());
+
+
     }
 }

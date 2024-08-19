@@ -38,7 +38,7 @@ public class SmallShutterBlock extends WaterloggedBlock {
     public static final EnumProperty<DoorHingeSide> HINGE = BlockStateProperties.DOOR_HINGE;
 
     public SmallShutterBlock(final Properties properties) {
-        super(properties, SMALL_SHUTTER_SHAPES);
+        super(properties.pushReaction(PushReaction.DESTROY).lightLevel((state) -> 1), SMALL_SHUTTER_SHAPES);
         this.registerDefaultState(this.defaultBlockState().setValue(SmallShutterBlock.OPEN_POSITION, BlockStatePropertiesAA.OpenPosition.CLOSED).setValue(SmallShutterBlock.HINGE, DoorHingeSide.LEFT).setValue(SmallShutterBlock.POWERED, false));
     }
 
@@ -58,12 +58,6 @@ public class SmallShutterBlock extends WaterloggedBlock {
             case HALF -> 3 * (hinge ? dir.getClockWise().get2DDataValue() : dir.getCounterClockWise().get2DDataValue());
         };
     }
-
-    // TODO: Move to Block.Properties
-//    @Override
-//    public PushReaction getPistonPushReaction(final BlockState state) {
-//        return PushReaction.DESTROY;
-//    }
 
     @Nullable
     @Override
@@ -172,12 +166,6 @@ public class SmallShutterBlock extends WaterloggedBlock {
     public boolean useShapeForLightOcclusion(final BlockState p_220074_1_In) {
         return false;
     }
-
-    // TODO: Block.Properties
-//    @Override
-//    public int getLightEmission(final BlockState stateIn, final BlockGetter worldIn, final BlockPos posIn) {
-//        return 1;
-//    }
 
     @Override
     public VoxelShape getOcclusionShape(final BlockState p_196247_1_In, final BlockGetter p_196247_2_In, final BlockPos p_196247_3_In) {

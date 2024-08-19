@@ -7,8 +7,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import org.dawnoftimebuilder.block.IFlammable;
 
-public class RotatedPillarBlockAA extends RotatedPillarBlock {
+public class RotatedPillarBlockAA extends RotatedPillarBlock implements IFlammable {
     private int fireSpreadSpeed = 0;
     private int fireDestructionSpeed = 0;
 
@@ -39,14 +40,13 @@ public class RotatedPillarBlockAA extends RotatedPillarBlock {
         return this;
     }
 
-    // TODO: Registrify this.
-//    @Override
-//    public int getFireSpreadSpeed(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
-//        return state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED) ? 0 : this.fireSpreadSpeed;
-//    }
-//
-//    @Override
-//    public int getFlammability(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
-//        return state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED) ? 0 : this.fireDestructionSpeed;
-//    }
+    @Override
+    public int getFireSpreadSpeed(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+        return state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED) ? 0 : this.fireSpreadSpeed;
+    }
+
+    @Override
+    public int getFlammability(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+        return state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED) ? 0 : this.fireDestructionSpeed;
+    }
 }

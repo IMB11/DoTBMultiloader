@@ -187,12 +187,6 @@ public class DoubleGrowingBushBlock extends GrowingBushBlock {
         return bottomState.setValue(HALF, Half.TOP);
     }
 
-    // TODO: Block.Properties
-//    @Override
-//    public PushReaction getPistonPushReaction(BlockState state) {
-//        return PushReaction.DESTROY;
-//    }
-
     public int getAgeReachingTopBlock() {
         return this.growingAge;
     }

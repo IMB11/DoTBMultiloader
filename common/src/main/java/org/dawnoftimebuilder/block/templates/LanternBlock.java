@@ -26,7 +26,7 @@ public class LanternBlock extends SpecialDisplayBlock implements IBlockChain {
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
 
     public LanternBlock(Properties properties, VoxelShape[] shapes) {
-        super(properties, shapes);
+        super(properties.lightLevel((state) -> 15), shapes);
         this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.DOWN));
     }
 
@@ -51,12 +51,6 @@ public class LanternBlock extends SpecialDisplayBlock implements IBlockChain {
             case UP -> 5;
         };
     }
-
-    // TODO: Block.Properties
-//    @Override
-//    public int getLightEmission(BlockState state, BlockGetter world, BlockPos pos) {
-//        return 15;
-//    }
 
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {

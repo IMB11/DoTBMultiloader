@@ -21,7 +21,7 @@ import static org.dawnoftimebuilder.util.VoxelShapes.GERANIUM_SHAPE;
 public class GeraniumBlock extends BlockAA {
 
     public GeraniumBlock(Properties properties) {
-        super(properties, GERANIUM_SHAPE);
+        super(properties.pushReaction(PushReaction.DESTROY), GERANIUM_SHAPE);
     }
 
     @Nullable
@@ -35,10 +35,4 @@ public class GeraniumBlock extends BlockAA {
         BlockState blockDown = worldIn.getBlockState(pos.below());
         return blockDown.getBlock() == Blocks.GRASS_BLOCK || blockDown.is(BlockTags.DIRT) || blockDown.getBlock() == Blocks.FARMLAND;
     }
-
-    // TODO: Move this to Block.Properties
-//    @Override
-//    public PushReaction getPistonPushReaction(BlockState state) {
-//        return PushReaction.DESTROY;
-//    }
 }

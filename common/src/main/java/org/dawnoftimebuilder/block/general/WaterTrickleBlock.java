@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -34,7 +35,7 @@ import static net.minecraft.world.InteractionHand.MAIN_HAND;
 
 public abstract class WaterTrickleBlock extends BlockAA {
     public WaterTrickleBlock(final Properties propertiesIn) {
-        super(propertiesIn);
+        super(propertiesIn.pushReaction(PushReaction.DESTROY).lightLevel((state ) -> 1));
         this.registerDefaultState(this.defaultBlockState().setValue(BlockStatePropertiesAA.NORTH_TRICKLE, false).setValue(BlockStatePropertiesAA.EAST_TRICKLE, false).setValue(BlockStatePropertiesAA.SOUTH_TRICKLE, false)
                 .setValue(BlockStatePropertiesAA.WEST_TRICKLE, false).setValue(BlockStatePropertiesAA.CENTER_TRICKLE, false).setValue(BlockStateProperties.UNSTABLE, true)
                 .setValue(BlockStatePropertiesAA.WATER_TRICKLE_END, WaterTrickleEnd.FADE));
@@ -263,13 +264,6 @@ public abstract class WaterTrickleBlock extends BlockAA {
         };
     }
 
-
-    // TODO: Move this to Block.Properties
-//    @Override
-//    public PushReaction getPistonPushReaction(final BlockState p_149656_1_) {
-//        return PushReaction.DESTROY;
-//    }
-
     @Override
     public int getLightBlock(final BlockState p_200011_1_In, final BlockGetter p_200011_2_In, final BlockPos p_200011_3_In) {
         return 1;
@@ -279,12 +273,6 @@ public abstract class WaterTrickleBlock extends BlockAA {
     public boolean useShapeForLightOcclusion(final BlockState p_220074_1_In) {
         return false;
     }
-
-    // TODO: Move this to Block.Properties
-//    @Override
-//    public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
-//        return 1;
-//    }
 
     @Override
     public VoxelShape getOcclusionShape(final BlockState p_196247_1_In, final BlockGetter p_196247_2_In, final BlockPos p_196247_3_In) {

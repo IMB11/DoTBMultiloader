@@ -12,7 +12,7 @@ import dev.isxander.yacl3.platform.YACLPlatform;
 public class DoTBConfig {
     public static final ConfigClassHandler<DoTBConfig> HANDLER = ConfigClassHandler.createBuilder(DoTBConfig.class)
             .serializer(config -> GsonConfigSerializerBuilder.create(config)
-                    .setPath(YACLPlatform.getConfigDir().resolve("dawnoftimebuilder-config.json"))
+                    .setPath(YACLPlatform.getConfigDir().resolve("dawnoftimebuilder-config.json5"))
                     .setJson5(true)
                     .build())
             .build();

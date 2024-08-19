@@ -15,9 +15,11 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.dawnoftimebuilder.block.templates.ChairBlock;
+import org.dawnoftimebuilder.entity.ChairEntity;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -25,7 +27,7 @@ import javax.annotation.Nullable;
 public class BirchCouchBlock extends ChairBlock {
 
     public BirchCouchBlock(Properties properties, float pixelsYOffset, VoxelShape[] shapes) {
-        super(properties, pixelsYOffset, shapes);
+        super(properties.pushReaction(PushReaction.DESTROY), pixelsYOffset, shapes);
         this.defaultBlockState().setValue(BlockStateProperties.PERSISTENT, true);
     }
 
@@ -46,9 +48,7 @@ public class BirchCouchBlock extends ChairBlock {
             case EAST -> x = 14.0F;
         }
 
-        return super.use(state, worldIn, pos, player, handIn, hit);
-        // TODO: Entities
-//        return ChairEntity.createEntity(worldIn, pos, player, player.getDirection().getOpposite(), x, this.pixelsYOffset, z);
+        return ChairEntity.createEntity(worldIn, pos, player, player.getDirection().getOpposite(), x, this.pixelsYOffset, z);
     }
 
     @Nullable
@@ -78,12 +78,6 @@ public class BirchCouchBlock extends ChairBlock {
         } else
             return super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
     }
-
-    // TODO: Move to Block.Properties
-//    @Override
-//    public PushReaction getPistonPushReaction(BlockState state) {
-//        return PushReaction.DESTROY;
-//    }
 
     @Override
     public void playerWillDestroy(Level level, @NotNull BlockPos pos, @NotNull BlockState state, @NotNull Player player) {

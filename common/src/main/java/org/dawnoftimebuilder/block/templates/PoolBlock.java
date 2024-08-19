@@ -41,7 +41,7 @@ public class PoolBlock extends BlockAA {
     public final int faucetLevel;
 
     public PoolBlock(final Properties propertiesIn, final int maxLevelIn, final int faucetLevelIn, VoxelShape[] shapes) {
-        super(propertiesIn, shapes);
+        super(propertiesIn.lightLevel((state) -> 1), shapes);
         this.registerDefaultState(this.defaultBlockState().setValue(BlockStateProperties.NORTH, false).setValue(BlockStateProperties.EAST, false).setValue(BlockStateProperties.SOUTH, false).setValue(BlockStateProperties.WEST, false).setValue(BlockStatePropertiesAA.HAS_PILLAR, false).setValue(BlockStatePropertiesAA.LEVEL, 0));
         this.maxLevel = maxLevelIn;
         this.faucetLevel = faucetLevelIn;
@@ -281,12 +281,6 @@ public class PoolBlock extends BlockAA {
     public int getLightBlock(final BlockState p_200011_1_In, final BlockGetter p_200011_2_In, final BlockPos p_200011_3_In) {
         return 1;
     }
-
-    // TODO: Block.Properties
-//    @Override
-//    public int getLightEmission(final BlockState stateIn, final BlockGetter worldIn, final BlockPos posIn) {
-//        return 1;
-//    }
 
     @Override
     public boolean useShapeForLightOcclusion(final BlockState p_220074_1_In) {

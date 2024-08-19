@@ -20,6 +20,9 @@
         ],
         "client": [
             "org.dawnoftimebuilder.DoTFabric"
+        ],
+        "modmenu": [
+            "org.dawnoftimebuilder.compat.ModMenuEntrypoint"
         ]
     },
     "mixins": [

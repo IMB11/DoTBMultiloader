@@ -13,10 +13,11 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.dawnoftimebuilder.block.IBlockGeneration;
+import org.dawnoftimebuilder.block.IFlammable;
 
 import static org.dawnoftimebuilder.util.VoxelShapes.FULL_SHAPE;
 
-public class BushBlockDoT extends BushBlock implements IBlockGeneration {
+public class BushBlockDoT extends BushBlock implements IBlockGeneration, IFlammable {
     private int fireSpreadSpeed = 0;
     private int fireDestructionSpeed = 0;
     private final VoxelShape[] shapes;
@@ -58,16 +59,15 @@ public class BushBlockDoT extends BushBlock implements IBlockGeneration {
         return this;
     }
 
-    // TODO: Implement using registries.
-//    @Override
-//    public int getFireSpreadSpeed(final BlockState state, final BlockGetter world, final BlockPos pos, final Direction face) {
-//        return state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED) ? 0 : this.fireSpreadSpeed;
-//    }
-//
-//    @Override
-//    public int getFlammability(final BlockState state, final BlockGetter world, final BlockPos pos, final Direction face) {
-//        return state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED) ? 0 : this.fireDestructionSpeed;
-//    }
+    @Override
+    public int getFireSpreadSpeed(final BlockState state, final BlockGetter world, final BlockPos pos, final Direction face) {
+        return state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED) ? 0 : this.fireSpreadSpeed;
+    }
+
+    @Override
+    public int getFlammability(final BlockState state, final BlockGetter world, final BlockPos pos, final Direction face) {
+        return state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED) ? 0 : this.fireDestructionSpeed;
+    }
 
     @Override
     public boolean generateOnPos(WorldGenLevel world, BlockPos pos, BlockState state, RandomSource random) {

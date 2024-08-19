@@ -21,7 +21,7 @@ import static org.dawnoftimebuilder.util.VoxelShapes.WILD_PLANT_SHAPES;
 public class WildPlantBlock extends BlockAA {
 
     public WildPlantBlock(Properties properties, VoxelShape[] shapes) {
-        super(properties, shapes);
+        super(properties.pushReaction(PushReaction.DESTROY), shapes);
     }
 
     public WildPlantBlock(Properties properties){
@@ -50,10 +50,4 @@ public class WildPlantBlock extends BlockAA {
         BlockState blockDown = worldIn.getBlockState(pos.below());
         return blockDown.getBlock() == Blocks.GRASS_BLOCK || blockDown.is(BlockTags.DIRT) || blockDown.getBlock() == Blocks.FARMLAND;
     }
-
-    // TODO: Block.Properties
-//    @Override
-//    public PushReaction getPistonPushReaction(BlockState state) {
-//        return PushReaction.DESTROY;
-//    }
 }

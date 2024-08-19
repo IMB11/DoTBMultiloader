@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javax.annotation.Nullable;
+
+import net.minecraft.world.level.material.PushReaction;
 import org.dawnoftimebuilder.DoTBConfig;
 import org.dawnoftimebuilder.block.IBlockGeneration;
 import org.dawnoftimebuilder.block.templates.BlockAA;
@@ -52,7 +54,7 @@ public class IvyBlock extends BlockAA implements IBlockGeneration {
     public static final BooleanProperty PERSISTENT = BlockStateProperties.PERSISTENT;
 
     public IvyBlock(Properties properties) {
-        super(properties, IVY_SHAPES);
+        super(properties.pushReaction(PushReaction.DESTROY), IVY_SHAPES);
         this.registerDefaultState(this.defaultBlockState().setValue(AGE, 0).setValue(NORTH, false).setValue(EAST, false).setValue(SOUTH, false).setValue(WEST, false).setValue(PERSISTENT, false));
     }
 
@@ -126,11 +128,9 @@ public class IvyBlock extends BlockAA implements IBlockGeneration {
             if(levelIn.getRawBrightness(pos, 0) >= 8) {
                 int age = state.getValue(AGE);
                 if(age < 2) { //Probability "can grow"
-                    // TODO: Implement own onCropsGrowPre and onCropsGrowPost
-//                    if(ForgeHooks.onCropsGrowPre(levelIn, pos, state, random.nextInt(DoTBConfig.CLIMBING_PLANT_GROWTH_CHANCE.get()) == 0)) {
-//                        levelIn.setBlock(pos, state.setValue(AGE, age + 1), 2);
-//                        ForgeHooks.onCropsGrowPost(levelIn, pos, state);
-//                    }
+                    if(random.nextInt(DoTBConfig.get().climbingPlantGrowthChance) == 0) {
+                        levelIn.setBlock(pos, state.setValue(AGE, age + 1), 2);
+                    }
                     return;
                 }
                 if(random.nextInt(DoTBConfig.get().climbingPlantSpreadChance) == 0) {
@@ -266,12 +266,6 @@ public class IvyBlock extends BlockAA implements IBlockGeneration {
         }
         return InteractionResult.PASS;
     }
-
-    // TODO: Move this to Block.Properties
-//    @Override
-//    public PushReaction getPistonPushReaction(BlockState state) {
-//        return PushReaction.DESTROY;
-//    }
 
     @Override
     public void appendHoverText(@NotNull ItemStack stack, @Nullable BlockGetter levelIn,@NotNull List<Component> tooltip,@NotNull TooltipFlag flagIn) {

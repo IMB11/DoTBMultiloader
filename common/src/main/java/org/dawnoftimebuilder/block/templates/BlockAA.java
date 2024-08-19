@@ -10,12 +10,13 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.dawnoftimebuilder.Constants;
+import org.dawnoftimebuilder.block.IFlammable;
 import org.jetbrains.annotations.NotNull;
 
 import static org.dawnoftimebuilder.Constants.MOD_ID;
 import static org.dawnoftimebuilder.util.VoxelShapes.FULL_SHAPE;
 
-public class BlockAA extends Block {
+public class BlockAA extends Block implements IFlammable {
     private int fireSpreadSpeed = 0;
     private int fireDestructionSpeed = 0;
     private final VoxelShape[] shapes;
@@ -87,14 +88,13 @@ public class BlockAA extends Block {
         return this;
     }
 
-    // TODO: Impl using registries.
-//    @Override
-//    public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-//        return state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED) ? 0 : this.fireSpreadSpeed;
-//    }
-//
-//    @Override
-//    public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-//        return state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED) ? 0 : this.fireDestructionSpeed;
-//    }
+    @Override
+    public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+        return state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED) ? 0 : this.fireSpreadSpeed;
+    }
+
+    @Override
+    public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+        return state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED) ? 0 : this.fireDestructionSpeed;
+    }
 }

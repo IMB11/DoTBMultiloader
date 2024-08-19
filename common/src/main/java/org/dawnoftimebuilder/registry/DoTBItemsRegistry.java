@@ -1,6 +1,7 @@
 package org.dawnoftimebuilder.registry;
 
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.SpawnEggItem;
 import org.dawnoftimebuilder.item.IHasFlowerPot;
 import org.dawnoftimebuilder.item.templates.ItemDoTB;
 import org.dawnoftimebuilder.item.templates.PotItem;
@@ -33,9 +34,7 @@ public abstract class DoTBItemsRegistry {
     public final Supplier<Item> MULBERRY_LEAVES = register("mulberry_leaves", ItemDoTB::new);
     public final Supplier<Item> GRAPE = register("grape", () -> new ItemDoTB(new Item.Properties().food(Foods.GRAPE)));
     public Supplier<Item> GRAPE_SEEDS;
-
-    // TODO: This.
-//    public final Supplier<Item> SILKMOTH_SPAWN_EGG = register("silkmoth_spawn_egg", () -> new SpawnEggItem(DoTBEntitiesRegistry.SILKMOTH_ENTITY, 0xDBD8BD, 0xFEFEFC, new Item.Properties()));
+    public final Supplier<Item> SILKMOTH_SPAWN_EGG = register("silkmoth_spawn_egg", () -> new SpawnEggItem(DoTBEntitiesRegistry.INSTANCE.SILKMOTH_ENTITY.get(), 0xDBD8BD, 0xFEFEFC, new Item.Properties()));
 
     public void postRegister() {
         GRAPE_SEEDS = registerWithFlowerPot("grape_seeds", PotItem::new);

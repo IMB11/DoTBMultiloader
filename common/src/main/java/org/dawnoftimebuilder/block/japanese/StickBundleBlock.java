@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import org.dawnoftimebuilder.DoTBConfig;
@@ -38,7 +39,7 @@ public class StickBundleBlock extends BlockAA implements IBlockChain {
     private static final IntegerProperty AGE = BlockStateProperties.AGE_3;
 
     public StickBundleBlock(Properties properties) {
-        super(properties, STICK_BUNDLE_SHAPES);
+        super(properties.pushReaction(PushReaction.DESTROY), STICK_BUNDLE_SHAPES);
         this.registerDefaultState(this.defaultBlockState().setValue(AGE, 0).setValue(HALF, Half.TOP));
     }
 
@@ -147,12 +148,6 @@ public class StickBundleBlock extends BlockAA implements IBlockChain {
             }
         }
     }
-
-    // TODO: Move to Block.Properties
-//    @Override
-//    public PushReaction getPistonPushReaction(BlockState state) {
-//        return PushReaction.DESTROY;
-//    }
 
     @Override
     public boolean canConnectToChainUnder(BlockState state) {

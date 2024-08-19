@@ -208,8 +208,7 @@ public enum CreativeInventoryCategories {
             DoTBBlocksRegistry.INSTANCE.REINFORCED_BLACK_WROUGHT_IRON_FENCE.get().asItem(),
             DoTBBlocksRegistry.INSTANCE.REINFORCED_GOLDEN_WROUGHT_IRON_FENCE.get().asItem(),
             DoTBItemsRegistry.INSTANCE.GRAPE.get(),
-            // TODO: Grape Seeds
-//            DoTBBlocksRegistry.INSTANCE.GRAPE_SEEDS.get(),
+            DoTBItemsRegistry.INSTANCE.GRAPE_SEEDS.get(),
             DoTBBlocksRegistry.INSTANCE.BOXWOOD_BUSH.get().asItem(),
             DoTBBlocksRegistry.INSTANCE.BOXWOOD_SMALL_HEDGE.get().asItem(),
             DoTBBlocksRegistry.INSTANCE.BOXWOOD_TALL_HEDGE.get().asItem(),
@@ -365,21 +364,18 @@ public enum CreativeInventoryCategories {
             DoTBBlocksRegistry.INSTANCE.CAST_IRON_TEACUP_DECORATED.get().asItem(),
             DoTBBlocksRegistry.INSTANCE.MAPLE_RED_SAPLING.get().asItem(),
             DoTBBlocksRegistry.INSTANCE.BAMBOO_DRYING_TRAY.get().asItem(),
-            // TODO: Camellia
-//            DoTBBlocksRegistry.INSTANCE.CAMELLIA.get().asItem(),
+            DoTBBlocksRegistry.INSTANCE.CAMELLIA.get().asItem(),
             DoTBItemsRegistry.INSTANCE.CAMELLIA_LEAVES.get(),
             DoTBItemsRegistry.INSTANCE.TEA_LEAVES.get(),
             DoTBBlocksRegistry.INSTANCE.STICK_BUNDLE.get().asItem(),
-            // TODO: Mulberry
-//            DoTBBlocksRegistry.INSTANCE.MULBERRY.get().asItem(),
+            DoTBBlocksRegistry.INSTANCE.MULBERRY.get().asItem(),
             DoTBItemsRegistry.INSTANCE.MULBERRY_LEAVES.get(),
             DoTBItemsRegistry.INSTANCE.SILK_WORM_EGGS.get(),
             DoTBItemsRegistry.INSTANCE.SILK_WORMS_HATCHERY.get(),
             DoTBItemsRegistry.INSTANCE.SILK_WORMS.get(),
             DoTBItemsRegistry.INSTANCE.SILK_COCOONS.get(),
             DoTBItemsRegistry.INSTANCE.SILK.get(),
-            // TODO: Rice
-//            DoTBBlocksRegistry.INSTANCE.RICE.get().asItem(),
+            DoTBBlocksRegistry.INSTANCE.RICE.get().asItem(),
             Items.FLINT_AND_STEEL
     ),
     PERSIAN("persian",
@@ -476,11 +472,9 @@ public enum CreativeInventoryCategories {
             DoTBBlocksRegistry.INSTANCE.PLASTERED_STONE_CRESSET.get().asItem(),
             DoTBBlocksRegistry.INSTANCE.FEATHERED_SERPENT_SCULPTURE.get().asItem(),
             DoTBBlocksRegistry.INSTANCE.SERPENT_SCULPTED_COLUMN.get().asItem(),
-            // TODO: Commelina
-//            DoTBBlocksRegistry.INSTANCE.COMMELINA.get().asItem(),
+            DoTBBlocksRegistry.INSTANCE.COMMELINA.get().asItem(),
             DoTBBlocksRegistry.INSTANCE.WILD_MAIZE.get().asItem(),
-            // TODO: Maize
-//            DoTBBlocksRegistry.INSTANCE.MAIZE.get().asItem(),
+            DoTBBlocksRegistry.INSTANCE.MAIZE.get().asItem(),
             Items.FLINT_AND_STEEL
     ),
     ROMAN("roman",

@@ -37,7 +37,12 @@ public class PlasteredStoneCressetBlock extends WaterloggedBlock {
     private static final BooleanProperty LIT = BlockStateProperties.LIT;
 
     public PlasteredStoneCressetBlock(Properties properties) {
-        super(properties, PLASTERED_STONE_CRESSET_SHAPES);
+        super(properties.lightLevel((state) -> {
+            if(state.getValue(WATERLOGGED) || !state.getValue(LIT)) {
+                return 0;
+            }
+            return (state.getValue(HEAT) == 4) ? 15 : state.getValue(HEAT) * 2;
+        }), PLASTERED_STONE_CRESSET_SHAPES);
         this.registerDefaultState(this.defaultBlockState().setValue(LIT, false).setValue(HEAT, 0).setValue(WATERLOGGED, false));
     }
 
@@ -129,12 +134,4 @@ public class PlasteredStoneCressetBlock extends WaterloggedBlock {
             }
         }
     }
-
-    // TODO: Move to Block.Properties
-//    @Override
-//    public int getLightEmission(BlockState state, BlockGetter world, BlockPos pos) {
-//        if(state.getValue(WATERLOGGED) || !state.getValue(LIT))
-//            return 0;
-//        return (state.getValue(HEAT) == 4) ? 15 : state.getValue(HEAT) * 2;
-//    }
 }

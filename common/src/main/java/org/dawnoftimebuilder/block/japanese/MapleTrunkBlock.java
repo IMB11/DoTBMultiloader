@@ -29,7 +29,7 @@ public class MapleTrunkBlock extends BlockAA {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
     public MapleTrunkBlock(final Properties properties) {
-        super(properties);
+        super(properties.pushReaction(PushReaction.DESTROY));
         this.registerDefaultState(this.defaultBlockState().setValue(MapleTrunkBlock.FACING, Direction.NORTH));
     }
 
@@ -95,12 +95,6 @@ public class MapleTrunkBlock extends BlockAA {
 
         return stateIn;
     }
-
-    // TODO: Move to Block.Properties
-//    @Override
-//    public PushReaction getPistonPushReaction(final BlockState state) {
-//        return PushReaction.DESTROY;
-//    }
 
 //    @Override
 //    public ItemStack getCloneItemStack(final BlockState stateIn, final HitResult targetIn, final BlockGetter worldIn, final BlockPos posIn, final Player playerIn) {

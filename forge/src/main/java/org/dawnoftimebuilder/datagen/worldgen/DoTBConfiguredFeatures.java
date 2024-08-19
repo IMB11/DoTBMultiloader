@@ -12,7 +12,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfigur
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
-import org.dawnoftimebuilder.DawnOfTimeBuilder;
+import org.dawnoftimebuilder.Constants;
 import org.dawnoftimebuilder.registry.DoTBBlocksRegistry;
 import org.dawnoftimebuilder.registry.DoTBFeaturesRegistry;
 
@@ -30,26 +30,25 @@ public class DoTBConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> IVY_KEY = registerKey("ivy");
 
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
-        // TODO: Camellia
-//        register(context, CAMELLIA_KEY, Feature.RANDOM_PATCH,
-//            new RandomPatchConfiguration(48, 5, 2,
-//                PlacementUtils.onlyWhenEmpty(DoTBFeaturesRegistry.INSTANCE.DOT_FEATURE.get(),
-//                    new SimpleBlockConfiguration(
-//                        BlockStateProvider.simple(DoTBBlocksRegistry.INSTANCE.CAMELLIA.get())
-//                    )
-//                )
-//            )
-//        );
-//
-//        register(context, COMMELINA_KEY, DoTBFeaturesRegistry.INSTANCE.DEFAULT_CROPS.get(),
-//            new RandomPatchConfiguration(48, 5, 2,
-//                PlacementUtils.onlyWhenEmpty(DoTBFeaturesRegistry.INSTANCE.DOT_FEATURE.get(),
-//                    new SimpleBlockConfiguration(
-//                        BlockStateProvider.simple(DoTBBlocksRegistry.INSTANCE.COMMELINA.get())
-//                    )
-//                )
-//            )
-//        );
+        register(context, CAMELLIA_KEY, Feature.RANDOM_PATCH,
+            new RandomPatchConfiguration(48, 5, 2,
+                PlacementUtils.onlyWhenEmpty(DoTBFeaturesRegistry.INSTANCE.DOT_FEATURE.get(),
+                    new SimpleBlockConfiguration(
+                        BlockStateProvider.simple(DoTBBlocksRegistry.INSTANCE.CAMELLIA.get())
+                    )
+                )
+            )
+        );
+
+        register(context, COMMELINA_KEY, DoTBFeaturesRegistry.INSTANCE.DEFAULT_CROPS.get(),
+            new RandomPatchConfiguration(48, 5, 2,
+                PlacementUtils.onlyWhenEmpty(DoTBFeaturesRegistry.INSTANCE.DOT_FEATURE.get(),
+                    new SimpleBlockConfiguration(
+                        BlockStateProvider.simple(DoTBBlocksRegistry.INSTANCE.COMMELINA.get())
+                    )
+                )
+            )
+        );
 
         register(context, CYPRESS_KEY, Feature.RANDOM_PATCH,
             new RandomPatchConfiguration(32, 5, 2,
@@ -81,16 +80,15 @@ public class DoTBConfiguredFeatures {
             )
         );
 
-        // TODO: Mulberry
-//        register(context, MULBERRY_KEY, DoTBFeaturesRegistry.INSTANCE.DEFAULT_CROPS.get(),
-//            new RandomPatchConfiguration(32, 5, 2,
-//                PlacementUtils.onlyWhenEmpty(DoTBFeaturesRegistry.INSTANCE.DOT_FEATURE.get(),
-//                    new SimpleBlockConfiguration(
-//                        BlockStateProvider.simple(DoTBBlocksRegistry.INSTANCE.MULBERRY.get())
-//                    )
-//                )
-//            )
-//        );
+        register(context, MULBERRY_KEY, DoTBFeaturesRegistry.INSTANCE.DEFAULT_CROPS.get(),
+            new RandomPatchConfiguration(32, 5, 2,
+                PlacementUtils.onlyWhenEmpty(DoTBFeaturesRegistry.INSTANCE.DOT_FEATURE.get(),
+                    new SimpleBlockConfiguration(
+                        BlockStateProvider.simple(DoTBBlocksRegistry.INSTANCE.MULBERRY.get())
+                    )
+                )
+            )
+        );
 
         register(context, RICE_KEY, DoTBFeaturesRegistry.INSTANCE.DEFAULT_CROPS.get(),
             new RandomPatchConfiguration(64, 5, 2,

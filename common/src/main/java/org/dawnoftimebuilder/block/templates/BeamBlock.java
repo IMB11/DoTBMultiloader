@@ -181,7 +181,7 @@ public class BeamBlock extends WaterloggedBlock implements IBlockPillar, IBlockC
         return state.getValue(AXIS_Y) ? BlockStatePropertiesAA.PillarConnection.TEN_PX : BlockStatePropertiesAA.PillarConnection.NOTHING;
     }
 
-    // TODO: Move to tag?
+    // TODO: Implement workaround for this.
 //    @Override
 //    public boolean isLadder(BlockState state, LevelReader world, BlockPos pos, LivingEntity entity) {
 //        return !state.getValue(CLIMBING_PLANT).hasNoPlant();

@@ -33,7 +33,7 @@ public class MarbleStatueBlock extends WaterloggedBlock {
     public static final IntegerProperty MULTIBLOCK = BlockStatePropertiesAA.MULTIBLOCK_0_2;
 
     public MarbleStatueBlock(final Properties properties) {
-        super(properties, MARBLE_STATUE_SHAPES);
+        super(properties.pushReaction(PushReaction.DESTROY), MARBLE_STATUE_SHAPES);
         this.registerDefaultState(this.defaultBlockState().setValue(MarbleStatueBlock.FACING, Direction.NORTH).setValue(MarbleStatueBlock.MULTIBLOCK, 0).setValue(WaterloggedBlock.WATERLOGGED, false));
     }
 
@@ -105,10 +105,4 @@ public class MarbleStatueBlock extends WaterloggedBlock {
 
         return Blocks.AIR.defaultBlockState();
     }
-
-    // TODO: Move to Block.Properties
-//    @Override
-//    public PushReaction getPistonPushReaction(final BlockState state) {
-//        return PushReaction.DESTROY;
-//    }
 }

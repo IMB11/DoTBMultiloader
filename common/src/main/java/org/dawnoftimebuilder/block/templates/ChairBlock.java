@@ -8,6 +8,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.dawnoftimebuilder.entity.ChairEntity;
 
 public class ChairBlock extends WaterloggedHorizontalBlock {
     public final float pixelsYOffset;
@@ -19,8 +20,6 @@ public class ChairBlock extends WaterloggedHorizontalBlock {
 
     @Override
     public InteractionResult use(final BlockState state, final Level worldIn, final BlockPos pos, final Player player, final InteractionHand handIn, final BlockHitResult hit) {
-        // TODO: Entities
-        return super.use(state, worldIn, pos, player, handIn, hit);
-        //        return ChairEntity.createEntity(worldIn, pos, player, state.getValue(FACING), this.pixelsYOffset);
+        return ChairEntity.createEntity(worldIn, pos, player, state.getValue(FACING), this.pixelsYOffset);
     }
 }

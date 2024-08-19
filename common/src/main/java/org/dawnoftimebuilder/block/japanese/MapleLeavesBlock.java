@@ -28,7 +28,7 @@ public class MapleLeavesBlock extends BlockAA {
     public static final IntegerProperty MULTIBLOCK_Z = BlockStatePropertiesAA.MULTIBLOCK_3Z;
 
     public MapleLeavesBlock(final Properties properties) {
-        super(properties);
+        super(properties.pushReaction(PushReaction.DESTROY));
         this.registerDefaultState(this.defaultBlockState().setValue(MapleTrunkBlock.FACING, Direction.NORTH).setValue(MapleLeavesBlock.MULTIBLOCK_X, 0).setValue(MapleLeavesBlock.MULTIBLOCK_Y, 0).setValue(MapleLeavesBlock.MULTIBLOCK_Z, 0));
     }
 
@@ -128,12 +128,6 @@ public class MapleLeavesBlock extends BlockAA {
 
         return stateIn;
     }
-
-    // TODO: Move to Block.Properties
-//    @Override
-//    public PushReaction getPistonPushReaction(final BlockState state) {
-//        return PushReaction.DESTROY;
-//    }
 
 //    @Override
 //    public ItemStack getCloneItemStack(final BlockState stateIn, final HitResult targetIn, final BlockGetter worldIn, final BlockPos posIn, final Player playerIn) {

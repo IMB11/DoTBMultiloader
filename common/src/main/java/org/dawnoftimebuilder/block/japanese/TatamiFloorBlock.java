@@ -25,7 +25,7 @@ public class TatamiFloorBlock extends BlockAA {
     public static final EnumProperty<Half> HALF = BlockStateProperties.HALF;
 
     public TatamiFloorBlock(Properties properties) {
-        super(properties, VoxelShapes.TATAMI_FLOOR_SHAPES);
+        super(properties.pushReaction(PushReaction.DESTROY), VoxelShapes.TATAMI_FLOOR_SHAPES);
     }
 
     @Override
@@ -73,12 +73,6 @@ public class TatamiFloorBlock extends BlockAA {
         }
         return InteractionResult.PASS;
     }
-
-    // TODO: Move to Block.Properties
-//    @Override
-//    public PushReaction getPistonPushReaction(BlockState state) {
-//        return PushReaction.DESTROY;
-//    }
 
     @Override
     public void playerWillDestroy(Level worldIn, BlockPos pos, BlockState state, Player player) {

@@ -46,20 +46,17 @@ public interface IBlockClimbingPlant {
 
             if(worldIn.getRawBrightness(pos, 0) >= 8) {
                 int age = stateIn.getValue(AGE_0_6);
-                // TODO: Own Implementation
-//				if (ForgeHooks.onCropsGrowPre(worldIn, pos, stateIn, random.nextInt(DoTBConfig.get().climbingPlantGrowthChance) == 0)) {//Probability "can grow"
-//					if(age < 2){
-//						this.placePlant(stateIn.setValue(AGE_0_6, age + 1), worldIn, pos, 2);
-//						ForgeHooks.onCropsGrowPost(worldIn, pos, stateIn);
-//						return;
-//					}else{
-//						if(stateIn.getValue(CLIMBING_PLANT).canGrow(worldIn, age)){
-//							this.placePlant(stateIn.setValue(AGE_0_6, 2 + ((age - 1) % 5)), worldIn, pos, 2);
-//							ForgeHooks.onCropsGrowPost(worldIn, pos, stateIn);
-//							return;
-//						}
-//					}
-//				}
+				if (random.nextInt(DoTBConfig.get().climbingPlantGrowthChance) == 0) {//Probability "can grow"
+					if(age < 2){
+						this.placePlant(stateIn.setValue(AGE_0_6, age + 1), worldIn, pos, 2);
+						return;
+					}else{
+						if(stateIn.getValue(CLIMBING_PLANT).canGrow(worldIn, age)){
+							this.placePlant(stateIn.setValue(AGE_0_6, 2 + ((age - 1) % 5)), worldIn, pos, 2);
+							return;
+						}
+					}
+				}
                 if(age < 2 || random.nextInt(DoTBConfig.get().climbingPlantSpreadChance) != 0)
                     return;//Probability "can spread"
                 BlockPos[] positions = new BlockPos[] {
