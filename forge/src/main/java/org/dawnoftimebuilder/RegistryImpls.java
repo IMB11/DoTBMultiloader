@@ -216,33 +216,6 @@ public class RegistryImpls {
     }
 
     public static void initClient(IEventBus bus) {
-        DoTBColorsRegistry.initialize();
-        bus.addListener((RegisterColorHandlersEvent.Block eventIn) -> {
-            for(final var entry : DoTBColorsRegistry.getBlocksColorRegistry().entrySet()) {
-                final Block[] blocks = new Block[entry.getValue().size()];
-                int i = 0;
-                for(final Supplier<Block> block : entry.getValue()) {
-                    blocks[i] = block.get();
-                    i++;
-                }
-                eventIn.getBlockColors().register(entry.getKey(), blocks);
-            }
-            DoTBColorsRegistry.getBlocksColorRegistry().clear();
-        });
-
-        bus.addListener((RegisterColorHandlersEvent.Item eventIn) -> {
-            for(final var entry : DoTBColorsRegistry.getItemsColorRegistry().entrySet()) {
-                final Item[] items = new Item[entry.getValue().size()];
-                int i = 0;
-                for(final Supplier<Item> item : entry.getValue()) {
-                    items[i] = item.get();
-                    i++;
-                }
-                eventIn.getItemColors().register(entry.getKey(), items);
-            }
-            DoTBColorsRegistry.getItemsColorRegistry().clear();
-        });
-
         bus.addListener((EntityRenderersEvent.RegisterRenderers event) -> {
             event.registerEntityRenderer(DoTBEntitiesRegistry.INSTANCE.SILKMOTH_ENTITY.get(), SilkmothRenderer::new);
             event.registerEntityRenderer(DoTBEntitiesRegistry.INSTANCE.CHAIR_ENTITY.get(), ChairRenderer::new);
