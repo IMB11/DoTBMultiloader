@@ -1,6 +1,6 @@
 package org.dawnoftimebuilder.mixin.api;
 
-public interface CreativeMixinScreen {
+public interface CreativeScreen {
     int dOTBuilder$getPage();
 
 }

@@ -5,8 +5,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
+import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.CreativeModeTab;
@@ -15,7 +15,7 @@ import org.dawnoftimebuilder.client.gui.creative.CreativeInventoryCategories;
 import org.dawnoftimebuilder.client.gui.elements.buttons.CategoryButton;
 import org.dawnoftimebuilder.client.gui.elements.buttons.GroupButton;
 import org.dawnoftimebuilder.client.gui.elements.buttons.SocialsButton;
-import org.dawnoftimebuilder.mixin.api.CreativeMixinScreen;
+import org.dawnoftimebuilder.mixin.api.CreativeScreen;
 import org.dawnoftimebuilder.registry.DoTBCreativeModeTabsRegistry;
 import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
@@ -34,7 +34,7 @@ import static org.dawnoftimebuilder.DoTBCommon.CREATIVE_ICONS;
 @SuppressWarnings("unused")
 @Debug(print = true)
 @Mixin(CreativeModeInventoryScreen.class)
-public abstract class CreativeInventoryMixin extends AbstractContainerScreen<CreativeModeInventoryScreen.ItemPickerMenu> implements CreativeMixinScreen {
+public abstract class CreativeInventoryMixin extends EffectRenderingInventoryScreen<CreativeModeInventoryScreen.ItemPickerMenu> implements CreativeScreen {
     @Shadow public abstract boolean mouseScrolled(double p_98527_, double p_98528_, double p_98529_);
 
     @Unique

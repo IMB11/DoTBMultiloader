@@ -7,18 +7,18 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.dawnoftimebuilder.client.gui.creative.CreativeInventoryCategories;
-import org.dawnoftimebuilder.mixin.api.CreativeMixinScreen;
+import org.dawnoftimebuilder.mixin.api.CreativeScreen;
 
 import static org.dawnoftimebuilder.DoTBCommon.CREATIVE_ICONS;
 import static org.dawnoftimebuilder.DoTBCommon.MOD_ID;
 
 public class CategoryButton extends Button {
-    private final CreativeMixinScreen parent;
+    private final CreativeScreen parent;
     private boolean selected;
     private static final ResourceLocation[] BUTTON_ICONS = fillButtonIcons();
     private final int index;
 
-    public CategoryButton(int x, int y, int index, OnPress pressable, CreativeMixinScreen parent) {
+    public CategoryButton(int x, int y, int index, OnPress pressable, CreativeScreen parent) {
         super(x, y, 32, 28, Component.empty(), pressable, DEFAULT_NARRATION);
         this.selected = false;
         this.index = index;
