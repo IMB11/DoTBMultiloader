@@ -215,17 +215,6 @@ public class RegistryImpls {
         }
     }
 
-    public static void initClient(IEventBus bus) {
-        bus.addListener((EntityRenderersEvent.RegisterRenderers event) -> {
-            event.registerEntityRenderer(DoTBEntitiesRegistry.INSTANCE.SILKMOTH_ENTITY.get(), SilkmothRenderer::new);
-            event.registerEntityRenderer(DoTBEntitiesRegistry.INSTANCE.CHAIR_ENTITY.get(), ChairRenderer::new);
-            event.registerBlockEntityRenderer(DoTBBlockEntitiesRegistry.INSTANCE.DRYER.get(), DryerBERenderer::new);
-            event.registerBlockEntityRenderer(DoTBBlockEntitiesRegistry.INSTANCE.DISPLAYER.get(), DisplayerBERenderer::new);
-        });
-
-        MenuScreens.register(DoTBMenuTypesRegistry.INSTANCE.DISPLAYER.get(), DisplayerScreen::new);
-    }
-
     public static void init(IEventBus bus) {
         DoTBEntitiesRegistry.INSTANCE = new ForgeEntitiesRegistry();
         ForgeEntitiesRegistry.ENTITY_TYPES_REGISTRY.register(bus);

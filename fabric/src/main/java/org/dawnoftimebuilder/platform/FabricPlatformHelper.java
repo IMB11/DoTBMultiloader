@@ -8,6 +8,7 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import org.dawnoftimebuilder.DoTBConfig;
 import org.dawnoftimebuilder.DoTBFabric;
 import org.dawnoftimebuilder.platform.services.IPlatformHelper;

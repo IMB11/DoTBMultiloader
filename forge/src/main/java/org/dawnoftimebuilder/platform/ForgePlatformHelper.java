@@ -4,6 +4,8 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraftforge.network.NetworkHooks;
 import org.dawnoftimebuilder.DoTBConfig;
 import org.dawnoftimebuilder.DoTBForge;
 import org.dawnoftimebuilder.platform.services.IPlatformHelper;
@@ -36,6 +38,6 @@ public class ForgePlatformHelper implements IPlatformHelper {
 
     @Override
     public void openScreenHandler(Player playerEntity, MenuProvider provider, BiConsumer<ServerPlayer, FriendlyByteBuf> dataWriter) {
-
+        NetworkHooks.openScreen((ServerPlayer) playerEntity, provider, ((BlockEntity) provider).getBlockPos());
     }
 }

@@ -52,9 +52,9 @@ public abstract class CreativeInventoryMixin extends EffectRenderingInventoryScr
     @Unique
     private Button dOTBuilder$github;
     @Unique
-    private int dOTBuilder$selectedCategoryID = 0;
+    private static int dOTBuilder$selectedCategoryID = 0;
     @Unique
-    private int dOTBuilder$page = 0;
+    private static int dOTBuilder$page = 0;
     @Unique
     private boolean dOTBuilder$tabDoTBSelected;
     @Unique

@@ -120,12 +120,7 @@ public class DryerBlock extends WaterloggedBlock implements EntityBlock {
 
     @Override
     public InteractionResult use(final BlockState state, final Level worldIn, final BlockPos pos, final Player player, final InteractionHand handIn, final BlockHitResult hit) {
-        if(!worldIn.isClientSide() && handIn == InteractionHand.MAIN_HAND && worldIn.getBlockEntity(pos) instanceof DryerBlockEntity) {
-            final DryerBlockEntity tileEntity = (DryerBlockEntity) worldIn.getBlockEntity(pos);
-            if(tileEntity == null) {
-                return InteractionResult.PASS;
-            }
-
+        if(!worldIn.isClientSide() && handIn == InteractionHand.MAIN_HAND && worldIn.getBlockEntity(pos) instanceof DryerBlockEntity tileEntity) {
             if(player.isCrouching()) {
                 return tileEntity.dropOneItem(worldIn, pos);
             }

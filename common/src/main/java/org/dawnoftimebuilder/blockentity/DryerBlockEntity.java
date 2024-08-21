@@ -1,5 +1,6 @@
 package org.dawnoftimebuilder.blockentity;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -7,6 +8,7 @@ import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Player;
@@ -21,6 +23,7 @@ import org.dawnoftimebuilder.recipe.DryerRecipe;
 import org.dawnoftimebuilder.registry.DoTBBlockEntitiesRegistry;
 import org.dawnoftimebuilder.registry.DoTBRecipeTypesRegistry;
 import org.jetbrains.annotations.NotNull;
+import org.lwjgl.glfw.GLFW;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -55,6 +58,7 @@ public class DryerBlockEntity extends BlockEntity {
             }
 
             if (success) {
+                this.setChanged();
                 this.getLevel().sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
             }
 
@@ -144,6 +148,8 @@ public class DryerBlockEntity extends BlockEntity {
 
     private boolean putItemStackInIndex(final int index, final ItemStack itemStack, final Player player) {
         //Tries to put the itemStack in a dryer : first we check if there is a corresponding recipe, then we set the variables.
+        // enable mouse
+        GLFW.glfwSetInputMode(Minecraft.getInstance().getWindow().getWindow(), GLFW.GLFW_CURSOR, GLFW.GLFW_CURSOR_NORMAL);
         if (this.getLevel() != null) {
             final SimpleContainer invInHand = new SimpleContainer(itemStack);
             final DryerRecipe recipe = this.getDryerRecipe(invInHand);
@@ -155,6 +161,8 @@ public class DryerBlockEntity extends BlockEntity {
                 final float timeVariation = new Random().nextFloat() * 2.0F - 1.0F;
                 final int range = timeVariation >= 0 ? Services.PLATFORM.getConfig().dryingTimeVariation : 10000 / (100 + Services.PLATFORM.getConfig().dryingTimeVariation);
                 this.remainingTicks[index] = (int) (recipe.getDryingTime() * (100 + timeVariation * range) / 100);
+
+                this.setChanged();
                 this.getLevel().sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
 
                 return true;
