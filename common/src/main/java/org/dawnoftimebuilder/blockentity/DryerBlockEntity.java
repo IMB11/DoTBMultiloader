@@ -59,7 +59,8 @@ public class DryerBlockEntity extends BlockEntity {
 
             if (success) {
                 this.setChanged();
-                this.getLevel().sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
+                BlockState state = level.getBlockState(worldPosition);
+                this.getLevel().sendBlockUpdated(this.worldPosition, state, state, Block.UPDATE_ALL);
             }
 
             if (finish >= 2) {
@@ -163,7 +164,8 @@ public class DryerBlockEntity extends BlockEntity {
                 this.remainingTicks[index] = (int) (recipe.getDryingTime() * (100 + timeVariation * range) / 100);
 
                 this.setChanged();
-                this.getLevel().sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
+                BlockState state = level.getBlockState(worldPosition);
+                this.getLevel().sendBlockUpdated(this.worldPosition, state, state, Block.UPDATE_ALL);
 
                 return true;
             }
@@ -206,7 +208,7 @@ public class DryerBlockEntity extends BlockEntity {
 
     @Override
     public void load(final CompoundTag tag) {
-        itemHandler.fromTag(tag.getList("inv", CompoundTag.TAG_LIST));
+        itemHandler.fromTag(tag.getList("inv", CompoundTag.TAG_COMPOUND));
         for (int index = 0; index < 2; index++) {
             this.remainingTicks[index] = tag.getInt("remainingTime" + index);
         }

@@ -38,7 +38,7 @@ public class DisplayerBlockEntity extends BlockEntity implements MenuProvider {
 
 	@Override
 	public void load(CompoundTag tag) {
-		itemHandler.fromTag(tag.getList("inv", CompoundTag.TAG_LIST));
+		itemHandler.fromTag(tag.getList("inv", CompoundTag.TAG_COMPOUND));
 		super.load(tag);
 	}
 
