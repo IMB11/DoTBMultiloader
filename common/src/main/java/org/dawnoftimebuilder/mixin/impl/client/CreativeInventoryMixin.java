@@ -52,9 +52,9 @@ public abstract class CreativeInventoryMixin extends EffectRenderingInventoryScr
     @Unique
     private Button dOTBuilder$github;
     @Unique
-    private int dOTBuilder$selectedCategoryID = 0;
+    private static int dOTBuilder$selectedCategoryID = 0;
     @Unique
-    private int dOTBuilder$page = 0;
+    private static int dOTBuilder$page = 0;
     @Unique
     private boolean dOTBuilder$tabDoTBSelected;
     @Unique
@@ -114,31 +114,31 @@ public abstract class CreativeInventoryMixin extends EffectRenderingInventoryScr
 
         if(this.dOTBuilder$tabDoTBSelected) {
             this.dOTBuilder$updateItems((CreativeModeInventoryScreen) (Object) this);
-            toggleButtons(true);
+            dOTBuilder$toggleButtons(true);
             this.dOTBuilder$buttons.get(dOTBuilder$selectedCategoryID % 4).setSelected(true);
         } else {
-            toggleButtons(false);
+            dOTBuilder$toggleButtons(false);
         }
     }
 
-    boolean hasSetItemsYet = false;
-
+    @Unique
+    private static boolean dOTBuilder$hasSetItemsYet = false;
     @Inject(method = "render", at = @At(value = "HEAD"))
     public void dawnoftimebuilder$render(GuiGraphics $$0, int $$1, int $$2, float $$3, CallbackInfo ci) {
         //            dOTBuilder$updateItems((CreativeModeInventoryScreen) (Object) this);
 
-        if (!hasSetItemsYet && this.dOTBuilder$tabDoTBSelected) {
+        if (!dOTBuilder$hasSetItemsYet && this.dOTBuilder$tabDoTBSelected) {
             dOTBuilder$updateItems((CreativeModeInventoryScreen) (Object) this);
-            hasSetItemsYet = true;
-        } else {
-            hasSetItemsYet = false;
+            dOTBuilder$hasSetItemsYet = true;
+        } else if (!this.dOTBuilder$tabDoTBSelected) {
+            dOTBuilder$hasSetItemsYet = false;
         }
 
-        toggleButtons(this.dOTBuilder$tabDoTBSelected);
+        dOTBuilder$toggleButtons(this.dOTBuilder$tabDoTBSelected);
     }
 
     @Unique
-    private void toggleButtons(boolean val) {
+    private void dOTBuilder$toggleButtons(boolean val) {
         this.dOTBuilder$btnScrollUp.visible = val;
         this.dOTBuilder$btnScrollDown.visible =  val;
         this.dOTBuilder$discord.visible = val;
