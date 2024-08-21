@@ -121,9 +121,19 @@ public abstract class CreativeInventoryMixin extends EffectRenderingInventoryScr
         }
     }
 
+    boolean hasSetItemsYet = false;
+
     @Inject(method = "render", at = @At(value = "HEAD"))
     public void dawnoftimebuilder$render(GuiGraphics $$0, int $$1, int $$2, float $$3, CallbackInfo ci) {
         //            dOTBuilder$updateItems((CreativeModeInventoryScreen) (Object) this);
+
+        if (!hasSetItemsYet && this.dOTBuilder$tabDoTBSelected) {
+            dOTBuilder$updateItems((CreativeModeInventoryScreen) (Object) this);
+            hasSetItemsYet = true;
+        } else {
+            hasSetItemsYet = false;
+        }
+
         toggleButtons(this.dOTBuilder$tabDoTBSelected);
     }
 

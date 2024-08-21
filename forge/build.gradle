@@ -94,7 +94,8 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     compileOnly project(":common")
     implementation fg.deobf("dev.isxander:yet-another-config-lib:${project.yacl_version}-forge")
-    jarJar(runtimeOnly(fg.deobf("maven.modrinth:fusion-connected-textures:1.1.1-forge-mc1.20.1")))
+    runtimeOnly fg.deobf("maven.modrinth:fusion-connected-textures:1.1.1-forge-mc1.20.1")
+
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
 }
 

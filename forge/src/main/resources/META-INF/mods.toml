@@ -29,6 +29,12 @@ mandatory = true
 versionRange = "[3.0.0,4.0.0)"
 ordering = "NONE"
 side = "BOTH"
+[[dependencies.${mod_id}]]
+modId = "fusion"
+mandatory = false
+versionRange = "[1.0.0,2.0.0)"
+ordering = "NONE"
+side = "CLIENT"
 
 [[mixins]]
 config = "${mod_id}.mixins.json"
